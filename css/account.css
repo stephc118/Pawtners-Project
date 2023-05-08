@@ -1,0 +1,148 @@
+.row {
+    display: flex;
+}
+
+img {
+    margin-left: 100px;
+    height: 600px;
+    width: 600px;
+}
+
+.col {
+    margin: 100px 50px;
+    flex: 50%;
+}
+
+/*************form***************/
+
+li {
+    list-style-type: none;
+    color: #74BFB1;
+}
+
+input {
+    width: 400px;
+    height: 40px;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: #74BFB1;
+}
+
+input::placeholder {
+    color: #74BFB1;
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+}
+
+input:focus {
+    background-color: #E2F8F4;
+    outline: #74BFB1;
+    color: #74BFB1;
+}
+
+#create-btn {
+    font-weight: 700;
+    font-size: 25px;
+    border-radius: 6px;
+    color: white;
+    background-color: #74BFB1;
+    border: none;
+    width: 408px;
+    height: 60px;
+    margin-bottom: 30px;
+}
+
+#create-btn:hover {
+    background-color: #97DDD0;
+}
+
+.link {
+    color: #74BFB1;
+    font-weight: bold;
+}
+
+.link:hover {
+    color: #97DDD0;
+}
+
+/****************section**************/
+
+#section-sm {
+    display: flex;
+    align-items: center;
+    width: 408px;
+    padding: 20px 0;
+}
+
+hr {
+    width: 200px;
+    border-width: 1px 0 0 0;
+    border-color: #97DDD0;
+}
+
+#section-sm .heading {
+    margin: 0;
+    font-size: 15px;
+}
+
+#section-sm .text {
+    text-align: center;
+    width: 50px;
+    color: #74BFB1;
+}
+
+/***********Icon***************/
+
+.icon {
+    display: flex;
+   align-items: center;
+}
+
+#register .fa-facebook {
+    font-size: 50px;
+    color: #3B5998;
+    margin: 10px;
+}
+
+.fa-google {
+
+    padding: 10px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    background: #dd4b39;
+    color: white;
+    margin: 10px 10px 10px 20px;
+}
+
+#register .fa-facebook:hover {
+    color: #5572b1;
+}
+
+.fa-google:hover {
+    background: #de6959;
+}
+
+/***************Error*************/
+
+/* .email,
+.password {
+    border-color: #CD3232;
+}
+
+.email::placeholder,
+.password::placeholder {
+    color: #daadad;
+}
+
+label {
+    color: #757575;
+}
+
+.email:focus,
+.password:focus {
+    background-color: #f7e5e5;
+    color: #CD3232;
+} */

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Booking - Dog Walking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/db553ccdab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/booking.css">
+</head>
+
+<body>
+    <!-- Nav Bar -->
+    <div id="topnav">
+        <a href="index.html" class="nav-item logo">PAWTNERS</a>
+        <a href="services.html" class="nav-item">Services</a>
+        <a href="contact.html" class="nav-item">Contact</a>
+        <a href="register.html"><button class="topnav-btn outline-btn">Register</button></a>
+        <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
+    </div>
+
+
+    <!-- Top div -->
+    <div id="top-div">
+        <div id="brand">
+            <div class="text-box">
+
+                <h1>
+                    Dog Walking <br>
+                    Booking Form
+                </h1>
+
+
+            </div>
+        </div>
+
+        <div id="brand-img">
+            <img class="image" src="image/image.jpeg" alt="brand-img">
+        </div>
+    </div>
+
+    <div id="section">
+        <hr class="left">
+        <div class="text">
+            <p class="heading">Let's make<br>a booking</p>
+        </div>
+        <hr class="right">
+    </div>
+
+    <h1 class="choice-heading">Choose the best suitable plan for your fur babies first.</h1>
+
+    <div id="choice">
+        <div class="card choice-card one">
+            <div class="text-box">
+                <h3 class="card-heading">Every Other Day Plan</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>15 minutes or 30 minutes session</li>
+                        <li>Maximum 3 dogs at a time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card choice-card two">
+            <div class="text-box">
+                <h3 class="card-heading">Daily Plan</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>15 minutes or 30 minutes session</li>
+                        <li>Maximum 2 dogs at a time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card choice-card three">
+            <div class="text-box">
+                <h3 class="card-heading">Regular Active Plan</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>45 minutes or 1 hour  session</li>
+                        <li>Maximum 1 dog at a time</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="booking-form">
+        <form action="/success.html" method="post">
+            <ul>
+                <!-- <li><label for="plan">Plan</label></li>
+                <select name="plan" class="plan" required>
+                    <option value="">Plan</option>
+                    <option value="eod">Every Other Day Plan</option>
+                    <option value="daily">Daily Plan</option>
+                    <option value="active">Regular Active Plan</option>
+                </select> -->
+                <li> <label for="date">Date</label></li>
+                <li><input type="date" name="date" class="date" required></li><br>
+                <li> <label for="time">Time</label></li>
+                <li><input type="time" name="time" placeholder="Time" class="time" required></li><br>
+                <li><label for="frequency" class="frequency-label">Frequency</label></li>
+                <select name="frequency" class="frequency" required>
+                    <option value="">Frequency</option>
+                    <option value="1">1 Day</option>
+                    <option value="2">2 Day</option>
+                    <option value="3">3 Day</option>
+                    <option value="4">4 Day</option>
+                    <option value="5">5 Day</option>
+                    <option value="6">6 Day</option>
+                    <option value="7">7 Day</option>
+                </select>
+                <li><label for="duration">Duration</label></li>
+                <select name="duration" class="duration" required>
+                    <option value="">Duration</option>
+                    <option value="15" class="m15">15 minutes</option>
+                    <option value="30" class="m30">30 minutes</option>
+                    <option value="45" class="m45">45 minutes</option>
+                    <option value="hr" class="hr">1 hour</option>
+                </select>
+                <li> <label for="number">Number of Pets</label></li>
+                <li><input type="text" name="number" placeholder="Number" class="number" required></li><br>
+                <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation
+                    and payment.</p>
+                <li><a href="success.html"><button type="submit" id="send-btn">Send</button></a></li>
+            </ul>
+
+        </form>
+    </div>
+    <script src="walking-booking.js"></script>
+</body>
+
+<footer>
+    <div id="footer">
+        <hr>
+    </div>
+    <div class="items">
+        <div class="item brand-name">
+            <b>PAWTNERS</b><br>
+            An ALL-in-ONE platform served by Pawtners for Pawrents and Fur Babies
+        </div>
+        <div class="item copyright">
+            @ 2023 Pawtners. All Rights Reserved.
+        </div>
+        <div class="item social">
+            Check out more on our social media platforms <br>
+            <i class="fa-brands fa-facebook"></i> 
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-twitter"></i>
+        </div>
+    </div>
+
+</footer>
+</html>

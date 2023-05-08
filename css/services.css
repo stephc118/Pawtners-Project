@@ -1,0 +1,56 @@
+#section {
+    margin: 100px 0;
+}
+
+.row-1,
+.row-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 450px;
+    height: 550px;
+    background-color: #FAF7F4;
+    margin: 40px;
+    border-radius: 10px;
+}
+
+.img-div {
+    height: 300px;
+}
+
+img {
+    height: 300px;
+    width: 450px;
+}
+
+.text-div {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 70px;
+    height: 100px;
+}
+
+.title {
+    margin-bottom: 0;
+}
+
+.subtitle {
+    margin: 0;
+    color: #A18772;
+}
+
+.price h2 {
+    font-weight: lighter;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: center;
+    
+}
+
+footer {
+    margin-top: 200px;
+}

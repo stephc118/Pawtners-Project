@@ -1,0 +1,140 @@
+#section {
+    margin: 100px 0;
+}
+
+#choice {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 100px;
+}
+
+.card {
+    display: flex;
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+}
+
+.choice-card {
+    background-color: #ffffff;
+    border: solid 2px #56493E;
+}
+
+.action-card {
+    background-color: #A18772;
+    border: none;
+    color: #ffffff;
+}
+
+#choice .text-box {
+    width: 200px;
+    margin: auto;
+}
+
+.card-heading {
+    text-align: center;
+    font-size: 25px;
+}
+
+.list-item {
+    font-size: 20px;
+}
+
+
+/*************Form****************/
+
+.choice-heading {
+    text-align: center;
+}
+
+#booking-form {
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    
+}
+
+#booking-form.ride {
+    visibility: visible;
+}
+
+#booking-form li {
+    list-style-type: none;
+    padding-bottom: 5px;
+}
+
+input {
+    border-radius: 8px;
+    width: 400px;
+    height: 40px;
+    border: solid 2px #A18772;
+}
+
+input::placeholder {
+    color: #A18772;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+}
+
+input:focus {
+    background-color: #F5E1D2;
+    outline: #56493E;
+    color: #56493E;
+}
+
+
+.date,
+.time {
+    width: 404px;
+    height: 46px;
+    padding-left: 0;
+    color: #A18772;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+}
+
+.frequency,
+.location,
+.duration,
+.plan {
+    color: #A18772;
+    border-radius: 8px;
+    border: solid 2px;
+    width: 408px;
+    height: 46px;
+    margin-bottom: 25px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+}
+
+/* #booking-form select:focus {
+    border: solid 1px #56493E;
+} */
+
+.reminder {
+    width: 400px;
+    text-align: center;
+}
+
+#send-btn {
+    font-weight: 700;
+    font-size: 25px;
+    border-radius: 6px;
+    color: white;
+    background-color: #56493E;
+    border: none;
+    width: 408px;
+    height: 60px;
+    margin-bottom: 100px;
+}
+
+#send-btn:hover {
+    background-color: #A18772;
+}
+
+.success-msg {
+    width: 700px;
+    text-align: center;
+    margin: 200px auto 300px;
+}
+

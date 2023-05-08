@@ -1,0 +1,175 @@
+html, ul {
+    font-family: 'Manrope', sans-serif;
+}
+
+body {
+    margin: 0;
+    color: #56493E;
+}
+
+/*******************Nav Bar ***************************/
+
+#topnav {
+    background-color: #ffffff;
+    height: 60px;
+    border-bottom: solid 1px #3C3C3C;
+}
+
+.logo {
+    font-weight: 700;
+}
+
+#topnav {
+    padding: 5px 20px;
+}
+
+#topnav .nav-item {
+    float: left;
+    color: #56493E;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+#topnav .nav-item:hover {
+    color: #A18772;
+}
+
+.outline-btn {
+    background-color: #ffffff;
+    color: #B5A294;
+    border: solid 3px #B5A294;
+    padding: 10px 15px;
+}
+
+.green-btn {
+    background-color: #74BFB1;
+    color: #ffffff;
+    border: 0;
+    margin: 0 10px;
+    padding: 13px 18px;
+}
+
+.user {
+    float: right;
+    margin: 18px 5px;
+}
+
+i.user {
+    margin: 15px 5px;
+    font-size: 30px;
+}
+
+.topnav-btn {
+    float: right;
+    margin: 7px 10px;
+    font-weight: 700;
+    border-radius: 6px;
+    width: 90px;
+}
+
+.green-btn:hover {
+    background-color: #97DDD0;
+}
+
+.outline-btn:hover {
+    color: #A18772;
+    border-color: #A18772;
+}
+
+
+/*******************Top Div***************************/
+
+#top-div {
+    display: flex;
+    justify-content: center;
+}
+
+#brand {
+    width: 700px;
+    margin: 100px 150px;
+}
+
+span {
+    color: #74BFB1;
+}
+
+.big-btn {
+    float: left;
+    margin: 7px 10px;
+    font-weight: 700;
+    font-size: larger;
+    border-radius: 6px;
+    width: 150px;
+    height: 60px;
+}
+
+#brand .green-btn {
+    margin-left: 0;
+}
+
+#brand-img {
+    width: 800px;
+}
+
+.image {
+    width: 800px;
+    height: 550px;
+}
+
+#brand .text-box {
+    width: 500px;
+}
+
+/**********************Section hr*************************/
+
+#section {
+    display: flex;
+    align-items: center;
+}
+
+hr {
+    width: 800px;
+    color: #3C3C3C;
+    border-width: 1px 0 0 0;
+    margin-left: 0;
+}
+
+
+#section .heading {
+    margin: 0;
+    font-size: 35px;
+}
+
+#section .text {
+   text-align: center;
+   width: 300px;
+}
+
+/**************************Footer********************************/
+
+#footer hr {
+    width: 1680px;
+    color: #3C3C3C;
+}
+
+.items {
+    display: flex;
+    justify-content:space-evenly;
+}
+
+.item {
+    width: 500px;
+    margin: 100px;
+    text-align: center;
+}
+
+.item i {
+    font-size: 30px;
+    margin: 10px;
+}
+
+.item i:hover {
+    color: #A18772;
+}

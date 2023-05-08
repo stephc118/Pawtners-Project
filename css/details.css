@@ -1,0 +1,164 @@
+#section {
+    margin: 100px 0;
+    width: 1700px;
+}
+
+hr {
+    width: 700px;
+}
+
+/***************Considerations****************/
+
+.row {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 50px 150px;
+    height: 500px;
+}
+
+.number {
+    font-size: 200px;
+    font-weight: 900;
+}
+
+.text-box {
+    margin: 75px;
+}
+
+#consideration h3 {
+    font-size: 30px;
+}
+
+.card {
+    width: 400px;
+    height: 450px;
+    margin: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.pink-1 {
+    background-color: #FEDDC2;
+}
+
+.pink-2 {
+    background-color: #F5E1D2;
+}
+
+.yellow-1 {
+    background-color: #FFF6BD;
+}
+
+.yellow-2 {
+    background-color: #F7EFC0;    
+}
+
+.green-1 {
+    background-color: #D9F4D3;
+}
+
+.green-2 {
+    background-color: #CEEDC7;
+}
+
+#consideration i {
+    width: 100px;
+    font-size: 100px;
+}
+
+.number {
+    color: #A18772;
+    
+}
+
+/*******************Pricing***************/
+
+.row-1 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 150px 150px 300px;
+    height: 500px;
+}
+
+.price-card {
+    display: flex;
+    justify-content: center;
+    width: 380px;
+    height: 650px;
+    border: solid 3px #74BFB1;
+    background-color: white;
+    margin: 40px;
+    border-radius: 10px;
+    color: #74BFB1;
+}
+
+.action {
+    border: none;
+    background-color: #97DDD0;
+    color: white;
+}
+
+.action.price-card {
+    height: 656px;
+}
+
+.text-div {
+    margin: auto;
+}
+
+.title,
+.subtitle,
+.price {
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 0;
+}
+
+.subtitle {
+    margin: 0 0 50px;
+}
+
+
+li {
+    margin: 20px 0;
+}
+
+.list-item {
+    width: 200px;
+    line-height: 30px;
+    margin: auto;
+}
+
+.price {
+    margin: 50px 0 100px;
+}
+
+.btn {
+    float: unset;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: center;   
+}
+
+/***********Only 1 card************/
+
+.first {
+    margin-right: 700px;
+}
+
+.second {
+    margin: 0 400px;
+}
+
+.third {
+    margin-left: 700px;
+}
+.long.text-box {
+    margin: 60px 60px;
+}

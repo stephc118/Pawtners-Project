@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Booking - Pets Grooming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/db553ccdab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/booking.css">
+</head>
+
+<body>
+    <!-- Nav Bar -->
+    <div id="topnav">
+        <a href="index.html" class="nav-item logo">PAWTNERS</a>
+        <a href="services.html" class="nav-item">Services</a>
+        <a href="contact.html" class="nav-item">Contact</a>
+        <a href="register.html"><button class="topnav-btn outline-btn">Register</button></a>
+        <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
+    </div>
+
+
+    <!-- Top div -->
+    <div id="top-div">
+        <div id="brand">
+            <div class="text-box">
+
+                <h1>
+                    Pets Grooming <br>
+                    Booking Form
+                </h1>
+
+
+            </div>
+        </div>
+
+        <div id="brand-img">
+            <img class="image" src="image/image.jpeg" alt="brand-img">
+        </div>
+    </div>
+
+    <div id="section">
+        <hr class="left">
+        <div class="text">
+            <p class="heading">Let's make<br>a booking</p>
+        </div>
+        <hr class="right">
+    </div>
+
+    <h1 class="choice-heading">Choose the best suitable plan for your fur babies first.</h1>
+
+    <div id="choice">
+        <div class="card choice-card" >
+            <div class="text-box">
+                <h3 class="card-heading">Regular Showers</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>Finish around 1 hour</li>
+                        <li>Includes basic cleaning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card choice-card" >
+            <div class="text-box">
+                <h3 class="card-heading">Hair Trimming</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>Finish around 2 hours</li>
+                        <li>Includes all basic cleaning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card choice-card" >
+            <div class="text-box">
+                <h3 class="card-heading">Spa & Treatment</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>Finish around 1.5 hours</li>
+                        <li>Includes showers and basic cleaning</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="booking-form">
+        <form action="/success.html" method="post" visibility="hidden">
+            <ul>
+                <!-- <li><label for="plan">Plan</label></li>
+                <select name="plan" class="plan" required>
+                    <option value="">Plan</option>
+                    <option value="shower">Regular Showers</option>
+                    <option value="trimming">Hair Trimming</option>
+                    <option value="spa">Spa & Treatment</option> -->
+                </select>
+                <li> <label for="date">Date</label></li>
+                <li><input type="date" name="date" class="date" required></li><br>
+                <li> <label for="time">Time</label></li>
+                <li><input type="time" name="time" placeholder="Time" class="time" required></li><br>
+                <li> <label for="number">Number of Pets</label></li>
+                <li><input type="text" name="number" placeholder="Number" class="number" required></li><br>
+                <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation
+                    and payment.</p>
+                <li><a href="success.html"><button type="submit" id="send-btn">Send</button></a></li>
+            </ul>
+
+        </form>
+    </div>
+    <script src="grooming-booking.js"></script>
+</body>
+
+<footer>
+    <div id="footer">
+        <hr>
+    </div>
+    <div class="items">
+        <div class="item brand-name">
+            <b>PAWTNERS</b><br>
+            An ALL-in-ONE platform served by Pawtners for Pawrents and Fur Babies
+        </div>
+        <div class="item copyright">
+            @ 2023 Pawtners. All Rights Reserved.
+        </div>
+        <div class="item social">
+            Check out more on our social media platforms <br>
+            <i class="fa-brands fa-facebook"></i> 
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-twitter"></i>
+        </div>
+    </div>
+
+</footer>
+</html>
