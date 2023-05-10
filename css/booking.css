@@ -1,11 +1,33 @@
+#center {
+    text-align: center;
+    margin: 250px 0 300px;
+}
+
+#choice-heading {
+    margin-top: 100px;
+    text-align: center;
+}
+
 #section {
     margin: 100px 0;
 }
 
-#choice {
+#plan-choice,
+#service-choice,
+#plan-heading {
     display: flex;
     justify-content: space-evenly;
     margin: 100px;
+}
+
+#plan-heading {
+    visibility: hidden;
+}
+
+#plan-choice.pet-sitting,
+#plan-choice.dog-walking,
+#plan-choice.pets-grooming {
+    display: none;
 }
 
 .card {
@@ -26,7 +48,8 @@
     color: #ffffff;
 }
 
-#choice .text-box {
+#plan-choice .text-box,
+#service-choice .text-box {
     width: 200px;
     margin: auto;
 }
@@ -49,13 +72,14 @@
 
 #booking-form {
     display: flex;
-    justify-content: center;
-    visibility: hidden;
-    
+    justify-content: center; 
 }
 
-#booking-form.ride {
-    visibility: visible;
+#booking-form.pet-sitting,
+#booking-form.dog-walking,
+#booking-form.pets-grooming,
+#booking-form.pets-ride {
+    display: none;
 }
 
 #booking-form li {
@@ -95,8 +119,7 @@ input:focus {
 
 .frequency,
 .location,
-.duration,
-.plan {
+.duration {
     color: #A18772;
     border-radius: 8px;
     border: solid 2px;
@@ -106,10 +129,6 @@ input:focus {
     font-family: 'Manrope', sans-serif;
     font-size: 15px;
 }
-
-/* #booking-form select:focus {
-    border: solid 1px #56493E;
-} */
 
 .reminder {
     width: 400px;

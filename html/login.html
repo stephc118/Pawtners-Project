@@ -3,17 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Log In</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/db553ccdab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/account.css">
 </head>
 
 <body>
-
     <!-- Nav Bar -->
     <div id="topnav">
         <a href="index.html" class="nav-item logo">PAWTNERS</a>
@@ -26,19 +25,19 @@
 
     <div class="row">
         <div class="col">
-            <img src="image/image.jpeg" alt="register-img">
+            <img src="/image/image.jpeg" alt="register-img">
         </div>
         <div class="col">
-            <form action="http://localhost:3001/register" id="register" method="post">
+            <form action="http://localhost:3001/login" id="register" method="POST">
                 <ul>
                     <li>
-                        <h1>Create an account</h1>
+                        <h1>Log In</h1>
                     </li>
-                    <li><input type="text" name="username" placeholder="Username" class="usermane" required></li><br>
+
                     <li><input type="text" name="email" placeholder="Email Address" class="email" required></li><br>
                     <li><input type="text" name="password" placeholder="Password" class="password" required></li><br>
-                    <li><button type="submit" id="create-btn">Create Account</button></li>
-                    <li>Existing user? <a href="login.html" class="link">Log In</a></li>
+                    <li><button type="submit" id="create-btn">Log In</button></li>
+                    <li>Not yet a user? <a href="register.html" class="link">Register</a></li>
                     <li>
                         <div id="section-sm">
                             <hr class="left">
@@ -49,7 +48,7 @@
                         </div>
                     </li>
                     <li class="icon">
-                        Sign Up using <i class="fa-brands fa-google"></i> <i class="fa-brands fa-facebook"></i>
+                        Log in using <i class="fa-brands fa-google"></i> <i class="fa-brands fa-facebook"></i>
                     </li>
                 </ul>
             </form>

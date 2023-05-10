@@ -3,17 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Booking - Pets Ride</title>
+    <title>Contact</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/db553ccdab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
 </head>
 
 <body>
-    <!-- Nav Bar -->
+    <!-- Nav bar -->
     <div id="topnav">
         <a href="index.html" class="nav-item logo">PAWTNERS</a>
         <a href="services.html" class="nav-item">Services</a>
@@ -22,38 +22,43 @@
         <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
     </div>
 
+
     <!-- Top div -->
     <div id="top-div">
         <div id="brand">
             <div class="text-box">
-
                 <h1>
-                    Booking Successful!
+                    Contact Us
                 </h1>
+                <h3 class="grey-700">
+                    Tell us anything! We will get to you as soon as possible.
+                </h3>
+                <div id="contact-form">
+                    <form action="">
+                        <ul>
+                            <li> <label for="Name">Pawrent’s name</label></li>
+                            <li><input type="text" name="Name" placeholder="Name" class="name" required></li><br>
 
+                            <li><label for="email">Pawrent’s email</label></li>
+                            <li><input type="email" name="email" placeholder="Email" class="email" required></li><br>
 
+                            <li> <label for="message">Pawrent’s message</label></li>
+                            <li><input type="text" name="message" placeholder="Message" class="message" required></li><br>
+                            <button type="submit" id="send-btn">Send</button>
+                        </ul>
+
+                    </form>
+                </div>
             </div>
         </div>
 
-        <div id="brand-img">
-            <img class="image" src="image/image.jpeg" alt="brand-img">
+        <div id="contact-img">
+            <img class="contact-image" src="/image/image.jpeg" alt="brand-img">
         </div>
     </div>
 
-    <div id="section">
-        <hr class="left">
-        <div class="text">
-            <p class="heading">Thank You!</p>
-        </div>
-        <hr class="right">
-    </div>
-
-    <div class="success-msg">
-        <h1>We will be in touched via email within 2-3 working days.</h1>
-    </div>
 
 </body>
-
 <footer>
     <div id="footer">
         <hr>
