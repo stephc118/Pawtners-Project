@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const { Client } = require('pg');
 const bodyParser = require("body-parser");
@@ -5,6 +6,7 @@ const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcrypt = require("bcrypt");
 const path = require("path");
+const session = require("express-session");
 
 const saltRounds = 10;
 
@@ -19,26 +21,15 @@ const saltRounds = 10;
     app.use(bodyParser.urlencoded({ extended: false }));
 
     //Use static file
-    app.use(express.static(path.join(__dirname, '../')));
+    app.use(express.static(path.join(__dirname, '../public/html')));
+    app.use(express.static(path.join(__dirname, '../public')));
+    // app.use(express.static("public"));
 
-    /**********************Routes*****************************/
-
-    //     app.get('/healthcheck', (req, res) => {
-    //         res.send('OK')
-    //     });
-
-    //     app.get('/auth/google',
-    //     passport.authenticate('google', { scope: ['profile'] }));
-
-    //    app.get('/auth/google/index', 
-    //     passport.authenticate('google', { failureRedirect: '/login' }),
-    //     function(req, res) {
-    //       // Successful authentication, redirect home.
-    //       res.redirect('/');
-    //     });
-
-
-
+    app.use(session({
+        secret: 'Thisispawtnerslittlesecret.',
+        resave: false,
+        saveUninitialized: false
+    }));
 
 
 
@@ -56,19 +47,20 @@ const saltRounds = 10;
                 const foundUserPw = foundUser.rows[0].password;
                 const match = await bcrypt.compare(req.body.password, foundUserPw);
 
-                if (match) {
-                    res.redirect("http://127.0.0.1:3000");
-                } else {
-                    throw new Error("password doesn't match")
-                }
-            } else {
-                throw new Error("user not found")
-            }
+                    if (match) {
+                        req.session.loggedIn = true;
+                        console.log(req.session.id);
+                        console.log(foundUser.rows[0]);
+                        const username = foundUser.rows[0].username;
+                        res.redirect("booking.html");
 
-        } catch (err) {
+                    } else {
+                        res.redirect("login.html");
+                    }
+                }
+            } catch (err) {
             res.send(err.message);
         }
-
     });
 
     app.post("/register", async (req, res) => {
@@ -76,16 +68,16 @@ const saltRounds = 10;
         const email = req.body.email;
 
         try {
-            const hash = await bcrypt.hash(req.body.password, saltRounds);
+            const hashedPw = await bcrypt.hash(req.body.password, saltRounds);
 
             const newUser = 'INSERT INTO users(username, email, password) VALUES($1, $2, $3) RETURNING *';
-            const input = [username, email, hash];
+            const input = [username, email, hashedPw];
 
             const register = await client.query(newUser, input);
             // const newUsername = register.rows[0].username;
 
             if (register.rows.length) {
-                res.send(register.rows[0].id);
+                res.sendStatus(register.rows[0].id);
             }
             // res.redirect("http://127.0.0.1:3000");
 
@@ -95,7 +87,19 @@ const saltRounds = 10;
 
     });
 
+    app.get("/logout", async(req, res, next) => {
+            req.session.destroy(function(err) {
+                console.log('Destroyed session')
+             })
+            res.redirect("not-login.html")
+        });
+   
+        // app.get('/logout',(req,res) => {
+        //     req.session.destroy();
+        //     res.redirect('not-login.html');
+        // });
 
+    
     /********************Pets Ride Form***************************/
 
     app.post("/ride-booking", async (req, res) => {
@@ -169,7 +173,7 @@ const saltRounds = 10;
             const frequency2 = req.body.frequency2;
             const duration2 = req.body.duration2;
             const numberOfPets2 = req.body.number2;
-           
+
 
             const newWalking = 'INSERT INTO walking(date, time, frequency, duration, numberofpets) VALUES($1, $2, $3, $4, $5) RETURNING *';
             const inputWalking = [date2, time2, frequency2, duration2, numberOfPets2]
