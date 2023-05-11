@@ -1,9 +1,9 @@
-const chosenService = document.querySelectorAll("#service-choice .choice-card");
+const chosenServices = document.querySelectorAll("#service-choice .choice-card");
 
 
-chosenService.forEach(chosenService => {
+chosenServices.forEach(chosenService => {
     chosenService.addEventListener('click', () => {
-        var prevChoice = document.querySelector(".action-card");
+        const prevChoice = document.querySelector(".action-card");
 
         const petSitting = document.querySelectorAll(".choice-card")[0];
         const dogWalking = document.querySelectorAll(".choice-card")[1];
@@ -26,9 +26,9 @@ chosenService.forEach(chosenService => {
 
         if (prevChoice) {
             prevChoice.classList.remove("action-card");
+        }
 
-        } chosenService.classList.add("action-card");
-
+        chosenService.classList.add("action-card");
 
         const OTP = document.querySelectorAll(".choice-card")[4];
         const RDP = document.querySelectorAll(".choice-card")[5];
@@ -63,7 +63,7 @@ chosenService.forEach(chosenService => {
                         frequencyLabel1.style.display = 'none';
                         frequency1.style.display = 'none';
                     } else {
-                        sittingForm.style.display = 'flex'; 
+                        sittingForm.style.display = 'flex';
                         walkingForm.style.display = 'none';
                         groomingForm.style.display = 'none';
                         rideForm.style.display = 'none';
@@ -94,7 +94,7 @@ chosenService.forEach(chosenService => {
 
                     var frequencyLabel2 = document.querySelectorAll(".frequency-label")[1];
                     var frequency2 = document.querySelectorAll(".frequency")[1];
-                
+
                     if (EODP === chosenPlan || DP === chosenPlan) {
                         walkingForm.style.display = 'flex';
                         sittingForm.style.display = 'none';
@@ -133,15 +133,15 @@ chosenService.forEach(chosenService => {
                     if (prevChoice) {
                         prevChoice.classList.remove("action-card");
                     } chosenPlan.classList.add("action-card");
-                        groomingForm.style.display = 'flex';
-                        sittingForm.style.display = 'none';
-                        walkingForm.style.display = 'none';
-                        rideForm.style.display = 'none';
+                    groomingForm.style.display = 'flex';
+                    sittingForm.style.display = 'none';
+                    walkingForm.style.display = 'none';
+                    rideForm.style.display = 'none';
                 })
             })
         };
 
-        if (petsRide === chosenService ) {
+        if (petsRide === chosenService) {
             planHeading.style.visibility = 'hidden';
             walkingPlan.style.display = 'none';
             sittingPlan.style.display = 'none';
@@ -150,7 +150,7 @@ chosenService.forEach(chosenService => {
             sittingForm.style.display = 'none';
             walkingForm.style.display = 'none';
             groomingForm.style.display = 'none';
-        } 
+        }
 
     })
 });
