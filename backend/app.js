@@ -18,12 +18,8 @@ const saltRounds = 10;
     await client.connect()
 
 
-    app.use(bodyParser.urlencoded({ extended: false }));
-
-    //Use static file
-    app.use(express.static(path.join(__dirname, '../public/html')));
-    app.use(express.static(path.join(__dirname, '../public')));
-    // app.use(express.static("public"));
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
 
     app.use(session({
         secret: 'Thisispawtnerslittlesecret.',
@@ -31,35 +27,33 @@ const saltRounds = 10;
         saveUninitialized: false
     }));
 
-
-
-
     /*******************Log In & Register***********************/
 
     app.post("/login", async (req, res) => {
-
         try {
+            if (!req.body.email || !req.body.password) throw new Error('missing email/password.');
+
             const { email, password } = req.body;
 
             const foundUser = await client.query(`SELECT * FROM users WHERE email = $1`, [email]);
 
             if (foundUser.rows.length) {
-                const foundUserPw = foundUser.rows[0].password;
-                const match = await bcrypt.compare(req.body.password, foundUserPw);
+                const { id, username, password: passwordInDB } = foundUser.rows[0];
+                const match = await bcrypt.compare(password, passwordInDB);
+                if (match) {
+                    req.session.user = { id };
+                    res.json({ username });
 
-                    if (match) {
-                        req.session.loggedIn = true;
-                        console.log(req.session.id);
-                        console.log(foundUser.rows[0]);
-                        const username = foundUser.rows[0].username;
-                        res.redirect("booking.html");
-
-                    } else {
-                        res.redirect("login.html");
-                    }
+                } else {
+                    throw new Error('Incorrect username/password.')
                 }
-            } catch (err) {
-            res.send(err.message);
+            } else {
+                throw new Error('user not found');
+            }
+        } catch (err) {
+            alert('Log in failed. Please try again.');
+            res.status(500).json({ message: err.message });
+
         }
     });
 
@@ -74,32 +68,27 @@ const saltRounds = 10;
             const input = [username, email, hashedPw];
 
             const register = await client.query(newUser, input);
-            // const newUsername = register.rows[0].username;
 
             if (register.rows.length) {
                 res.sendStatus(register.rows[0].id);
             }
-            // res.redirect("http://127.0.0.1:3000");
-
         } catch (err) {
             console.log(err);
         }
-
     });
 
-    app.get("/logout", async(req, res, next) => {
-            req.session.destroy(function(err) {
-                console.log('Destroyed session')
-             })
-            res.redirect("not-login.html")
-        });
-   
-        // app.get('/logout',(req,res) => {
-        //     req.session.destroy();
-        //     res.redirect('not-login.html');
-        // });
+    app.get("/logout", async (req, res, next) => {
+        req.session.destroy(function (err) {
+            if (err) throw err;
 
-    
+            console.log('Destroyed session')
+
+            // Clear the session cookie
+            res.clearCookie('connect.sid');
+
+            res.sendStatus(200);
+        })
+    });
     /********************Pets Ride Form***************************/
 
     app.post("/ride-booking", async (req, res) => {
@@ -161,9 +150,6 @@ const saltRounds = 10;
             console.log(err);
         }
     });
-
-    // (date, time, frequency, location, numberofpets, district)
-
     /**********************Dog Walking***************************/
 
     app.post("/walking-booking", async (req, res) => {
@@ -186,8 +172,25 @@ const saltRounds = 10;
         }
     });
 
-    /**********************Server start at port 3001****************/
-    app.listen(3001, (req, res) => {
-        console.log("server started at port 3001");
+
+    //Use static file
+    app.use(express.static(path.join(__dirname, '../public/html')));
+    app.use(express.static(path.join(__dirname, '../public')));
+    app.use(isLoggedIn, express.static(path.join(__dirname, '../private'))); //server private page for logged in user
+
+    function isLoggedIn(req, res, next) {
+        console.log(req.session);
+        // implement check for user in session
+        if (req.session?.user) {
+            next();
+        } else {
+            console.log('user not found');
+            res.redirect('not-login.html');
+        }
+    };
+
+    /**********************Server start at port 3000****************/
+    app.listen(3000, (req, res) => {
+        console.log("server started at port 3000");
     });
 })()
