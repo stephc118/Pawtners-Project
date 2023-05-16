@@ -177,6 +177,7 @@ const saltRounds = 10;
     app.use(express.static(path.join(__dirname, '../public/html')));
     app.use(express.static(path.join(__dirname, '../public')));
     app.use(isLoggedIn, express.static(path.join(__dirname, '../private'))); //server private page for logged in user
+    
 
     function isLoggedIn(req, res, next) {
         console.log(req.session);

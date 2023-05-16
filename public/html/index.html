@@ -18,8 +18,16 @@
         <a href="index.html" class="nav-item logo">PAWTNERS</a>
         <a href="services.html" class="nav-item">Services</a>
         <a href="contact.html" class="nav-item">Contact</a>
-        <a href="register.html"><button class="topnav-btn outline-btn">Register</button></a>
-        <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
+        <div id="not-login-nav">
+            <a href="register.html"><button class="topnav-btn outline-btn">Register</button></a>
+            <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
+        </div>
+        <div id="login-nav">
+            <form id="logout" method="post">
+                <button type="submit" class="topnav-btn green-btn logout-btn">Log Out</button>
+                <p class="user">User 123</p><i class="user fa-solid fa-circle-user"></i>
+            </form>
+        </div>
     </div>
 
     <!-- Top div -->
@@ -38,12 +46,12 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                 </p>
                 <a href="services.html"><button class="green-btn big-btn">Explore</button></a>
-            <a href="register.html"><button class="outline-btn big-btn">Register</button></a>
+                <a href="register.html"><button class="outline-btn big-btn">Register</button></a>
         </div>
         <div id="brand-img">
             <img class="image" src="../image/image.jpeg" alt="brand-img">
         </div>
-        </div>
+    </div>
     </div>
 
 
@@ -87,7 +95,7 @@
             <h1>Pet Sitting</h1>
             <p>Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac
                 aliquet odio mattis. </p>
-                <a href="pet-sitting.html"><button class="green-btn">Learn More</button></a>
+            <a href="pet-sitting.html"><button class="green-btn">Learn More</button></a>
         </div>
     </div>
 
@@ -97,7 +105,7 @@
             <h1>Dog walking</h1>
             <p>Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac
                 aliquet odio mattis. </p>
-                <a href="dog-walking.html"><button class="green-btn">Learn More</button></a>
+            <a href="dog-walking.html"><button class="green-btn">Learn More</button></a>
         </div>
         <div class="img-box">
             <img src="/image/image.jpeg" alt="intro-img">
@@ -113,7 +121,7 @@
             <h1>Pets Grooming</h1>
             <p>Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac
                 aliquet odio mattis. </p>
-                <a href="pets-grooming.html"><button class="green-btn">Learn More</button></a>
+            <a href="pets-grooming.html"><button class="green-btn">Learn More</button></a>
         </div>
     </div>
 
@@ -123,7 +131,7 @@
             <h1>Pets ride</h1>
             <p>Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac
                 aliquet odio mattis. </p>
-                <a href="pets-ride.html"><button class="green-btn">Learn More</button></a>
+            <a href="pets-ride.html"><button class="green-btn">Learn More</button></a>
         </div>
         <div class="img-box">
             <img src="/image/image.jpeg" alt="intro-img">
@@ -214,10 +222,11 @@
     <div id="call-to-action">
         <h1>Make a booking now <br>
             for your fur babies!</h1>
-        <a href="not-login.html"><button class="green-btn large">Book Now</button></a>
+        <a href="booking.html"><button class="green-btn large">Book Now</button></a>
 
     </div>
-
+    <script src="../js/navbar.js"></script>
+    <script src="../js/logout.js"></script>
 </body>
 
 <footer>

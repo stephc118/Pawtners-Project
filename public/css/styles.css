@@ -9,6 +9,14 @@ body {
 
 /*******************Nav Bar ***************************/
 
+#login-nav {
+    display: none;
+}
+
+#not-login-nav {
+    display: '';
+}
+
 #topnav {
     background-color: #ffffff;
     height: 60px;

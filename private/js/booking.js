@@ -1,7 +1,7 @@
+
+
 const chosenServices = document.querySelectorAll("#service-choice .choice-card");
 
-// const username = sessionStorage.getItem('username');
-// console.log('username', username);
 
 chosenServices.forEach(chosenService => {
     chosenService.addEventListener('click', () => {

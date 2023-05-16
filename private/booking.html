@@ -14,21 +14,21 @@
 
 <body>
     <!-- Nav Bar -->
-    <!-- <div id="topnav">
+    <div id="topnav">
         <a href="index.html" class="nav-item logo">PAWTNERS</a>
         <a href="services.html" class="nav-item">Services</a>
         <a href="contact.html" class="nav-item">Contact</a>
-        <a href="register.html"><button class="topnav-btn outline-btn">Register</button></a>
-        <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
-    </div> -->
-
-        <!-- Nav Bar -->
-        <div id="topnav">
-            <a href="index.html" class="nav-item logo">PAWTNERS</a>
-            <a href="services.html" class="nav-item">Services</a>
-            <a href="contact.html" class="nav-item">Contact</a>
-            <a href="/logout"> <button class="topnav-btn green-btn">Log Out</button></a>
-            </i><a href="" class="user">User 123</a><i class="user fa-solid fa-circle-user"></i>
+        <div id="not-login-nav">
+            <a href="register.html"><button class="topnav-btn outline-btn">Register</button></a>
+            <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
+        </div>
+        <div id="login-nav">
+            <form id="logout">
+                <button type="submit" class="topnav-btn green-btn logout-btn">Log Out</button>
+                <p class="user">User 123</p><i class="user fa-solid fa-circle-user"></i>
+            </form>
+        </div>
+    </div>
 
     <!-- Choose Service -->
     <h1 id="choice-heading">Choose a service for your fur babies first.</h1>
@@ -181,7 +181,7 @@
         </div>
     </div>
 
-<!-- Pet sitting booking form -->
+    <!-- Pet sitting booking form -->
     <div id="booking-form" class="pet-sitting">
         <form action="http://localhost:3001/sitting-booking" method="post">
             <ul>
@@ -190,7 +190,7 @@
                 <li> <label for="time">Time</label></li>
                 <li><input type="time" name="time1" placeholder="Time" class="time" required></li><br>
                 <li><label for="frequency1" class="frequency-label">Frequency</label></li>
-                <select name="frequency1"  class="frequency">
+                <select name="frequency1" class="frequency">
                     <option value="">Frequency</option>
                     <option value="1 Day">1 Day</option>
                     <option value="2 Day">2 Day</option>
@@ -211,7 +211,8 @@
                 <li> <label for="district">District</label></li>
                 <li><input type="text" name="district1" placeholder="District" class="district" required></li><br>
 
-                <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation
+                <p class="reminder">Once we received your booking, we will be contacting you via email for
+                    confirmation
                     and payment.</p>
                 <li><a href="success.html"><button type="submit" id="send-btn">Send</button></a></li>
             </ul>
@@ -227,7 +228,7 @@
                 <li><input type="date" name="date2" class="date" required></li><br>
                 <li> <label for="time">Time</label></li>
                 <li><input type="time" name="time2" placeholder="Time" class="time" required></li><br>
-                <li><label for="frequency2"  class="frequency-label">Frequency</label></li>
+                <li><label for="frequency2" class="frequency-label">Frequency</label></li>
                 <select name="frequency2" class="frequency">
                     <option value="">Frequency</option>
                     <option value="1">1 Day</option>
@@ -248,7 +249,8 @@
                 </select>
                 <li> <label for="number">Number of Pets</label></li>
                 <li><input type="text" name="number2" placeholder="Number" class="number" required></li><br>
-                <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation
+                <p class="reminder">Once we received your booking, we will be contacting you via email for
+                    confirmation
                     and payment.</p>
                 <li><a href="success.html"><button type="submit" id="send-btn">Send</button></a></li>
             </ul>
@@ -267,7 +269,8 @@
                 <li><input type="time" name="time3" placeholder="Time" class="time" required></li><br>
                 <li> <label for="number">Number of Pets</label></li>
                 <li><input type="text" name="number3" placeholder="Number" class="number" required></li><br>
-                <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation
+                <p class="reminder">Once we received your booking, we will be contacting you via email for
+                    confirmation
                     and payment.</p>
                 <li><a href="success.html"><button type="submit" id="send-btn">Send</button></a></li>
             </ul>
@@ -289,7 +292,8 @@
                 <li><input type="text" name="dropoff4" placeholder="Location" class="dropoff" required></li><br>
                 <li> <label for="number">Number of Pets</label></li>
                 <li><input type="text" name="number4" placeholder="Number" class="number" required></li><br>
-                <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation
+                <p class="reminder">Once we received your booking, we will be contacting you via email for
+                    confirmation
                     and payment.</p>
                 <li><a href="success.html"><button type="submit" id="send-btn">Send</button></a></li>
             </ul>
@@ -298,6 +302,8 @@
     </div>
 
     <script src="/js/booking.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/logout.js"></script>
 </body>
 
 <footer>
