@@ -34,16 +34,15 @@
 
     <div class="row">
         <div class="col">
-            <img src="../image/image.jpeg" alt="register-img">
+            <img src="../image/register.png" alt="register-img">
         </div>
         <div class="col">
-            <form action="http://localhost:3001/register" id="register" method="post">
+            <form id="register" method="post">
                 <ul>
                     <li>
                         <h1>Create an account</h1>
                     </li>
                     <li><input type="text" name="username" placeholder="Username" class="username" required></li><br>
-                    <!-- <li><input type="text" name="username" placeholder="Username" class="usermane" required></li><br> -->
                     <li><input type="text" name="email" placeholder="Email Address" class="email" required></li><br>
                     <li><input type="text" name="password" placeholder="Password" class="password" required></li><br>
                     <li><button type="submit" id="create-btn">Create Account</button></li>
@@ -58,14 +57,14 @@
                         </div>
                     </li>
                     <li class="icon">
-                        Sign Up using <a href="/auth/google"><i class="fa-brands fa-google"></a></i> <i
+                        Sign Up using <a href="/connect/google"><i class="fa-brands fa-google"></a></i> <i
                             class="fa-brands fa-facebook"></i>
                     </li>
                 </ul>
             </form>
         </div>
     </div>
-    <script src="register.js"></script>
+    <script src="../js/register.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/logout.js"></script>
 </body>

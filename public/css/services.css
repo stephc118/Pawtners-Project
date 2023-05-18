@@ -8,6 +8,10 @@
     justify-content: center;
 }
 
+.row-1 {
+    margin-top: 100px;
+}
+
 .card {
     width: 450px;
     height: 550px;
@@ -16,13 +20,14 @@
     border-radius: 10px;
 }
 
-.img-div {
+/* .img-div {
     height: 300px;
-}
+} */
 
 img {
-    height: 300px;
+    height: 280px;
     width: 450px;
+    border-radius: 10px 10px 0 0;
 }
 
 .text-div {

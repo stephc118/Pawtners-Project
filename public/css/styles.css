@@ -5,6 +5,7 @@ html, ul {
 body {
     margin: 0;
     color: #56493E;
+    width: 1440px;
 }
 
 /*******************Nav Bar ***************************/
@@ -116,9 +117,9 @@ span {
     margin-left: 0;
 }
 
-#brand-img {
+/* #brand-img {
     width: 800px;
-}
+} */
 
 .image {
     width: 800px;

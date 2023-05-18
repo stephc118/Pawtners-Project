@@ -5,7 +5,7 @@
 img {
     margin-left: 100px;
     height: 600px;
-    width: 600px;
+    width: 500px;
 }
 
 .col {
@@ -98,8 +98,8 @@ hr {
    align-items: center;
 }
 
-#register .fa-facebook,
-#login .fa-facebook {
+
+.fa-facebook {
     font-size: 50px;
     color: #3B5998;
     margin: 10px;
@@ -118,8 +118,8 @@ hr {
     margin: 10px 10px 10px 20px;
 }
 
-#register .fa-facebook:hover,
-#login .fa-facebook:hover {
+
+.fa-facebook:hover {
     color: #5572b1;
 }
 

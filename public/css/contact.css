@@ -36,20 +36,23 @@
     padding-bottom: 5px;
 }
 
-input {
+input,
+textarea {
     border: solid 2px #A18772;
     border-radius: 8px;
     width: 400px;
     height: 40px;
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: #A18772;
     font-family: 'Manrope', sans-serif;
     font-size: 15px;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
     background-color:#F5E1D2;
     outline: #56493E;
     color: #56493E;

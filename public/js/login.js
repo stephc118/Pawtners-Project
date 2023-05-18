@@ -44,16 +44,7 @@ loginForm.addEventListener('submit', async (event) => {
             } else {
                 throw new Error('unable to get user.');
             }
-            // const logInBtn = document.querySelector(".topnav-btn.green-btn");
-            // const registerBtn = document.querySelector(".topnav-btn.outline-btn");
-
-            // logInBtn.style.display = 'none';
-            // registerBtn.style.display = 'none';
-
         }
-
-
-
     } catch (err) {
         console.error(err);
         // alert(err.message);
@@ -61,3 +52,40 @@ loginForm.addEventListener('submit', async (event) => {
         alert('Something went wrong. Please try logging in again.')
     }
 });
+
+
+// const googleBtn = document.querySelector("#google");
+
+// googleBtn.addEventListener('submit', async(event) => {
+//     try {
+//         event.preventDefault();
+
+//         // const result = {
+//         //     username: username,
+//         //     email: email
+//         // };
+
+//         const res = await fetch('/login/google');
+    
+//         // const response = await res.json();
+//         // console.log(response);
+
+//         //If no user was found
+//         // if (res.status === 400) {
+//         //     // alert(response.message);
+//         //     //TODO: show error on UI
+//         //     alert('No User was found. Please try again')
+//         // }
+
+//         if (res.status === 200) {
+//             if (res?.name) {
+//                 sessionStorage.setItem('username_google', res.name);
+//                 window.location = '/booking.html';
+//             } else {
+//                 throw new Error('unable to get user.');
+//             }
+//         } 
+//     } catch (err) {
+//         alert('Something went wrong. Please try logging in again.')
+//     }
+// });
