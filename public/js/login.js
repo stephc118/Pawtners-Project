@@ -39,8 +39,8 @@ loginForm.addEventListener('submit', async (event) => {
             if (response?.username) {
                 sessionStorage.setItem('username', response.username);
                 window.location = '/booking.html';
-          
-             
+
+
             } else {
                 throw new Error('unable to get user.');
             }
@@ -53,39 +53,3 @@ loginForm.addEventListener('submit', async (event) => {
     }
 });
 
-
-// const googleBtn = document.querySelector("#google");
-
-// googleBtn.addEventListener('submit', async(event) => {
-//     try {
-//         event.preventDefault();
-
-//         // const result = {
-//         //     username: username,
-//         //     email: email
-//         // };
-
-//         const res = await fetch('/login/google');
-    
-//         // const response = await res.json();
-//         // console.log(response);
-
-//         //If no user was found
-//         // if (res.status === 400) {
-//         //     // alert(response.message);
-//         //     //TODO: show error on UI
-//         //     alert('No User was found. Please try again')
-//         // }
-
-//         if (res.status === 200) {
-//             if (res?.name) {
-//                 sessionStorage.setItem('username_google', res.name);
-//                 window.location = '/booking.html';
-//             } else {
-//                 throw new Error('unable to get user.');
-//             }
-//         } 
-//     } catch (err) {
-//         alert('Something went wrong. Please try logging in again.')
-//     }
-// });

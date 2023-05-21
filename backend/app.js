@@ -172,6 +172,7 @@ const grant = require('grant');
 
             // Clear the session cookie
             res.clearCookie('connect.sid');
+            res.clearCookie('username');
 
             res.sendStatus(200);
         })

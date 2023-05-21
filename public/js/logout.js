@@ -3,7 +3,6 @@ const logOut = document.querySelector("#logout");
 logOut.addEventListener('submit', async (event) => {
     try {
         event.preventDefault();
-        console.log('here');
         const res = await fetch('/logout');
         if (res.status === 200) {
             sessionStorage.clear();
