@@ -26,7 +26,6 @@ loginForm.addEventListener('submit', async (event) => {
             body: JSON.stringify(formData),
         });
 
-        const response = await res.json();
 
         //If no user was found
         if (res.status === 400) {
@@ -36,14 +35,7 @@ loginForm.addEventListener('submit', async (event) => {
         }
 
         if (res.status === 200) {
-            if (response?.username) {
-                sessionStorage.setItem('username', response.username);
                 window.location = '/booking.html';
-
-
-            } else {
-                throw new Error('unable to get user.');
-            }
         }
     } catch (err) {
         console.error(err);

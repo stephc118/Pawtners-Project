@@ -61,7 +61,8 @@ const grant = require('grant');
                 const match = await bcrypt.compare(password, passwordInDB);
                 if (match) {
                     req.session.user = { id: user_id };
-                    res.json({ username: username });
+                    res.cookie('username', username);
+                    res.sendStatus(200);
 
                 } else {
                     throw new Error('Incorrect username/password.')
