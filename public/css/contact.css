@@ -1,3 +1,15 @@
+@media (max-width: 1100px) {
+    #top-div {
+        flex-direction: column;
+        height: 100%;
+        margin: auto;
+    }
+}
+
+#top-div {
+    display: flex;
+}
+
 #form {
     display: flex;
 

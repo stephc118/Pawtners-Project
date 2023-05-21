@@ -5,7 +5,6 @@ html, ul {
 body {
     margin: 0;
     color: #56493E;
-    width: 1440px;
 }
 
 /*******************Nav Bar ***************************/
@@ -22,17 +21,14 @@ body {
     background-color: #ffffff;
     height: 60px;
     border-bottom: solid 1px #3C3C3C;
+    padding: 5px 20px;
 }
 
 .logo {
     font-weight: 700;
 }
 
-#topnav {
-    padding: 5px 20px;
-}
-
-#topnav .nav-item {
+#topnav .nav-item { 
     float: left;
     color: #56493E;
     text-align: center;
@@ -93,11 +89,13 @@ i.user {
 #top-div {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 #brand {
     width: 700px;
     margin: 100px 150px;
+    flex: 1;
 }
 
 span {
@@ -124,6 +122,11 @@ span {
 .image {
     width: 800px;
     height: 550px;
+   
+}
+
+#brand-img {
+    flex: 1;
 }
 
 #brand .text-box {
@@ -157,9 +160,8 @@ hr {
 
 /**************************Footer********************************/
 
-#footer hr {
-    width: 1680px;
-    color: #3C3C3C;
+#footer {
+    border-top: solid 1px #3C3C3C;
 }
 
 .items {

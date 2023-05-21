@@ -1,3 +1,14 @@
+@media (max-width: 1200px) {
+    .row {
+        flex-direction: column;
+        height: 100%;
+        margin: auto;
+        /* justify-content: center;
+        text-align: center; */
+       
+    }
+}
+
 .row {
     display: flex;
 }
@@ -10,9 +21,14 @@ img {
 
 .col {
     margin: 100px 50px;
-    flex: 50%;
+
 }
 
+.form {
+    display: flex;
+    flex-direction: column;
+    
+}
 /*************form***************/
 
 li {
@@ -99,7 +115,7 @@ hr {
 }
 
 
-.fa-facebook {
+.fb-btn {
     font-size: 50px;
     color: #3B5998;
     margin: 10px;
@@ -119,7 +135,7 @@ hr {
 }
 
 
-.fa-facebook:hover {
+.fb-btn:hover {
     color: #5572b1;
 }
 

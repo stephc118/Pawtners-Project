@@ -1,3 +1,29 @@
+@media (max-width: 1250px) {
+    #top-div,
+    #introduction,
+    #pet-sitting,
+    #dog-walking,
+    #pets-grooming,
+    #pets-ride,
+    #reviews {
+      flex-direction: column;
+      height: 100%;
+      text-align: center;
+      align-items: center;
+    }
+    #pet-sitting,
+    #dog-walking,
+    #pets-grooming,
+    #pets-ride {
+        max-width: 500px;
+    }
+
+    #call-to-action {
+        max-width: 600px;
+    }
+   
+  }
+
 /***********************Introduction**********************/
 
 #introduction {
@@ -25,7 +51,7 @@
 .service {
     display: flex;
     justify-content: center;
-    margin: 100px;
+    margin: 100px auto;
 }
 
 .service img {
@@ -42,7 +68,6 @@
 }
 
 .service button {
-    float: left;
     margin: 10px 0;
     font-weight: 700;
     font-size: larger;
@@ -58,7 +83,7 @@
    padding: 100px 0;
    border-radius: 10px;
    width: 1200px;
-   margin: auto;
+   
 }
 
 /**********************Section hr*************************/
@@ -72,6 +97,7 @@
 #reviews {
     display: flex;
     justify-content: space-evenly;
+    gap: 50px;
 }
 
 .card {
@@ -130,11 +156,16 @@
 /********************************Call to action**********************/
 
 #call-to-action {
-   text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1200px;
+    flex: 1;
+    text-align: center;
     background-color: #D9F4D3;
     padding: 100px 0;
     border-radius: 10px;
-    width: 1200px;
     color: #74BFB1;
     margin: auto auto 200px auto;
     font-size: 30px;
