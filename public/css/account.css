@@ -1,27 +1,44 @@
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
     .row {
         flex-direction: column;
         height: 100%;
-        margin: auto;
-        /* justify-content: center;
-        text-align: center; */
+        justify-content: center;
+        text-align: center;
        
     }
+
+    .icon,
+    .col {
+        justify-content: center;
+    }
+
+    .col.one {
+        margin: 0;
+    }
+   
+    ul {
+        padding-left: 0;
+    }
+
+    .image {
+      display: none;
+    }  
 }
 
 .row {
     display: flex;
+    justify-content: center;
 }
 
-img {
-    margin-left: 100px;
+.image {
     height: 600px;
     width: 500px;
 }
 
 .col {
-    margin: 100px 50px;
-
+    display: flex;
+    margin: 100px;
+   
 }
 
 .form {
@@ -91,7 +108,7 @@ input:focus {
 }
 
 hr {
-    width: 200px;
+    width: 175px; 
     border-width: 1px 0 0 0;
     border-color: #97DDD0;
 }

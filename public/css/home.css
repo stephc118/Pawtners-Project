@@ -18,12 +18,17 @@
         max-width: 500px;
     }
 
+    /* #dog-walking .img {
+        float: top;
+    } */
+    
     #call-to-action {
-        max-width: 600px;
+        max-width: 600px;       
     }
-   
-  }
-
+    #cta-heading {
+        font-size: 35px;
+    }
+    }
 /***********************Introduction**********************/
 
 #introduction {
@@ -58,6 +63,7 @@
     border-radius: 500px;
     width: 300px;
 }
+
 .service  .text-box {
     width: 400px;
     margin: 50px 100px;

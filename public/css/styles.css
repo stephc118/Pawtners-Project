@@ -115,13 +115,14 @@ span {
     margin-left: 0;
 }
 
-/* #brand-img {
-    width: 800px;
-} */
+#brand-img {
+    margin: 0;
+}
 
 .image {
     width: 800px;
     height: 550px;
+    float: right;
    
 }
 
@@ -171,7 +172,7 @@ hr {
 
 .item {
     width: 500px;
-    margin: 100px;
+    margin: 80px;
     text-align: center;
 }
 
