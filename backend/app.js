@@ -118,7 +118,7 @@ const grant = require('grant');
             //Add user id in our session
             if (user) {
                 req.session.user = {
-                    id: user.id,
+                    id: user.user_id,
                     username: user.username
                 };
                 res.cookie('username', user.username);
@@ -149,8 +149,9 @@ const grant = require('grant');
                 const register = await client.query(newUser, input);
 
                 if (register.rows.length) {
-                    req.session.user = { id: register.rows[0].id };
-                    res.json({ username: register.rows[0].username });
+                    req.session.user = { id: register.rows[0].user_id };
+                    res.cookie('username', register.rows[0].username);
+                    res.sendStatus(200);
 
                 } else {
                     throw new Error('Registration failed, please try again.');
@@ -174,10 +175,10 @@ const grant = require('grant');
             // Clear the session cookie
             res.clearCookie('connect.sid');
             res.clearCookie('username');
-
             res.sendStatus(200);
         })
     });
+
     /********************Pets Ride Form***************************/
 
     app.post("/ride-booking", async (req, res) => {
@@ -242,6 +243,7 @@ const grant = require('grant');
             console.log(err);
         }
     });
+
     /**********************Dog Walking***************************/
 
     app.post("/walking-booking", async (req, res) => {
@@ -279,7 +281,8 @@ const grant = require('grant');
         }
     })
 
-    //Use static file
+    /*************************Use static file********************/
+
     app.use(express.static(path.join(__dirname, '../public/html')));
     app.use(express.static(path.join(__dirname, '../public')));
     app.use(isLoggedIn, express.static(path.join(__dirname, '../private'))); //server private page for logged in user

@@ -32,7 +32,6 @@ registerForm.addEventListener('submit', async (event) => {
             body: JSON.stringify(formData),
         });
 
-        const response = await res.json();
 
         //If not success
         if (res.status === 400) {
@@ -42,14 +41,8 @@ registerForm.addEventListener('submit', async (event) => {
         }
 
         if (res.status === 200) {
-            if (response?.username) {
-                sessionStorage.setItem('username', response.username);
                 window.location = '/booking.html';
-            } else {
-                throw new Error('unable to register.');
-            }
         }
-
     } catch (err) {
         console.error(err);
         // alert(err.message);
