@@ -1,4 +1,4 @@
-const username =  decodeURI(document.cookie.substring(9));
+const username = getCookie('username');
 
 if (username) {
     const notLogIn = document.querySelector("#not-login-nav");
@@ -14,4 +14,11 @@ if (username) {
     const LogIn =  document.querySelector("#login-nav");
     notLogIn.style.display = 'block';
     LogIn.style.display = 'none'; 
+}
+
+function getCookie(key){
+    const regex = new RegExp('(?:^|;\s*)' + key + '=([^;]*)');
+    const match = regex.exec(document.cookie);
+
+    return match && match[1] ? decodeURIComponent(match[1]) : null;
 }
