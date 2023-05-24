@@ -286,19 +286,22 @@ const grant = require('grant');
     app.get('/history', async(req, res) => {
         try {
             const userId = req.session.user.id;
-            const query = await client.query('SELECT * from ride where user_id = $1', [userId]);
-            console.log(userId);
-            console.log(query.rows[0]);
-            if (query.rows.length) {
-                res.json({order: query.rows[0]});
+            const ride = await client.query('SELECT * from ride where user_id = $1', [userId]);
+            const sitting = await client.query('SELECT * from sitting where user_id = $1', [userId]);
+            const grooming = await client.query('SELECT * from grooming where user_id = $1', [userId]);
+            const walking = await client.query('SELECT * from walking where user_id = $1', [userId]);
+            if (ride.rows.length || sitting.rows.length || grooming.rows.length || walking.rows.length) {
+                res.json({orderRide: ride.rows[0], 
+                    orderSitting: sitting.rows[0], 
+                    orderGrooming: grooming.rows[0],
+                    orderWalking: walking.rows[0]});
             } else {
-                res.json({order: query.rows[0]});
+                res.json({order: 'none'});
             }
         } catch (err) {
             console.log(err);
         }
-
-    })
+    });
 
     /*************************Use static file********************/
 
