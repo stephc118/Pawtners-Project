@@ -97,11 +97,12 @@ i.user {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 500px;
 }
 
 #brand {
     width: 700px;
-    margin: 100px 150px;
+    margin: 100px;
     flex: 1;
 }
 
@@ -122,23 +123,11 @@ span {
     margin-left: 0;
 }
 
-#brand-img {
-    margin: 0;
-}
-
 .image {
-    width: 800px;
-    height: 550px;
+    width: 650px;
+    height: 500px;
     float: right;
    
-}
-
-#brand-img {
-    flex: 1;
-}
-
-#brand .text-box {
-    width: 500px;
 }
 
 /**********************Section hr*************************/
@@ -149,7 +138,7 @@ span {
 }
 
 hr {
-    width: 800px;
+    width: 850px;
     color: #3C3C3C;
     border-width: 1px 0 0 0;
     margin-left: 0;

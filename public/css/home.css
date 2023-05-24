@@ -41,6 +41,11 @@
     align-items: center;
 }
 
+#district .text-box,
+#candidate .text-box {
+    width: 500px;
+}
+
 /*********************Service Bar************************/
 
 #service-bar {
@@ -91,9 +96,9 @@
 #dog-walking, #pets-ride {
    background-color: #F7EFC0;
    padding: 100px 0;
+   margin: auto;
    border-radius: 10px;
-   width: 1200px;
-   
+   width: 1000px;
 }
 
 /**********************Section hr*************************/
@@ -107,12 +112,12 @@
 #reviews {
     display: flex;
     justify-content: space-evenly;
-    gap: 50px;
+    gap: 20px;
 }
 
 .card {
     background-color: #F5E1D2;
-    width: 400px;
+    width: 350px;
     height: 450px;
     border-radius: 20px;
 }
@@ -140,7 +145,6 @@
 
 .fa-star {
     color: #ebc751;
-    font-size: larger;
 }
 
 .rev-msg {
@@ -148,7 +152,7 @@
 }
 
 .rev-msg p {
-    font-size: larger;
+    font-size: large;
 }
 
 
@@ -170,7 +174,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 1200px;
+    width: 1000px;
     flex: 1;
     text-align: center;
     background-color: #D9F4D3;
@@ -197,4 +201,10 @@
 
 .green-btn:hover {
     background-color: #97DDD0;
+}
+
+/****************Candidate***************************/
+
+#candidate img {
+    border-radius: 0;
 }
