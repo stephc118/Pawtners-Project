@@ -281,6 +281,25 @@ const grant = require('grant');
         }
     })
 
+    /***************************Account Page********************/
+
+    app.get('/history', async(req, res) => {
+        try {
+            const userId = req.session.user.id;
+            const query = await client.query('SELECT * from ride where user_id = $1', [userId]);
+            console.log(userId);
+            console.log(query.rows[0]);
+            if (query.rows.length) {
+                res.json({order: query.rows[0]});
+            } else {
+                res.json({order: query.rows[0]});
+            }
+        } catch (err) {
+            console.log(err);
+        }
+
+    })
+
     /*************************Use static file********************/
 
     app.use(express.static(path.join(__dirname, '../public/html')));

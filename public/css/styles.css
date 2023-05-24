@@ -83,6 +83,13 @@ i.user {
     border-color: #A18772;
 }
 
+#account-btn {
+    color: #56493E;
+}
+
+#account-btn:hover {
+    color: #A18772;
+}
 
 /*******************Top Div***************************/
 

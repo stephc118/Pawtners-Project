@@ -1,0 +1,36 @@
+#title {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#table {
+    margin: 50px auto 200px;
+    color: #A18772;
+    display: flex;
+    justify-content: center;
+}
+
+td {
+    padding: 5px 30px;
+}
+
+#subtitle {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#no-booking {
+    text-align: center;
+    font-size: 25px;
+    color: #A18772;
+    margin: 100px auto 100px;
+}
+
+#book-btn {
+   display: block;
+   margin: 50px auto 200px;
+}
+
+a {
+    text-decoration: none;
+}
