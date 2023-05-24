@@ -25,7 +25,8 @@ const grant = require('grant');
     app.use(session({
         secret: 'Thisispawtnerslittlesecret.',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: { path: '/', httpOnly: true, secure: false, maxAge: 900000}
     }));
 
     //Grant for OAuth login
@@ -72,7 +73,6 @@ const grant = require('grant');
             }
         } catch (err) {
             res.status(500).json({ message: err.message });
-
         }
     });
 
