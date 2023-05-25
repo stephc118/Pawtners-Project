@@ -1,6 +1,16 @@
 (async () => {
     try {
-
+        const table = document.querySelector("#table");
+        const noBooking = document.querySelector("#no-booking");
+        const bookBtn = document.querySelector("#book-btn");
+        table.style.display = 'none';
+        noBooking.style.display = 'none';
+        bookBtn.style.display = 'none';
+        setTimeout (()=> {
+            const spinner = document.querySelector("#load");
+            spinner.style.display = 'none';
+        }, "1000");
+            
         const res = await fetch('/history');
 
         const response = await res.json();
@@ -14,17 +24,20 @@
         if (res.status === 200) {
             if (!response.orderRide && !response.orderSitting &&
                 !response.orderGrooming && !response.orderWalking) {
-                const table = document.querySelector("#table");
-                table.style.display = 'none';
+
+                setTimeout (()=> {
+                    noBooking.style.display = '';
+                    bookBtn.style.display = '';
+                }, 980);
             }
             else if (response?.orderRide || response?.orderSitting ||
                 response?.orderGrooming || response?.orderWalking) {
 
-                const noBooking = document.querySelector("#no-booking");
-                const bookBtn = document.querySelector("#book-btn");
-                noBooking.style.display = 'none';
-                bookBtn.style.display = 'none';
-
+                setTimeout (()=> {
+                    noBooking.style.display = 'none';
+                    bookBtn.style.display = 'none';
+                    table.style.display = '';
+                }, 980);
 
                 if (response?.orderRide) {
 
@@ -51,6 +64,7 @@
                 } else {
                     row2.style.display = 'none';
                 }
+
                 if (response?.orderGrooming) {
                     row3.style.display = '';
                     const orderNo3 = document.querySelectorAll("#row3 td")[0];
@@ -63,6 +77,7 @@
                 } else {
                     row3.style.display = 'none';
                 }
+
                 if (response?.orderWalking) {
                     row4.style.display = '';
                     const orderNo4 = document.querySelectorAll("#row4 td")[0];
