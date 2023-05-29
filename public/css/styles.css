@@ -1,10 +1,17 @@
-html, ul {
+html,
+ul {
     font-family: 'Manrope', sans-serif;
 }
 
 body {
     margin: 0;
     color: #56493E;
+    min-height: 100vh;
+}
+
+.content {
+    min-height: calc(100vh - 230px - 71px);
+    box-sizing: border-box;
 }
 
 /*******************Nav Bar ***************************/
@@ -28,7 +35,7 @@ body {
     font-weight: 700;
 }
 
-#topnav .nav-item { 
+#topnav .nav-item {
     float: left;
     color: #56493E;
     text-align: center;
@@ -127,7 +134,7 @@ span {
     width: 650px;
     height: 500px;
     float: right;
-   
+
 }
 
 /**********************Section hr*************************/
@@ -151,24 +158,26 @@ hr {
 }
 
 #section .text {
-   text-align: center;
-   width: 300px;
+    text-align: center;
+    width: 300px;
 }
 
 /**************************Footer********************************/
 
-#footer {
+footer {
     border-top: solid 1px #3C3C3C;
+    height: 230px;
+    box-sizing: border-box;
 }
 
 .items {
     display: flex;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
+    padding: 80px;
 }
 
 .item {
     width: 500px;
-    margin: 80px;
     text-align: center;
 }
 
