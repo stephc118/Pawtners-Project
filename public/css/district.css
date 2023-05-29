@@ -1,0 +1,89 @@
+.title {
+    text-align: center;
+    padding: 100px 0 50px;
+}
+#area {
+    display: flex;
+    padding: 0 0 80px;
+    justify-content: center;
+}
+
+.area-btn {
+    margin: 0 25px;
+    font-weight: 700;
+    font-size: larger;
+    border: none;
+    border-radius: 6px;
+    width: 200px;
+    height: 70px;
+    color: #A18772;
+}
+
+.hk {
+    background-color: #C9F5ED;
+}
+
+.hk:hover {
+    background-color: #E2F8F4;
+}
+
+.hk:focus {
+    background-color: #97DDD0;
+    color: white;
+}
+
+.kl {
+    background-color: #F7EFC0;
+}
+
+.kl:hover {
+    background-color: #f9f4d3;
+}
+
+.kl:focus {
+    background-color: #F0E7AB;
+    color: white;
+}
+
+.nt {
+    background-color: #FEDDC2;
+}
+
+.nt:hover {
+    background-color: #fbe3cf;
+}
+
+.nt:focus {
+    background-color: #EACAB1;
+    color: white;
+}
+
+
+.unchosen {
+    background-color: #eae8e7;
+}
+
+/****************District***************************/
+
+.district {
+    display: flex;
+    padding-bottom: 200px;
+    justify-content: center;
+    text-align: center;
+}
+
+.district-btn {
+    margin: 15px 20px;
+    font-weight: 500;
+    font-size: larger;
+    border: none;
+    border-radius: 6px;
+    width: 200px;
+    height: 70px;
+    color: white;
+    background-color: #B5A294;
+}
+
+.district-btn:hover {
+    background-color: #D7C3B3;
+}
