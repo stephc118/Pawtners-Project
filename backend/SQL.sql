@@ -77,3 +77,45 @@ message VARCHAR(255) NOT NULL
 -- SELECT ride.date, ride.time, ride.pickup, ride.dropoff, ride.numberofpets, users.username
 -- FROM ride
 -- INNER JOIN users ON users.user_id=ride.user_id;
+
+--Create Pawtners details
+
+CREATE TABLE staff (
+    pawtner_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email email NOT NULL UNIQUE,
+    district VARCHAR(255) NOT NULL,
+    experience VARCHAR(255) NOT NULL,
+    services VARCHAR(255) NOT NULL   
+);
+
+INSERT INTO staff VALUES (
+    1,
+    'steph',
+    'steph@123.com',
+    'Wan Chai',
+    '2 years',
+    'grooming & pet sitting'
+);
+
+INSERT INTO staff VALUES (
+    2,
+    'Avis',
+    'avis@123.com',
+    'Wan Chai',
+    '1 years',
+    'grooming'
+);
+
+INSERT INTO staff VALUES (
+    3,
+    'Jack',
+    'jack@123.com',
+    'Sha Tin',
+    '1 years',
+    'grooming'
+);
+
+UPDATE staff
+SET district = 'sha-tin'
+WHERE pawtner_id = 3;

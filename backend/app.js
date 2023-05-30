@@ -303,6 +303,21 @@ const grant = require('grant');
         }
     });
 
+    /********************************District Page*********************/
+
+    app.get('/district', async (req, res) => {
+        try {
+            const staff = await client.query('SELECT * from staff');
+            if (staff.rows.length) {
+                res.json ({result: staff});
+            } else {
+                res.json({result: 'none'});
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    })
+
     /*************************Use static file********************/
 
     app.use(express.static(path.join(__dirname, '../public/html')));
