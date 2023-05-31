@@ -68,7 +68,7 @@
 
 .district {
     display: flex;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
     justify-content: center;
     text-align: center;
 }
@@ -87,4 +87,25 @@
 
 .district-btn:hover {
     background-color: #D7C3B3;
+}
+
+/*********************Staff card************************/
+
+#container {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 100px;
+}
+.card {
+    background-color: #e4d4c9;
+    width: 350px;
+    height: 280px;
+    border-radius: 10px;
+    padding: 20px 0 0 20px;
+   
+}
+
+.card li {
+    list-style: none;
+    line-height: 40px;
 }

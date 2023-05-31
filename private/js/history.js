@@ -1,43 +1,37 @@
+var spinner = document.querySelector("#load");
+
 (async () => {
     try {
         const table = document.querySelector("#table");
-        const noBooking = document.querySelector("#no-booking");
-        const bookBtn = document.querySelector("#book-btn");
-        table.style.display = 'none';
-        noBooking.style.display = 'none';
-        bookBtn.style.display = 'none';
-        setTimeout (()=> {
-            const spinner = document.querySelector("#load");
-            spinner.style.display = 'none';
-        }, "1000");
-            
+        const timeoutId = setTimeout(() => {
+            // show spinner
+            spinner.style.display = 'flex';
+        }, 1000)
+
         const res = await fetch('/history');
 
         const response = await res.json();
 
-        console.log(response);
+        clearTimeout(timeoutId); //remove spinner
 
         if (res.status === 400) {
             throw new Error('Something went wrong with your booking history, please try again.')
         }
 
         if (res.status === 200) {
+            //if no booking
             if (!response.orderRide && !response.orderSitting &&
                 !response.orderGrooming && !response.orderWalking) {
 
-                setTimeout (()=> {
-                    noBooking.style.display = '';
-                    bookBtn.style.display = '';
-                }, 980);
+                const bookBtn = document.querySelector(".no-booking-content");
+                bookBtn.style.display = '';
             }
+            //if have booking
             else if (response?.orderRide || response?.orderSitting ||
                 response?.orderGrooming || response?.orderWalking) {
 
-                setTimeout (()=> {
-                    noBooking.style.display = 'none';
-                    bookBtn.style.display = 'none';
-                    table.style.display = '';
-                }, 980);
+                spinner.style.display = 'none';
+                table.style.display = 'table';
 
                 if (response?.orderRide) {
 
