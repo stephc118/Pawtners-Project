@@ -23,8 +23,9 @@ var spinner = document.querySelector("#load");
             if (!response.orderRide && !response.orderSitting &&
                 !response.orderGrooming && !response.orderWalking) {
 
+                spinner.style.display = 'none';
                 const bookBtn = document.querySelector(".no-booking-content");
-                bookBtn.style.display = '';
+                bookBtn.style.display = 'block';
             }
             //if have booking
             else if (response?.orderRide || response?.orderSitting ||
@@ -34,55 +35,63 @@ var spinner = document.querySelector("#load");
                 table.style.display = 'table';
 
                 if (response?.orderRide) {
-
-                    const orderNo1 = document.querySelectorAll("#row1 td")[0];
-                    const service1 = document.querySelectorAll("#row1 td")[1];
-                    const date1 = document.querySelectorAll("#row1 td")[2];
-                    const otherDetails1 = document.querySelectorAll("#row1 td")[3];
-                    orderNo1.innerHTML = response.orderRide.ride_order_id;
-                    service1.innerHTML = 'Pets Ride';
-                    date1.innerHTML = response.orderRide.date;
-                } else {
-                    row1.style.display = 'none';
+                    for (i = 0; i < response.orderRide.length; i++) {
+                        const { ride_order_id, date, time } = response.orderRide[i];
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td id="order-no">${ride_order_id}</td>
+                        <td id="serivce">Pet's Ride</td>
+                        <td id="date">${date}</td>
+                        <td id="other-details">Time: ${time}</td>
+                        <td>Pending</td>
+                        `
+                        table.appendChild(row);
+                    }
                 }
 
-                if (response?.orderSitting) {
-                    row2.style.display = '';
-                    const orderNo2 = document.querySelectorAll("#row2 td")[0];
-                    const service2 = document.querySelectorAll("#row2 td")[1];
-                    const date2 = document.querySelectorAll("#row2 td")[2];
-                    const otherDetails2 = document.querySelectorAll("#row2 td")[3];
-                    orderNo2.innerHTML = response.orderSitting.sitting_order_id;
-                    service2.innerHTML = 'Pets Sitting';
-                    date2.innerHTML = response.orderSitting.date;
-                } else {
-                    row2.style.display = 'none';
+                if (response?.orderSitting.length) {
+                    for (i = 0; i < response?.orderSitting.length; i++) {
+                        const { sitting_order_id, date, location } = response.orderSitting[i];
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td id="order-no">${sitting_order_id}</td>
+                            <td id="serivce">Pet Sitting</td>
+                            <td id="date">${date}</td>
+                            <td id="other-details">Location: At ${location}</td>
+                            <td>Pending</td>
+                            `
+                        table.appendChild(row);
+                    }
                 }
 
                 if (response?.orderGrooming) {
-                    row3.style.display = '';
-                    const orderNo3 = document.querySelectorAll("#row3 td")[0];
-                    const service3 = document.querySelectorAll("#row3 td")[1];
-                    const date3 = document.querySelectorAll("#row3 td")[2];
-                    const otherDetails3 = document.querySelectorAll("#row3 td")[3];
-                    orderNo3.innerHTML = response.orderGrooming.grooming_order_id;
-                    service3.innerHTML = 'Pets Grooming';
-                    date3.innerHTML = response.orderGrooming.date;
-                } else {
-                    row3.style.display = 'none';
+                    for (i = 0; i < response.orderGrooming.length; i++) {
+                        const { grooming_order_id, date, numberofpets } = response.orderGrooming[i];
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td id="order-no">${grooming_order_id}</td>
+                        <td id="serivce">Pets Grooming</td>
+                        <td id="date">${date}</td>
+                        <td id="other-details">Number of Pets: ${numberofpets}</td>
+                        <td>Pending</td>
+                        `
+                        table.appendChild(row);
+                    }
                 }
 
                 if (response?.orderWalking) {
-                    row4.style.display = '';
-                    const orderNo4 = document.querySelectorAll("#row4 td")[0];
-                    const service4 = document.querySelectorAll("#row4 td")[1];
-                    const date4 = document.querySelectorAll("#row4 td")[2];
-                    const otherDetails4 = document.querySelectorAll("#row4 td")[3];
-                    orderNo4.innerHTML = response.orderWalking.walking_order_id;
-                    service4.innerHTML = 'Dog Walking';
-                    date4.innerHTML = response.orderWalking.date;
-                } else {
-                    row4.style.display = 'none';
+                    for (i = 0; i < response.orderWalking.length; i++) {
+                        const { walking_order_id, date, time, duration } = response.orderWalking[i];
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td id="order-no">${walking_order_id}</td>
+                        <td id="serivce">Dogs Walking</td>
+                        <td id="date">${date}</td>
+                        <td id="other-details">Time: ${time}, Duration: ${duration} mins</td>
+                        <td>Pending</td>
+                        `
+                        table.appendChild(row);
+                    }
                 }
             }
         }

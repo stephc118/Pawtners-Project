@@ -284,18 +284,33 @@ const grant = require('grant');
 
     app.get('/history', async(req, res) => {
         try {
-            const userId = req.session.user.id;
+            const userId = req.session.user.id;  
             const ride = await client.query('SELECT * from ride where user_id = $1', [userId]);
             const sitting = await client.query('SELECT * from sitting where user_id = $1', [userId]);
             const grooming = await client.query('SELECT * from grooming where user_id = $1', [userId]);
             const walking = await client.query('SELECT * from walking where user_id = $1', [userId]);
             if (ride.rows.length || sitting.rows.length || grooming.rows.length || walking.rows.length) {
-                res.json({orderRide: ride.rows[0], 
-                    orderSitting: sitting.rows[0], 
-                    orderGrooming: grooming.rows[0],
-                    orderWalking: walking.rows[0]});
+                res.json({orderRide: ride.rows, 
+                    orderSitting: sitting.rows, 
+                    orderGrooming: grooming.rows,
+                    orderWalking: walking.rows});
+
+                    // const booking = await client.query (
+                    //     ` 
+                    //         WITH sitting as ('SELECT * from ride where user_id = $1', [userId]),
+                    //         walking as ('SELECT * from walking where user_id = $1', [userId]),
+                    //         grooming as ('SELECT * from grooming where user_id = $1', [userId]),
+                    //         ride as ('SELECT * from ride where user_id = $1', [userId])
+                    //     `
+                    // )
+        
+                    // if (booking.rows.length) {
+                    //     res.json ({booking: booking.rows});
+                    // } else {
+                    //     res.json ({booking: []});
+                    // }
             } else {
-                res.json({order: 'none'});
+                res.json({order: []});
             }
         } catch (err) {
             console.log(err);

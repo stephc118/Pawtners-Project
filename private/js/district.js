@@ -1,41 +1,37 @@
-const hkBtn = document.querySelector('.hk');
-const klBtn = document.querySelector('.kl');
-const ntBtn = document.querySelector('.nt');
-const hkIsland = document.getElementById('hk-island');
-const kowloon = document.getElementById('kowloon');
-const newTer = document.getElementById('new-territories');
-
 const containerDOM = document.getElementById('container');
+const areaBtn = document.querySelectorAll('.area-btn');
+const districtDiv = document.querySelectorAll('.district');
 
-hkBtn.addEventListener('click', (event) => {
+// Listen to area button when clicked to open up the district buttons
+areaBtn.forEach(area => {
+    area.addEventListener('click', () => {
+        containerDOM.innerHTML = '';
+        // if HK-island
+        if (area === areaBtn[0]) {
+            districtDiv[0].style.display = 'flex';
+            districtDiv[1].style.display = 'none';
+            districtDiv[2].style.display = 'none';
+            areaBtn[1].classList.add('unchosen');
+            areaBtn[2].classList.add('unchosen');
 
-    hkIsland.style.display = 'flex';
-    kowloon.style.display = 'none';
-    newTer.style.display = 'none';
-    klBtn.classList.add('unchosen');
-    ntBtn.classList.add('unchosen');
-    containerDOM.innerHTML = '';
-
-})
-
-klBtn.addEventListener('click', (event) => {
-
-    kowloon.style.display = 'flex';
-    hkIsland.style.display = 'none';
-    newTer.style.display = 'none';
-    hkBtn.classList.add('unchosen');
-    ntBtn.classList.add('unchosen');
-    containerDOM.innerHTML = '';
-})
-
-ntBtn.addEventListener('click', (event) => {
-
-    newTer.style.display = 'flex';
-    hkIsland.style.display = 'none';
-    kowloon.style.display = 'none';
-    klBtn.classList.add('unchosen');
-    hkBtn.classList.add('unchosen');
-    containerDOM.innerHTML = '';
+        }
+        // if Kowloon
+        else if (area === areaBtn[1]) {
+            districtDiv[1].style.display = 'flex';
+            districtDiv[0].style.display = 'none';
+            districtDiv[2].style.display = 'none';
+            areaBtn[0].classList.add('unchosen');
+            areaBtn[2].classList.add('unchosen');
+        }
+        // if N.T.
+        else if (area === areaBtn[2]) {
+            districtDiv[2].style.display = 'flex';
+            districtDiv[1].style.display = 'none';
+            districtDiv[0].style.display = 'none';
+            areaBtn[0].classList.add('unchosen');
+            areaBtn[1].classList.add('unchosen');
+        }
+    })
 })
 
 const districtNameMapping = {
@@ -67,7 +63,7 @@ allDistrictButtons.forEach(districtButton => {
         // clear previous result
         const districtName = districtButton.value;
 
-        if (chosenDistrict === districtName){
+        if (chosenDistrict === districtName) {
             // avoid re-fetching staff information
             return;
         } else {
@@ -122,7 +118,7 @@ function createStaffCard(staff) {
 // Infinite scrolling
 
 async function getStaff(districtName, options) {
-    try{
+    try {
         const { limit = 3, offset = 0 } = options;
         const resp = await fetch(`/district/${districtName}?limit=${limit}&offset=${offset}`);
         const json = await resp.json();
@@ -140,7 +136,7 @@ window.addEventListener('scroll', async () => {
     ) {
         const staffResp = await getStaff(chosenDistrict, { limit: 2, offset: currentNumberOfStaff });
         const staffInfos = staffResp.staff;
-        
+
         if (staffInfos.length) {
             currentNumberOfStaff += staffInfos.length;
 
