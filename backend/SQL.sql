@@ -116,6 +116,25 @@ INSERT INTO staff VALUES (
     'grooming'
 );
 
+INSERT INTO staff VALUES (
+    4,
+    'Ivy',
+    'ivy@123.com',
+    'wan-chai',
+    '3 years',
+    'Dog Walking & Grooming'
+);
+
+INSERT INTO staff VALUES (
+    5,
+    'Rebecca',
+    'reb@123.com',
+    'wan-chai',
+    '2 years',
+    'Grooming & Pet Sitting'
+);
+
+
 UPDATE staff
 SET district = 'sha-tin'
 WHERE pawtner_id = 3;

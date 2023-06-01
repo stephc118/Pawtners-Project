@@ -53,6 +53,10 @@
     border-radius: 20px;
 }
 
+.card:hover {
+    box-shadow: 0 4px 10px #00000033;
+  }
+
 .choice-card {
     background-color: #ffffff;
     border: solid 2px #56493E;

@@ -21,7 +21,6 @@ const grant = require('grant');
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
 
-
     app.use(session({
         secret: 'Thisispawtnerslittlesecret.',
         resave: false,
@@ -304,17 +303,32 @@ const grant = require('grant');
     });
 
     /********************************District Page*********************/
-
-    app.get('/district', async (req, res) => {
+    app.get('/district/:name', async (req, res) => {
         try {
-            const staff = await client.query('SELECT * from staff');
+            const { name } = req.params;
+            const { limit, offset } = req.query;
+
+            const staff = await client.query(
+                `
+                    WITH staff_count as (SELECT count(*) from staff where district = $1),
+                    filtered_staff as (SELECT * from staff where district = $1 limit $2 offset $3)
+                    SELECT * FROM filtered_staff, staff_count
+                `,
+                [name, limit, offset]
+            );
+
             if (staff.rows.length) {
-                res.json ({result: staff});
+                const staffInfos = staff.rows.map(info => {
+                    const {count, ...infoNeeded} = info;
+                    return infoNeeded;
+                })
+                res.json ({staff: staffInfos, total: staff.rows[0].count});
             } else {
-                res.json({result: 'none'});
+                res.json({staff: []});
             }
         } catch (err) {
             console.log(err);
+            res.json({error: err.message})
         }
     })
 
