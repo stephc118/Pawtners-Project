@@ -69,7 +69,7 @@
     font-size: 25px;
 }
 
-.card.active {
+.card.selected {
 /* .action-card { */
     background-color: #A18772;
     border: none;
@@ -79,7 +79,8 @@
 }
 
 /**************  Plan selection  ****************/
-.plan-selection, .plan-selection .card-container{
+
+.plan-selection{
     display: none;
 }
 
@@ -92,11 +93,8 @@
 }
 
 .plan-selection.selected{
-    display: block;
-}
-
-.plan-selection .card-container.selected{
     display: flex;
+    flex-direction: column;
 }
 
 /***********************************************/
@@ -112,25 +110,29 @@
 }
 
 
-/*************Form****************/
+/************* booking form ****************/
 
 /* .choice-heading {
     text-align: center;
 } */
 
-#booking-form {
+.booking-form {
+    display: none;
+}
+
+.booking-form.selected {
     display: flex;
     justify-content: center;
 }
+/* 
+.booking-form.pet-sitting,
+.booking-form.dog-walking,
+.booking-form.pets-grooming,
+.booking-form.pets-ride {
+    display: none;
+} */
 
-#booking-form.pet-sitting,
-#booking-form.dog-walking,
-#booking-form.pets-grooming,
-#booking-form.pets-ride {
-    /* display: none; */
-}
-
-#booking-form li {
+.booking-form li {
     list-style-type: none;
     padding-bottom: 5px;
 }
