@@ -13,7 +13,9 @@ const grant = require('grant');
     const app = express();
 
     const client = new Client({
-        database: 'pawtners'
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: 'pawtners',
     })
     await client.connect()
 

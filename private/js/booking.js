@@ -1,7 +1,30 @@
+const serviceCards = document.querySelectorAll(".service-selection .card");
 
+for (const card of serviceCards){
+    //TODO: un-select when clicked elsewhere
+    card.addEventListener('click', (event) => {        
+        // clear previous selected card
+        const prevSelection = document.querySelector(".service-selection .card.active");
+        if (prevSelection) {
+            prevSelection.classList.remove("active");
+        }
+
+        card.classList.add("active"); //highlight button
+
+        // show plan selection section
+        const planSelectionSection = document.querySelector(".plan-selection");
+        planSelectionSection.classList.add("selected");
+        
+        //show specific plan based on service selected
+        const serviceSelected = event.target.dataset.value;
+        const planSelection = document.querySelector(`.plan-selection .card-container.${serviceSelected}`);
+        planSelection.classList.add("selected");
+
+        //TODO: clear plan when service selection changed
+    })
+}
 
 const chosenServices = document.querySelectorAll("#service-choice .choice-card");
-
 
 chosenServices.forEach(chosenService => {
     chosenService.addEventListener('click', () => {

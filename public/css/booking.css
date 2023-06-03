@@ -6,7 +6,7 @@
       align-items: center;
     }
 
-    #service-choice {
+    .card-container {
         flex-direction: column;
         align-items: center;
     }
@@ -18,51 +18,59 @@
     padding: 250px 0 300px;
 }
 
-#choice-heading {
+/**************  service selection  ****************/
+.service-selection h1{
     margin-top: 150px;
     text-align: center;
 }
+
+/***********************************************/
 
 #section {
     margin: 100px 0;
 }
 
-#plan-choice,
-#service-choice,
-#plan-heading {
+/* #plan-choice, */
+.card-container{
     display: flex;
     justify-content: space-evenly;
     margin: 100px;
     gap: 50px;
 }
 
-#plan-heading {
+/* #plan-heading {
     visibility: hidden;
-}
+} */
 
-#plan-choice.pet-sitting,
+/* #plan-choice.pet-sitting,
 #plan-choice.dog-walking,
 #plan-choice.pets-grooming {
     display: none;
-}
+} */
 
 .card {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 260px;
     height: 280px;
     border-radius: 20px;
+    background-color: #ffffff;
+    border: solid 2px #56493E;
+    cursor: pointer;
 }
 
 .card:hover {
     box-shadow: 0 4px 10px #00000033;
-  }
-
-.choice-card {
-    background-color: #ffffff;
-    border: solid 2px #56493E;
 }
 
-.action-card {
+.card h3 {
+    text-align: center;
+    font-size: 25px;
+}
+
+.card.active {
+/* .action-card { */
     background-color: #A18772;
     border: none;
     color: #ffffff;
@@ -70,16 +78,34 @@
     height: 284px;
 }
 
-#plan-choice .text-box,
-#service-choice .text-box {
-    width: 200px;
-    margin: auto;
+/**************  Plan selection  ****************/
+.plan-selection, .plan-selection .card-container{
+    display: none;
 }
 
-.card-heading {
+.plan-selection h1{
     text-align: center;
-    font-size: 25px;
 }
+
+.plan-selection .card {
+    flex-direction: column;
+}
+
+.plan-selection.selected{
+    display: block;
+}
+
+.plan-selection .card-container.selected{
+    display: flex;
+}
+
+/***********************************************/
+
+/* #plan-choice .text-box,
+.card-container .text-box {
+    width: 200px;
+    margin: auto;
+} */
 
 .list-item {
     font-size: 20px;
@@ -88,9 +114,9 @@
 
 /*************Form****************/
 
-.choice-heading {
+/* .choice-heading {
     text-align: center;
-}
+} */
 
 #booking-form {
     display: flex;
@@ -101,7 +127,7 @@
 #booking-form.dog-walking,
 #booking-form.pets-grooming,
 #booking-form.pets-ride {
-    display: none;
+    /* display: none; */
 }
 
 #booking-form li {
