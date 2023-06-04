@@ -55,7 +55,7 @@ for (const card of planCards){
         //BUG: required custom field doesn't work on dynamic form
         const clickedPlanDiv = event.target.closest(".card");
 
-        const frequencyEle = document.querySelector(`.booking-form .frequency`);
+        const frequencyEle = document.querySelector(`.booking-form.${serviceSelected} .frequency`);
         if (frequencyEle) {
             frequencyEle.classList.remove('regular');
             const frequency = clickedPlanDiv.dataset.frequency;
@@ -66,7 +66,7 @@ for (const card of planCards){
         }
 
 
-        const durationEle = document.querySelector(`.booking-form .duration`);
+        const durationEle = document.querySelector(`.booking-form.${serviceSelected} .duration`);
         if (durationEle) {
             durationEle.classList.remove('short');
             durationEle.classList.remove('long');
