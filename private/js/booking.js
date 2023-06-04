@@ -24,7 +24,7 @@ for (const card of serviceCards){
         if (serviceSelected === 'pets-ride') {
             const bookingForm = document.querySelector(`.booking-form.${serviceSelected}`);
             bookingForm.classList.add("selected");
-            bookingForm.scrollIntoView({behavior: 'smooth'});
+            bookingForm.scrollIntoView({behavior: 'smooth', block: 'nearest'});
         } else {
             const planSelection = document.querySelector(`.plan-selection.${serviceSelected}`);
             planSelection.classList.add("selected");
@@ -48,7 +48,7 @@ for (const card of planCards){
         // show booking form
         const bookingForm = document.querySelector(`.booking-form.${serviceSelected}`);
         bookingForm.classList.add("selected");
-        bookingForm.scrollIntoView({behavior: 'smooth'});
+        bookingForm.scrollIntoView({behavior: 'smooth', block: 'nearest'});
 
         
         // form custom input handling
