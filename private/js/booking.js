@@ -23,9 +23,11 @@ for (const card of serviceCards){
         if (serviceSelected === 'pets-ride') {
             const bookingForm = document.querySelector(`.booking-form.${serviceSelected}`);
             bookingForm.classList.add("selected");
+            bookingForm.scrollIntoView({behavior: 'smooth'});
         } else {
             const planSelection = document.querySelector(`.plan-selection.${serviceSelected}`);
             planSelection.classList.add("selected");
+            planSelection.scrollIntoView({behavior: 'smooth'});
         }
     })
 }
@@ -45,9 +47,11 @@ for (const card of planCards){
         // show booking form
         const bookingForm = document.querySelector(`.booking-form.${serviceSelected}`);
         bookingForm.classList.add("selected");
+        bookingForm.scrollIntoView({behavior: 'smooth'});
 
         
         // form custom input handling
+        //BUG: required custom field doesn't work on dynamic form
         const clickedPlanDiv = event.target.closest(".card");
 
         const frequencyEle = document.querySelector(`.booking-form .frequency`);

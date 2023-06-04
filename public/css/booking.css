@@ -34,6 +34,8 @@
     align-items: center;
     width: 260px;
     height: 280px;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
     border-radius: 20px;
     background-color: #ffffff;
     border: solid 2px #56493E;
@@ -41,7 +43,11 @@
 }
 
 .card:hover {
+    color: #ffffff;
+    border-color: transparent;
+    background-color: #A18772;
     box-shadow: 0 4px 10px #00000033;
+    transition: .3s;
 }
 
 .card h3 {
@@ -53,12 +59,18 @@
     background-color: #A18772;
     border: none;
     color: #ffffff;
-    width: 264px;
-    height: 284px;
 }
 
 .card .list-item {
-    font-size: 20px;
+    font-size: 16px;
+}
+
+.card ul {
+    padding-inline-start: 28px;
+}
+
+.card li {
+    padding-bottom: .5rem;
 }
 
 /**************  Plan selection  ****************/
@@ -181,6 +193,7 @@ input:focus {
 
 #send-btn:hover {
     background-color: #A18772;
+    transition: .3s;
 }
 
 .success-msg {
