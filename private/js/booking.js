@@ -67,9 +67,7 @@ for (const card of planCards){
             durationEle.classList.remove('long');
 
             const duration = clickedPlanDiv.dataset.duration;
-            console.log('duration', duration);
             if (duration) {
-                const durationEle = document.querySelector(`.booking-form .duration`);
                 durationEle.classList.add(duration);
             }
         }
