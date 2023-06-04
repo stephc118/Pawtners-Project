@@ -4,17 +4,21 @@
     margin: 0;
 }
 
-#table {
-    margin: 50px auto 200px;
+.tables {
+    /* margin: 50px auto 200px; */
     color: #A18772;
     display: none;
+}
+
+.tables h2{
+    margin-left: 2rem;
 }
 
 td {
     padding: 5px 30px;
 }
 
-#subtitle {
+thead {
     font-size: 20px;
     font-weight: bold;
 }

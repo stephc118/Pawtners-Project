@@ -2,7 +2,8 @@ var spinner = document.querySelector("#load");
 
 (async () => {
     try {
-        const table = document.querySelector("#table");
+        const tables = document.querySelector(".tables");
+        const petSittingTable = document.querySelector("table.pet-sitting tbody");
         const timeoutId = setTimeout(() => {
             // show spinner
             spinner.style.display = 'flex';
@@ -32,7 +33,8 @@ var spinner = document.querySelector("#load");
                 response?.orderGrooming || response?.orderWalking) {
 
                 spinner.style.display = 'none';
-                table.style.display = 'table';
+                // table.style.display = 'table';
+                tables.style.display = 'block';
 
                 if (response?.orderRide) {
                     for (i = 0; i < response.orderRide.length; i++) {
@@ -45,22 +47,24 @@ var spinner = document.querySelector("#load");
                         <td id="other-details">Time: ${time}</td>
                         <td>Pending</td>
                         `
-                        table.appendChild(row);
+                        tables.appendChild(row);
                     }
                 }
 
                 if (response?.orderSitting.length) {
                     for (i = 0; i < response?.orderSitting.length; i++) {
-                        const { sitting_order_id, date, location } = response.orderSitting[i];
+                        const { sitting_order_id, date, location, district, numberofpets, frequency, created_ts } = response.orderSitting[i];
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td id="order-no">${sitting_order_id}</td>
-                            <td id="serivce">Pet Sitting</td>
-                            <td id="date">${date}</td>
-                            <td id="other-details">Location: At ${location}</td>
+                            <td>${sitting_order_id}</td>
+                            <td>${new Date(date).toLocaleString('en-GB')}</td>
+                            <td>At ${location}: ${capitalize(district)}</td>
+                            <td>${numberofpets}</td>
+                            <td>${frequency !== null ? frequency : "-"}</td>
+                            <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                             <td>Pending</td>
                             `
-                        table.appendChild(row);
+                        petSittingTable.appendChild(row);
                     }
                 }
 
@@ -75,7 +79,7 @@ var spinner = document.querySelector("#load");
                         <td id="other-details">Number of Pets: ${numberofpets}</td>
                         <td>Pending</td>
                         `
-                        table.appendChild(row);
+                        tables.appendChild(row);
                     }
                 }
 
@@ -90,7 +94,7 @@ var spinner = document.querySelector("#load");
                         <td id="other-details">Time: ${time}, Duration: ${duration} mins</td>
                         <td>Pending</td>
                         `
-                        table.appendChild(row);
+                        tables.appendChild(row);
                     }
                 }
             }
@@ -99,3 +103,13 @@ var spinner = document.querySelector("#load");
         console.log(err);
     }
 })()
+
+function capitalize(str){
+    const words = str.split(" ");
+    if (words.length > 1) {
+        const capitalizedWords = words.map(word => capitalize(word));
+        return capitalizedWords.join(" ");
+    } else {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+}

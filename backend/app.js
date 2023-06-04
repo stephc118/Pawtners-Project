@@ -227,15 +227,14 @@ const grant = require('grant');
     app.post("/sitting-booking", async (req, res) => {
         try {
             const date = req.body.date;
-            const time = req.body.time;
             const frequency = req.body.frequency;
             const location = req.body.location;
             const numberOfPets = req.body.number;
             const district = req.body.district;
             const userId = req.session.user.id;
 
-            const newSitting = 'INSERT INTO sitting (date, time, frequency, location, numberofpets, district, user_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-            const inputSitting = [date, time, frequency, location, numberOfPets, district, userId]
+            const newSitting = 'INSERT INTO sitting (date, frequency, location, numberofpets, district, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+            const inputSitting = [date, frequency, location, numberOfPets, district, userId]
             const bookSitting = await client.query(newSitting, inputSitting);
             console.log(bookSitting.rows[0]);
             res.redirect('/success.html')

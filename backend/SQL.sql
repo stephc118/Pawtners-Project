@@ -3,7 +3,7 @@ draw SQL = https://drawsql.app/teams/stephs-team-2/diagrams/pawtners
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(255),
-    email email NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
 
@@ -32,12 +32,12 @@ CREATE TABLE grooming (
 --Sitting
 CREATE TABLE sitting (
     sitting_order_id SERIAL PRIMARY KEY,
-    date date NOT NULL,
-    time time NOT NULL,
-    frequency VARCHAR(255) NULL,
+    date timestamp NOT NULL,
+    frequency INT NULL,
     location VARCHAR(255) NOT NULL,
     numberofpets INT NOT NULL,
     district VARCHAR(255) NOT NULL,
+    created_ts timestamp DEFAULT NOW(),
     user_id INT NOT NULL
 );
 
@@ -58,7 +58,7 @@ CREATE TABLE walking (
 CREATE TABLE contact (
 id SERIAL PRIMARY KEY,
 name VARCHAR(255) NOT NULL,
-email email NOT NULL,
+email VARCHAR(255) NOT NULL,
 message VARCHAR(255) NOT NULL
 );
 
@@ -84,7 +84,7 @@ message VARCHAR(255) NOT NULL
 CREATE TABLE staff (
     pawtner_id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    email email NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     district VARCHAR(255) NOT NULL,
     experience VARCHAR(255) NOT NULL,
     services VARCHAR(255) NOT NULL   
