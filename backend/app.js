@@ -184,15 +184,15 @@ const grant = require('grant');
 
     app.post("/ride-booking", async (req, res) => {
         try {
-            const date4 = req.body.date4;
-            const time4 = req.body.time4;
-            const pickUp4 = req.body.pickup4;
-            const dropOff4 = req.body.dropoff4;
-            const numberOfPets4 = req.body.number4;
+            const date = req.body.date;
+            const time = req.body.time;
+            const pickUp = req.body.pickup;
+            const dropOff = req.body.dropoff;
+            const numberOfPets = req.body.number;
             const userId = req.session.user.id;
 
             const newRide = 'INSERT INTO ride(date, time, pickup, dropoff, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-            const inputRide = [date4, time4, pickUp4, dropOff4, numberOfPets4, userId]
+            const inputRide = [date, time, pickUp, dropOff, numberOfPets, userId]
             const bookRide = await client.query(newRide, inputRide);
             console.log(bookRide.rows[0]);
             res.redirect('/success.html')
@@ -206,13 +206,13 @@ const grant = require('grant');
 
     app.post("/grooming-booking", async (req, res) => {
         try {
-            const date3 = req.body.date3;
-            const time3 = req.body.time3;
-            const numberOfPets3 = req.body.number3;
+            const date = req.body.date;
+            const time = req.body.time;
+            const numberOfPets = req.body.number;
             const userId = req.session.user.id;
 
             const newGrooming = 'INSERT INTO grooming(date, time, numberofpets, user_id) VALUES($1, $2, $3, $4) RETURNING *';
-            const inputGrooming = [date3, time3, numberOfPets3, userId]
+            const inputGrooming = [date, time, numberOfPets, userId]
             const bookGrooming = await client.query(newGrooming, inputGrooming);
             console.log(bookGrooming.rows[0]);
             res.redirect('/success.html')
@@ -226,16 +226,16 @@ const grant = require('grant');
 
     app.post("/sitting-booking", async (req, res) => {
         try {
-            const date1 = req.body.date1;
-            const time1 = req.body.time1;
-            const frequency1 = req.body.frequency1;
-            const location1 = req.body.location1;
-            const numberOfPets1 = req.body.number1;
-            const district1 = req.body.district1;
+            const date = req.body.date;
+            const time = req.body.time;
+            const frequency = req.body.frequency;
+            const location = req.body.location;
+            const numberOfPets = req.body.number;
+            const district = req.body.district;
             const userId = req.session.user.id;
 
             const newSitting = 'INSERT INTO sitting (date, time, frequency, location, numberofpets, district, user_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-            const inputSitting = [date1, time1, frequency1, location1, numberOfPets1, district1, userId]
+            const inputSitting = [date, time, frequency, location, numberOfPets, district, userId]
             const bookSitting = await client.query(newSitting, inputSitting);
             console.log(bookSitting.rows[0]);
             res.redirect('/success.html')
@@ -249,16 +249,16 @@ const grant = require('grant');
 
     app.post("/walking-booking", async (req, res) => {
         try {
-            const date2 = req.body.date2;
-            const time2 = req.body.time2;
-            const frequency2 = req.body.frequency2;
-            const duration2 = req.body.duration2;
-            const numberOfPets2 = req.body.number2;
+            const date = req.body.date;
+            const time = req.body.time;
+            const frequency = req.body.frequency;
+            const duration = req.body.duration;
+            const numberOfPets = req.body.number;
             const userId = req.session.user.id;
 
 
             const newWalking = 'INSERT INTO walking(date, time, frequency, duration, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-            const inputWalking = [date2, time2, frequency2, duration2, numberOfPets2, userId]
+            const inputWalking = [date, time, frequency, duration, numberOfPets, userId]
             const bookWalking = await client.query(newWalking, inputWalking);
             console.log(bookWalking.rows[0]);
             res.redirect('/success.html')

@@ -1,3 +1,4 @@
+//BUG: form is able to sent past datatime, non exist district
 const serviceCards = document.querySelectorAll(".service-selection .card");
 let serviceSelected;
 
