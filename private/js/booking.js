@@ -17,9 +17,9 @@ for (const card of serviceCards){
         card.classList.add("selected"); //highlight button
         
         //show specific plan based on service selected
-        serviceSelected = event.target.dataset.value;
-        console.log('serviceSelected', serviceSelected);
-        // BUG: service selected is sometime null
+        const clickedCardDiv = event.target.closest(".card");
+        serviceSelected = clickedCardDiv.getAttribute("data-value");
+
         if (serviceSelected === 'pets-ride') {
             const bookingForm = document.querySelector(`.booking-form.${serviceSelected}`);
             bookingForm.classList.add("selected");
