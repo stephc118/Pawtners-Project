@@ -3,16 +3,16 @@ draw SQL = https://drawsql.app/teams/stephs-team-2/diagrams/pawtners
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(255),
-    email TEXT NOT NULL UNIQUE,
+    email email NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
 
 --Pets ride
 
 CREATE TABLE ride (
-    id SERIAL PRIMARY KEY,
-    date VARCHAR(255) NOT NULL,
-    time VARCHAR(255) NOT NULL,
+    ride_order_id SERIAL PRIMARY KEY,
+    date date NOT NULL,
+    time time NOT NULL,
     pickup VARCHAR(255) NOT NULL,
     dropoff VARCHAR(255) NOT NULL,
     numberofpets INT NOT NULL,
@@ -22,18 +22,18 @@ CREATE TABLE ride (
 --Grooming 
 
 CREATE TABLE grooming (
-    id SERIAL PRIMARY KEY,
-    date VARCHAR(255) NOT NULL,
-    time VARCHAR(255) NOT NULL,
+    grooming_order_id SERIAL PRIMARY KEY,
+    date date NOT NULL,
+    time time NOT NULL,
     numberofpets INT NOT NULL,
     user_id INT NOT NULL
 );
 
 --Sitting
 CREATE TABLE sitting (
-    id SERIAL PRIMARY KEY,
-    date VARCHAR(255) NOT NULL,
-    time VARCHAR(255) NOT NULL,
+    sitting_order_id SERIAL PRIMARY KEY,
+    date date NOT NULL,
+    time time NOT NULL,
     frequency VARCHAR(255) NULL,
     location VARCHAR(255) NOT NULL,
     numberofpets INT NOT NULL,
@@ -44,9 +44,9 @@ CREATE TABLE sitting (
 --Walking
 
 CREATE TABLE walking (
-    id SERIAL PRIMARY KEY,
-    date VARCHAR(255) NOT NULL,
-    time VARCHAR(255) NOT NULL,
+    walking_order_id SERIAL PRIMARY KEY,
+    date date NOT NULL,
+    time time NOT NULL,
     frequency VARCHAR(255) NULL,
     duration VARCHAR(255) NOT NULL,
     numberofpets INT NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE walking (
 CREATE TABLE contact (
 id SERIAL PRIMARY KEY,
 name VARCHAR(255) NOT NULL,
-email VARCHAR(255) NOT NULL,
+email email NOT NULL,
 message VARCHAR(255) NOT NULL
 );
 
@@ -78,6 +78,7 @@ message VARCHAR(255) NOT NULL
 -- FROM ride
 -- INNER JOIN users ON users.user_id=ride.user_id;
 
+
 --Create Pawtners details
 
 CREATE TABLE staff (
@@ -89,52 +90,52 @@ CREATE TABLE staff (
     services VARCHAR(255) NOT NULL   
 );
 
-INSERT INTO staff VALUES (
-    1,
-    'steph',
-    'steph@123.com',
-    'Wan Chai',
-    '2 years',
-    'grooming & pet sitting'
-);
+-- INSERT INTO staff VALUES (
+--     1,
+--     'steph',
+--     'steph@123.com',
+--     'Wan Chai',
+--     '2 years',
+--     'grooming & pet sitting'
+-- );
 
-INSERT INTO staff VALUES (
-    2,
-    'Avis',
-    'avis@123.com',
-    'Wan Chai',
-    '1 years',
-    'grooming'
-);
+-- INSERT INTO staff VALUES (
+--     2,
+--     'Avis',
+--     'avis@123.com',
+--     'Wan Chai',
+--     '1 years',
+--     'grooming'
+-- );
 
-INSERT INTO staff VALUES (
-    3,
-    'Jack',
-    'jack@123.com',
-    'Sha Tin',
-    '1 years',
-    'grooming'
-);
+-- INSERT INTO staff VALUES (
+--     3,
+--     'Jack',
+--     'jack@123.com',
+--     'Sha Tin',
+--     '1 years',
+--     'grooming'
+-- );
 
-INSERT INTO staff VALUES (
-    4,
-    'Ivy',
-    'ivy@123.com',
-    'wan-chai',
-    '3 years',
-    'Dog Walking & Grooming'
-);
+-- INSERT INTO staff VALUES (
+--     4,
+--     'Ivy',
+--     'ivy@123.com',
+--     'wan-chai',
+--     '3 years',
+--     'Dog Walking & Grooming'
+-- );
 
-INSERT INTO staff VALUES (
-    5,
-    'Rebecca',
-    'reb@123.com',
-    'wan-chai',
-    '2 years',
-    'Grooming & Pet Sitting'
-);
+-- INSERT INTO staff VALUES (
+--     5,
+--     'Rebecca',
+--     'reb@123.com',
+--     'wan-chai',
+--     '2 years',
+--     'Grooming & Pet Sitting'
+-- );
 
 
-UPDATE staff
-SET district = 'sha-tin'
-WHERE pawtner_id = 3;
+-- UPDATE staff
+-- SET district = 'sha-tin'
+-- WHERE pawtner_id = 3;

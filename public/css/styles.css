@@ -27,11 +27,16 @@ button {
     display: '';
 }
 
+#sticky {
+    position: sticky;
+    top: 0;
+}
+
 #topnav {
     background-color: #ffffff;
     height: 60px;
     border-bottom: solid 1px #3C3C3C;
-    padding: 5px 20px;
+    padding: 5px 20px;  
 }
 
 .logo {
