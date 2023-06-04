@@ -10,43 +10,23 @@
         flex-direction: column;
         align-items: center;
     }
-  }
-
-
-#center {
-    text-align: center;
-    padding: 250px 0 300px;
 }
 
 /**************  service selection  ****************/
+
 .service-selection h1{
     margin-top: 150px;
     text-align: center;
 }
 
-/***********************************************/
+/********************* card ************************/
 
-#section {
-    margin: 100px 0;
-}
-
-/* #plan-choice, */
 .card-container{
     display: flex;
     justify-content: space-evenly;
     margin: 100px;
     gap: 50px;
 }
-
-/* #plan-heading {
-    visibility: hidden;
-} */
-
-/* #plan-choice.pet-sitting,
-#plan-choice.dog-walking,
-#plan-choice.pets-grooming {
-    display: none;
-} */
 
 .card {
     display: flex;
@@ -70,12 +50,15 @@
 }
 
 .card.selected {
-/* .action-card { */
     background-color: #A18772;
     border: none;
     color: #ffffff;
     width: 264px;
     height: 284px;
+}
+
+.card .list-item {
+    font-size: 20px;
 }
 
 /**************  Plan selection  ****************/
@@ -97,51 +80,45 @@
     flex-direction: column;
 }
 
-/***********************************************/
-
-/* #plan-choice .text-box,
-.card-container .text-box {
-    width: 200px;
-    margin: auto;
-} */
-
-.list-item {
-    font-size: 20px;
-}
-
 
 /************* booking form ****************/
 
-/* .choice-heading {
-    text-align: center;
-} */
-
 .booking-form {
     display: none;
+}
+
+.booking-form form{
+    display: flex;
+    flex-direction: column;
 }
 
 .booking-form.selected {
     display: flex;
     justify-content: center;
 }
-/* 
-.booking-form.pet-sitting,
-.booking-form.dog-walking,
-.booking-form.pets-grooming,
-.booking-form.pets-ride {
-    display: none;
-} */
 
-.booking-form li {
-    list-style-type: none;
-    padding-bottom: 5px;
+input, select {
+    border-radius: 8px;
+    border: solid 2px #A18772;
+    color: #A18772;
+    font-size: 15px;
+    font-family: 'Manrope', sans-serif;
 }
 
 input {
-    border-radius: 8px;
     width: 400px;
     height: 40px;
-    border: solid 2px #A18772;
+}
+
+input[type="date"], input[type="time"] {
+    width: 404px;
+    height: 46px;
+}
+
+select {
+    width: 408px;
+    height: 46px;
+    margin-bottom: 25px;
 }
 
 input::placeholder {
@@ -156,28 +133,33 @@ input:focus {
     color: #56493E;
 }
 
-
-.date,
-.time {
-    width: 404px;
-    height: 46px;
-    padding-left: 0;
-    color: #A18772;
-    font-family: 'Manrope', sans-serif;
-    font-size: 15px;
+.input-group-wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
-.frequency,
-.location,
-.duration {
-    color: #A18772;
-    border-radius: 8px;
-    border: solid 2px;
-    width: 408px;
-    height: 46px;
-    margin-bottom: 25px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 15px;
+.frequency {
+    display: none;
+}
+
+.frequency.regular {
+    display: inherit;
+}
+
+.duration.short option[data-duration="short"]{
+    display: inherit;
+}
+
+.duration.short option[data-duration="long"]{
+    display: none;
+}
+
+.duration.long option[data-duration="long"]{
+    display: inherit;
+}
+
+.duration.long option[data-duration="short"]{
+    display: none;
 }
 
 .reminder {
