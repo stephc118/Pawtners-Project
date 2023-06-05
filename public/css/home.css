@@ -149,12 +149,9 @@
 
 .rev-msg {
     padding: 10px 60px;
-}
-
-.rev-msg p {
     font-size: large;
-}
 
+}
 
 .swipe {
     display: flex;

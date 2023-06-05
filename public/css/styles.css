@@ -16,6 +16,7 @@ body {
 
 button {
     cursor: pointer;
+    transition: .3s;
 }
 /*******************Nav Bar ***************************/
 
