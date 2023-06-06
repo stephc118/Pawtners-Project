@@ -68,7 +68,7 @@ function createCard () {
         paragraphElement.textContent = review.text;
 
         
-        cardElement.append(imageContainer, starContainer, nameContainer, paragraphElement)
+        cardElement.append(imageContainer, nameContainer, starContainer, paragraphElement)
         reviewContainer.append(cardElement);   
     })       
     }

@@ -58,6 +58,7 @@ textarea {
     border-radius: 8px;
     width: 400px;
     height: 40px;
+    font-family: 'Manrope', sans-serif;
 }
 
 input::placeholder,

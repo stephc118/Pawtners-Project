@@ -197,8 +197,8 @@ li {
 }
 
 .rev-card {
-    height: 450px;
-    width: 350px;
+    height: 500px;
+    width: 380px;
     box-sizing: border-box;
     background-color: white;
     border-radius: 10px;
@@ -209,13 +209,13 @@ li {
     text-align: center;
     padding: 50px 30px;
     opacity: 0.5;
-    transform: scale3d(0.8, 0.8, 1);
+    transform: scale(0.8, 0.8);
     transition: all 0.3s ease-in-out;
 }
 
 .rev-card.mouseover {
     opacity: 1;
-    transform: scale3d(1, 1, 1);
+    transform: scale(1, 1);
     transition: all 0.3s ease-in-out;
 }
 
@@ -224,7 +224,9 @@ li {
     display: flex;
     flex-direction: row;
     padding: 0;
+    margin: 0;
     color: #ebc751;
+    font-size: 30px;
 }
 
 .image-container {
@@ -240,13 +242,12 @@ li {
 }
 
 .name-container {
-    background-color: #97DDD0;
     width: 100%;
     text-align: center;
-    padding: 20px 0;
-    position: absolute;
-    bottom: 0;
-    border-radius: 0 0 10px 10px;
+    padding-top: 20px;
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .rev-card p {
@@ -258,9 +259,14 @@ li {
     text-align: center;
 }
 
+.form-container {
+    display: flex;
+    justify-content: center;
+    text-align: start;
+}
+
 .review-form label {
     font-size: 20px;
-  
 }
 
 .review-form select {
@@ -268,8 +274,9 @@ li {
     border-radius: 8px;
     width: 300px;
     height: 40px;
-    margin: 10px;
+    margin: 10px 0;
     color: #A18772;
+    font-family: 'Manrope', sans-serif;
 }
 
 .review-form button  {
@@ -290,13 +297,15 @@ li {
 .review-form textarea {
     border: solid 2px #A18772;
     border-radius: 8px;
-    width: 300px;
+    width: 500px;
     height: 150px;
-    margin: 10px;
+    margin: 10px 0;
     color: #A18772;
+    font-family: 'Manrope', sans-serif;
 }
 
 .review-form select:focus, 
-.review-form textarea:focus {
+.review-form textarea:focus {    
     outline: #56493E;
+    color: #56493E;
 }
