@@ -8,8 +8,12 @@ var spinner = document.querySelector("#load");
             spinner.style.display = 'flex';
         }, 1000)
 
-        const res = await fetch('/history');
+        // Get User Info
+        const resProfile = await fetch('/profile');
+        const jsonProfile = await resProfile.json();
 
+        // Get booking history
+        const res = await fetch('/history');
         const response = await res.json();
 
         clearTimeout(timeoutId); //remove spinner
@@ -19,6 +23,29 @@ var spinner = document.querySelector("#load");
         }
 
         if (res.status === 200) {
+            // Show Profile
+           const {username, user_id, email} = jsonProfile.profile;
+           const leftContainer = document.querySelector('.left');
+           const rightContainer = document.querySelector('.right');
+    
+           const profileEle = document.createElement('div');
+           profileEle.className = 'profile-element';
+           profileEle.innerHTML = `
+               <p><strong>Username:</strong> ${username}</p>
+               <p><strong>User ID:</strong> ${user_id}</p>
+               <p><strong>Email:</strong> ${email}</p>
+           `
+           leftContainer.append(profileEle);
+    
+           const imageEle = document.createElement('div');
+           imageEle.innerHTML = `
+               <p><strong><label for="file">Choose Your Profile Picture
+               <p><input type="file" accept="image/png, image/jpeg" name="image" id="file" onchange="loadFile(event)"></p>
+               <p><img id="output" width="150px" /></p>
+               <p><input type="submit" name="submit" value="Upload"></p>
+           `
+           rightContainer.append(imageEle);
+
             //if no booking
             if (!response.orderRide && !response.orderSitting &&
                 !response.orderGrooming && !response.orderWalking) {
@@ -99,3 +126,8 @@ var spinner = document.querySelector("#load");
         console.log(err);
     }
 })()
+
+const loadFile = function(event) {
+    const image = document.getElementById('output');
+    image.src = URL.createObjectURL(event.target.files[0]);
+}

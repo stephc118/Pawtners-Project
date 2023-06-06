@@ -276,13 +276,27 @@ const grant = require('grant');
             const query = 'INSERT INTO contact (name, email, message) VALUES ($1, $2, $3) RETURNING *';
             const newContact = await client.query(query, [name, email, message]);
             res.redirect('/index.html')
-            console.log(newContact.rows[0]);
         } catch (err) {
             console.error(err.message);
         }
     })
 
     /***************************Account Page********************/
+
+    app.get('/profile', async (req, res) => {
+        try {
+            const userId = req.session.user.id;  
+            const profile = await client.query (`SELECT * FROM users where user_id = $1`, [userId]);
+            console.log(profile.rows);
+            if (profile.rows.length) {
+                res.json({profile: profile.rows[0]});
+            } else {
+                res.json ({profile: []});
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    });
 
     app.get('/history', async(req, res) => {
         try {

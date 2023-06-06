@@ -1,3 +1,59 @@
+/*********************Profile*******************/
+
+#profile {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    color: #A18772;
+    margin: 0 400px;
+}
+
+.left, .right {
+    width: 50%;
+    margin: auto 0;
+    text-align: initial;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-element {
+    display: flex;
+    flex-direction: column;
+}
+
+#file {
+    display: none;
+}
+
+.right label {
+    cursor: pointer;
+}
+
+.right label:hover {
+    color: #56493E;
+}
+
+.right input[type="submit"]:hover {
+    background-color: #A18772;
+}
+
+.right input[type="submit"] {
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    background-color: #56493E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/***********************Booking Table**************/
+
 #title {
     text-align: center;
     padding-top: 100px;
