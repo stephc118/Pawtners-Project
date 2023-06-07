@@ -365,7 +365,27 @@ const grant = require('grant');
             console.log(err);
             res.json({error: err.message})
         }
-    })
+    });
+
+     /*************************Reviews********************/
+
+     app.get('/reviews/:service', async (req, res) => {
+        try {
+            const username = req.session.user.username;
+            const { service } = req.params;
+            const { limit } = req.query;
+            const review = await client.query(`SELECT * FROM reviews where service = $1 limit $2`, [service, limit]);
+            if (review.rows.length) {
+                res.json ({review: review.rows});
+        
+            } else {
+                res.json ({review: []});
+            }
+        } catch (err) {
+            console.log(err);
+            res.json({error: err.message}) 
+        }
+     });
 
     /*************************Use static file********************/
 

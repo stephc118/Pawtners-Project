@@ -139,3 +139,53 @@ CREATE TABLE staff (
 -- UPDATE staff
 -- SET district = 'sha-tin'
 -- WHERE pawtner_id = 3;
+
+--Review table
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    service TEXT NOT NULL,
+    star INT NOT NULL,
+    text VARCHAR(255) NOT NULL
+);
+
+INSERT INTO reviews VALUES(
+    1,
+    'dau',
+    'pet-sitting',
+    4,
+    'Good Service. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
+
+INSERT INTO reviews VALUES(
+    2,
+    'mung',
+    'pet-sitting',
+    5,
+    'Very Nice. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
+
+INSERT INTO reviews VALUES(
+    3,
+    'bak',
+    'pet-sitting',
+    5,
+    'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
+
+INSERT INTO reviews VALUES(
+    4,
+    'morgu',
+    'dog-walking',
+    5,
+    'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
+
+INSERT INTO reviews VALUES(
+    5,
+    'bingor',
+    'pet-sitting',
+    4,
+    'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);

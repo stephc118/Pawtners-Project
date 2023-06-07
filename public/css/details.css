@@ -182,7 +182,7 @@ li {
 
 .review-section {
     background-color: #f3eeeb;
-    height: 1400px;  
+    height: 800px;  
 }
 
 .review-section h1 {
@@ -250,12 +250,16 @@ li {
     font-weight: bold;
 }
 
+.service-container {
+    margin-bottom: 10px;
+}
+
 .rev-card p {
     line-height: 30px;
     margin: 0;
 }
 
-.review-form {
+/* .review-form {
     text-align: center;
 }
 
@@ -308,4 +312,4 @@ li {
 .review-form textarea:focus {    
     outline: #56493E;
     color: #56493E;
-}
+} */
