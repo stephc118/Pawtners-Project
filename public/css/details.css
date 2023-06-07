@@ -1,5 +1,6 @@
 
 @media (max-width: 1250px) {
+    .row,
     #top-div,
     .row-1 {
       flex-direction: column;
@@ -7,9 +8,15 @@
       text-align: center;
       align-items: center;
     }
-
+    
     .price-card {
         padding: 20px 0;
+    }
+
+    .review-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
   }
 
@@ -17,7 +24,6 @@
     display: flex;
     align-items: center;
     margin: 100px 0;
-    
 }
 
 /***************Considerations****************/
@@ -26,18 +32,24 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 50px 150px;
+    margin: 0 150px 100px;
+    gap: 50px;
 }
 
 .number {
     flex: 1;
     font-size: 200px;
     font-weight: 900;
+    margin: 50px 0 0;
 }
 
 .text-box {
-    margin: 75px;
+    padding: 75px;
 }
+
+.long.text-box {
+    padding: 60px 60px;
+} 
 
 #consideration h3 {
     font-size: 30px;
@@ -48,7 +60,6 @@
     display: flex;
     width: 400px;
     height: 450px;
-    margin: 30px;
     border-radius: 10px;
     text-align: center;
 }
@@ -163,26 +174,26 @@ li {
 
 /***********Only 1 card************/
 
-.first {
-    margin-right: 700px;
+/* .first {
+    padding-right: 700px;
 }
 
 .second {
-    margin: 0 400px;
+    padding: 0 400px;
 }
 
 .third {
-    margin-left: 700px;
+    padding-left: 700px;
 }
 .long.text-box {
-    margin: 60px 60px;
-}
+    padding: 60px 60px;
+} */
 
 /******************Reviews*************/
 
 .review-section {
     background-color: #f3eeeb;
-    height: 800px;  
+    padding-bottom: 100px;
 }
 
 .review-section h1 {
