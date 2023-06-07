@@ -371,7 +371,6 @@ const grant = require('grant');
 
      app.get('/reviews/:service', async (req, res) => {
         try {
-            const username = req.session.user.username;
             const { service } = req.params;
             const { limit } = req.query;
             const review = await client.query(`SELECT * FROM reviews where service = $1 limit $2`, [service, limit]);

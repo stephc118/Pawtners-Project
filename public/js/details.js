@@ -1,17 +1,24 @@
-const reviewContainer = document.querySelector('.review-container');
-
 (async () => {
     try {
-        // if (window.location = '/pet-sitting.html') {
-        //     const resp = await fetch('/reviews/pet-sitting');
-        // }
-        const resp = await fetch('/reviews/pet-sitting?limit=3');
+        let service;
+        const serviceHeading = document.title;
+        service = serviceHeading;
+
+        const serviceMapping = {
+            'Pet Sitting': 'pet-sitting',
+            'Dog Walking': 'dog-walking',
+            'Pets Grooming': 'pets-grooming',
+            'Pets Ride': 'pets-ride'
+        }
+
+        const resp = await fetch(`/reviews/${serviceMapping[service]}?limit=3`);
         const jsonReview = await resp.json();
 
         const reviews = jsonReview.review;
 
         function createCard() {
             reviews.forEach(review => {
+                const reviewContainer = document.querySelector('.review-container');
                 const cardElement = document.createElement('div');
                 cardElement.className = 'rev-card';
 
@@ -50,25 +57,15 @@ const reviewContainer = document.querySelector('.review-container');
             `
                 }
 
-                const serviceMapping = {
-                    'pet-sitting': 'Pet Sitting',
-                    'dog-walking': 'Dog Walking',
-                    'pets-grooming': 'Pets Grooming',
-                    'pets-ride': 'Pets Ride'
-                }
                 const serviceContainer = document.createElement('div');
                 serviceContainer.className = 'service-container';
-                serviceContainer.innerHTML =`
-                    <strong>Service used:</strong> ${serviceMapping[review.service]}
-                ` 
-
+                serviceContainer.innerHTML =`<strong>Service used:</strong> ${service}` 
 
                 const nameContainer = document.createElement('div');
                 nameContainer.classList.add('name-container');
                 nameContainer.textContent = review.username;
                 const paragraphElement = document.createElement('p');
                 paragraphElement.textContent = review.text;
-
 
                 cardElement.append(imageContainer, nameContainer, starContainer, serviceContainer, paragraphElement)
                 reviewContainer.append(cardElement);

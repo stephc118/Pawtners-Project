@@ -189,3 +189,35 @@ INSERT INTO reviews VALUES(
     4,
     'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
 );
+
+INSERT INTO reviews VALUES(
+    6,
+    'Lup Lup',
+    'pets-grooming',
+    5,
+    'Nice Job! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
+
+INSERT INTO reviews VALUES(
+    7,
+    'Shu Jai',
+    'pets-grooming',
+    4,
+    'Well done! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
+
+INSERT INTO reviews VALUES(
+    8,
+    'Gum Jai',
+    'pets-ride',
+    5,
+    'Happy with your service! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
+
+INSERT INTO reviews VALUES(
+    9,
+    'Fei Jai',
+    'dog-walking',
+    4,
+    'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
