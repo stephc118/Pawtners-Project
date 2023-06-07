@@ -1,6 +1,10 @@
 //TODO: check if user already logged in
 // const username = sessionStorage.getItem('username');
 
+const errorContainer = document.querySelector('.error-container');
+const errorEle = document.createElement('div');
+errorEle.className = 'error-message';
+errorEle.className = 'error-message';
 
 
 const registerForm = document.querySelector("#register");
@@ -35,18 +39,29 @@ registerForm.addEventListener('submit', async (event) => {
 
         //If not success
         if (res.status === 400) {
-            // alert(response.message);
             //TODO: show error on UI
-            alert('Registration failed. Please try again')
+            errorEle.innerHTML = `
+            <h3>Registration failed. Please try again.</h3>
+            `
+            errorContainer.append(errorEle);
+        }
+
+        if (res.status === 404) {
+            //TODO: show error on UI
+            errorEle.innerHTML = `
+            <h3>You have been logged in or <br>this email has already been registered.</h3>
+            `
+            errorContainer.append(errorEle);
         }
 
         if (res.status === 200) {
                 window.location = '/booking.html';
         }
     } catch (err) {
-        console.error(err);
-        // alert(err.message);
         //TODO: show error on UI
-        alert('Something went wrong. Please try to register again.')
+        errorEle.innerHTML = `
+            <h3>Something went wrong. Please try to register again.</h3>
+            `
+            errorContainer.append(errorEle);
     }
 });

@@ -67,9 +67,11 @@ const grant = require('grant');
                     res.sendStatus(200);
 
                 } else {
+                    res.sendStatus(400)
                     throw new Error('Incorrect username/password.')
                 }
             } else {
+                res.sendStatus(404);
                 throw new Error('user not found');
             }
         } catch (err) {
@@ -155,9 +157,11 @@ const grant = require('grant');
                     res.sendStatus(200);
 
                 } else {
+                    res.sendStatus(400);
                     throw new Error('Registration failed, please try again.');
                 }
             } else {
+                res.sendStatus(404);
                 throw new Error('You have been logged in or this email has already been registered.')
             }
         } catch (err) {

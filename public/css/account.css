@@ -181,3 +181,7 @@ label {
     background-color: #f7e5e5;
     color: #CD3232;
 } */
+
+.error-message {
+    color: #CD3232;
+}

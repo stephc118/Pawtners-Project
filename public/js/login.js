@@ -1,4 +1,7 @@
 const loginForm = document.querySelector("#login");
+const errorContainer = document.querySelector('.error-container');
+const errorEle = document.createElement('div');
+errorEle.className = 'error-message';
 
 //When Login form submitted
 loginForm.addEventListener('submit', async (event) => {
@@ -26,22 +29,30 @@ loginForm.addEventListener('submit', async (event) => {
             body: JSON.stringify(formData),
         });
 
-
         //If no user was found
-        if (res.status === 400) {
-            // alert(response.message);
+        if (res.status === 404) {
             //TODO: show error on UI
-            alert('No User was found. Please try again')
+            errorEle.innerHTML = `
+            <h3>No user was found, please try again.</h3>
+            `
+            errorContainer.append(errorEle);
+        }
+        if (res.status === 400) {
+            errorEle.innerHTML = `
+            <h3>Wrong email or password. Please try again.</h3>
+            `
+            errorContainer.append(errorEle);
         }
 
         if (res.status === 200) {
                 window.location = '/booking.html';
         }
     } catch (err) {
-        console.error(err);
-        // alert(err.message);
         //TODO: show error on UI
-        alert('Something went wrong. Please try logging in again.')
+        errorEle.innerHTML = `
+        <h3>Something went wrong. Please try logging in again.</h3>
+        `
+        errorContainer.append(errorEle);
     }
 });
 
