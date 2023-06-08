@@ -106,7 +106,8 @@
 
 .booking-form.selected {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 input, select {
@@ -131,6 +132,12 @@ select {
     width: 408px;
     height: 46px;
     margin-bottom: 25px;
+}
+
+select:focus {
+    background-color: #F5E1D2;
+    outline: #56493E;
+    color: #56493E;
 }
 
 input::placeholder {
@@ -188,7 +195,6 @@ input:focus {
     border: none;
     width: 408px;
     height: 60px;
-    margin-bottom: 100px;
 }
 
 #send-btn:hover {
@@ -203,8 +209,13 @@ input:focus {
 }
 
 .error-message {
+    visibility: hidden;
     color: #CD3232;
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+}
+
+.error-message.show {
+    visibility: visible;
 }

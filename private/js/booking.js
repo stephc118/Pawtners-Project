@@ -21,7 +21,7 @@ for (const card of serviceCards){
         const clickedCardDiv = event.target.closest(".card");
         serviceSelected = clickedCardDiv.dataset.serviceName;
 
-        if (serviceSelected === 'pets-ride') {
+        if (serviceSelected === 'ride') {
             const bookingForm = document.querySelector(`.booking-form.${serviceSelected}`);
             bookingForm.classList.add("selected");
             bookingForm.scrollIntoView({behavior: 'smooth', block: 'nearest'});
@@ -34,6 +34,7 @@ for (const card of serviceCards){
 }
 
 const planCards = document.querySelectorAll(".plan-selection .card");
+let planIdSelected;
 
 for (const card of planCards){
     card.addEventListener('click', (event) => {
@@ -44,6 +45,7 @@ for (const card of planCards){
         }
 
         card.classList.add("selected");
+        planIdSelected = card.dataset.planId;
 
         // show booking form
         const bookingForm = document.querySelector(`.booking-form.${serviceSelected}`);
@@ -79,158 +81,119 @@ for (const card of planCards){
     })
 }
 
-// Pets Grooming Booking Form Handling
+//TODO: clean form after send
+// TODO: check invalid value (e.g. incorrect date)
 
-const groomingForm = document.querySelector('.pets-grooming.booking-form');
+// const planIdToNameMapping = {
+//     1: "single",
+//     2: "regular-day",
+//     3: "regular-overnight",
+//     4: "every-other-day",
+//     5: "daily",
+//     6: "regular-active",
+//     7: "shower",
+//     8: "trimming",
+//     9: "spa"
+// }
 
-groomingForm.addEventListener('submit', async (event) => {
-    try {
-        event.preventDefault();
-
-        const date = document.querySelector('.pets-grooming .date').value;
-        const time = document.querySelector('.pets-grooming .time').value;
-        const numberOfPets = document.querySelector('.pets-grooming .number').value;
-        const errorContainer = document.querySelector('.pets-grooming .error-container');
-        errorEle = document.createElement('div');
-        errorEle.className = 'error-message';
-
-        if ( !date || !time || !numberOfPets ) {
-            errorEle.innerHTML = `<p>Please fill in all the fields!</p>`
-            errorContainer.append(errorEle);
-            return;
+const servicesBookingInfo = {
+    "grooming": {
+        selectors: {
+            date: "input.date",
+            time: "input.time",
+            numberOfPets: "input.numberOfPets"
         }
-
-        const formData = {
-            date: date,
-            time: time,
-            number: numberOfPets
+    },
+    "ride": {
+        selectors: {
+            date: "input.date",
+            time: "input.time",
+            pickup: "input.pickup",
+            dropoff: "input.dropoff",
+            numberOfPets: "input.numberOfPets"
         }
-
-        const res = await fetch ('/grooming-booking', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
+    },
+    "sitting": {
+        1: {
+            selectors: {
+                date: "input.date",
+                time: "input.time",
+                location: "select.location",
+                district: "input.district",
+                numberOfPets: "input.numberOfPets"
             },
-            body: JSON.stringify(formData)
-        });
-
-        if (res.status === 400) {
-            errorEle.innerHTML = `<p>Booking failed, please try again.</p>`
-            errorContainer.append(errorEle);
-            errorContainer.scrollIntoView({behavior: 'smooth', block: 'top'});
-        }
-        if (res.status === 500) {
-            errorEle.innerHTML = `<p>Invalid input, please try again.</p>`
-            errorContainer.append(errorEle);
-            errorContainer.scrollIntoView({behavior: 'smooth', block: 'top'});
-        }
-        if (res.status === 200) {
-            window.location = '/success.html'
-        }
-    } catch (err) {
-        errorEle.innerHTML = `<p>Something went wrong, please try again.</p>`
-        errorContainer.append(errorEle);
-        errorContainer.scrollIntoView({behavior: 'smooth', block: 'top'});
-    }
-});
-
-// Pets Ride Booking Form Handling
-
-const rideForm = document.querySelector('.pets-ride.booking-form');
-
-rideForm.addEventListener('submit', async (event) => {
-    try {
-        event.preventDefault();
-
-        const date = document.querySelector('.pets-ride .date').value;
-        const time = document.querySelector('.pets-ride .time').value;
-        const pickUp = document.querySelector('.pets-ride .pickup').value;
-        const dropOff = document.querySelector('.pets-ride .dropoff').value;
-        const numberOfPets = document.querySelector('.pets-ride .number').value;
-        const errorContainer = document.querySelector('.pets-ride .error-container');
-        errorEle = document.createElement('div');
-        errorEle.className = 'error-message';
-
-        if ( !date || !time || !pickUp || !dropOff || !numberOfPets ) {
-            errorEle.innerHTML = `<p>Please fill in all the fields!</p>`
-            errorContainer.append(errorEle);
-            return;
-        }
-
-        const formData = {
-            date: date,
-            time: time,
-            pickup: pickUp,
-            dropoff: dropOff,
-            number: numberOfPets
-        }
-
-        const res = await fetch ('/ride-booking', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
+        },
+        2: {
+            selectors: {
+                date: "input.date",
+                time: "input.time",
+                frequency: ".frequency select",
+                location: "select.location",
+                district: "input.district",
+                numberOfPets: "input.numberOfPets"
             },
-            body: JSON.stringify(formData)
-        });
-
-        if (res.status === 400) {
-            errorEle.innerHTML = `<p>Booking failed, please try again.</p>`
-            errorContainer.append(errorEle);
+        },
+        3: {
+            selectors: {
+                date: "input.date",
+                time: "input.time",
+                frequency: ".frequency select",
+                location: "select.location",
+                district: "input.district",
+                numberOfPets: "input.numberOfPets"
+            },
         }
-        if (res.status === 500) {
-            errorEle.innerHTML = `<p>Invalid input, please try again.</p>`
-            errorContainer.append(errorEle);
-        }
-        if (res.status === 200) {
-            window.location = '/success.html'
-        }
-    } catch (err) {
-        errorEle.innerHTML = `<p>Something went wrong, please try again.</p>`
-        errorContainer.append(errorEle);
     }
-});
+}
 
-// const petSittingForm = document.querySelector('.pet-sitting.booking-form');
+const forms = document.querySelectorAll('.booking-form');
 
-// petSittingForm.addEventListener('submit', async (event) => {
-//     try {
-//         event.preventDefault();
+for (const form of forms) {
+    form.addEventListener('submit', async (event) => {
+        try {
+            event.preventDefault();
+    
+            const selectors = servicesBookingInfo[serviceSelected][planIdSelected]
+                ? servicesBookingInfo[serviceSelected][planIdSelected].selectors
+                : servicesBookingInfo[serviceSelected].selectors;
 
-//         const date = document.querySelector('.date').value;
-//         const time = document.querySelector('.time').value;
-//         const location = document.querySelector('.location').value;
-//         const numberOfPets = document.querySelector('.number').value;
-//         const district = document.querySelector('.district').value;
+            const formData = Object.entries(selectors).reduce((acc, selector) => {
+                const [field, className] = selector;
+                
+                if (!acc[field]) {
+                    acc[field] = document.querySelector(`.${serviceSelected} ${className}`)?.value
+                }
+    
+                return acc;
+            }, {});
+    
+            // value checking for each field
+            const errorMessage = document.querySelector(`.${serviceSelected} .error-message p`);
+            for (const field in formData) {
+                const valueEntered = formData[field];
+                if(!valueEntered) {
+                    errorMessage.innerHTML = `Please enter all the fields!`;
+                    throw new Error(`missing value for field: ${field}`);
+                }
+            }
 
-//         if ( !date || !time || !location || !numberOfPets || district ) {
-//             alert ('Please fill in all the fields!')
-//             return;
-//         }
-
-//         const formData = {
-//             date: date,
-//             time: time,
-//             location: location,
-//             numberofpets: numberOfPets,
-//             district: district
-//         }
-
-//         const res = await fetch ('/sitting-booking', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(formData),
-//         });
-
-//         if (res.status === 400) {
-//             alert ('Booking failed, please try again.')
-//         }
-
-//         if (res.status === 200) {
-//             window.location = '/success.html'
-//         }
-//     } catch (err) {
-//         console.log(err);
-//     }
-// });
+            const res = await fetch (`/booking/${serviceSelected}?plan_id=${planIdSelected}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+    
+            if (res.status === 200) {
+                window.location = '/success.html'
+            } else {
+                throw new Error('unable to book service');
+            }
+        } catch (err) {
+            const errorContainer = document.querySelector(`.${serviceSelected} .error-message`);
+            errorContainer.classList.add('show');
+            console.error(err);
+        }
+    });
+}
