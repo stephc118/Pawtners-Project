@@ -198,7 +198,6 @@ const grant = require('grant');
             const newRide = 'INSERT INTO ride(date, time, pickup, dropoff, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
             const inputRide = [date, time, pickUp, dropOff, numberOfPets, userId]
             const bookRide = await client.query(newRide, inputRide);
-            console.log(bookRide.rows[0]);
             res.redirect('/success.html')
 
         } catch (err) {
@@ -218,7 +217,6 @@ const grant = require('grant');
             const newGrooming = 'INSERT INTO grooming(date, time, numberofpets, user_id) VALUES($1, $2, $3, $4) RETURNING *';
             const inputGrooming = [date, time, numberOfPets, userId]
             const bookGrooming = await client.query(newGrooming, inputGrooming);
-            console.log(bookGrooming.rows[0]);
             res.redirect('/success.html')
 
         } catch (err) {
@@ -241,7 +239,6 @@ const grant = require('grant');
             const newSitting = 'INSERT INTO sitting (date, time, frequency, location, numberofpets, district, user_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
             const inputSitting = [date, time, frequency, location, numberOfPets, district, userId]
             const bookSitting = await client.query(newSitting, inputSitting);
-            console.log(bookSitting.rows[0]);
             res.redirect('/success.html')
 
         } catch (err) {
@@ -264,7 +261,6 @@ const grant = require('grant');
             const newWalking = 'INSERT INTO walking(date, time, frequency, duration, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
             const inputWalking = [date, time, frequency, duration, numberOfPets, userId]
             const bookWalking = await client.query(newWalking, inputWalking);
-            console.log(bookWalking.rows[0]);
             res.redirect('/success.html')
 
         } catch (err) {
@@ -291,7 +287,6 @@ const grant = require('grant');
         try {
             const userId = req.session.user.id;  
             const profile = await client.query (`SELECT * FROM users where user_id = $1`, [userId]);
-            console.log(profile.rows);
             if (profile.rows.length) {
                 res.json({profile: profile.rows[0]});
             } else {
