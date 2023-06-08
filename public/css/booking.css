@@ -201,3 +201,10 @@ input:focus {
     text-align: center;
     margin: 200px auto 300px;
 }
+
+.error-message {
+    color: #CD3232;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}

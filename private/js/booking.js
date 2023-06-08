@@ -78,3 +78,159 @@ for (const card of planCards){
         }
     })
 }
+
+// Pets Grooming Booking Form Handling
+
+const groomingForm = document.querySelector('.pets-grooming.booking-form');
+
+groomingForm.addEventListener('submit', async (event) => {
+    try {
+        event.preventDefault();
+
+        const date = document.querySelector('.pets-grooming .date').value;
+        const time = document.querySelector('.pets-grooming .time').value;
+        const numberOfPets = document.querySelector('.pets-grooming .number').value;
+        const errorContainer = document.querySelector('.pets-grooming .error-container');
+        errorEle = document.createElement('div');
+        errorEle.className = 'error-message';
+
+        if ( !date || !time || !numberOfPets ) {
+            errorEle.innerHTML = `<p>Please fill in all the fields!</p>`
+            errorContainer.append(errorEle);
+            return;
+        }
+
+        const formData = {
+            date: date,
+            time: time,
+            number: numberOfPets
+        }
+
+        const res = await fetch ('/grooming-booking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (res.status === 400) {
+            errorEle.innerHTML = `<p>Booking failed, please try again.</p>`
+            errorContainer.append(errorEle);
+            errorContainer.scrollIntoView({behavior: 'smooth', block: 'top'});
+        }
+        if (res.status === 500) {
+            errorEle.innerHTML = `<p>Invalid input, please try again.</p>`
+            errorContainer.append(errorEle);
+            errorContainer.scrollIntoView({behavior: 'smooth', block: 'top'});
+        }
+        if (res.status === 200) {
+            window.location = '/success.html'
+        }
+    } catch (err) {
+        errorEle.innerHTML = `<p>Something went wrong, please try again.</p>`
+        errorContainer.append(errorEle);
+        errorContainer.scrollIntoView({behavior: 'smooth', block: 'top'});
+    }
+});
+
+// Pets Ride Booking Form Handling
+
+const rideForm = document.querySelector('.pets-ride.booking-form');
+
+rideForm.addEventListener('submit', async (event) => {
+    try {
+        event.preventDefault();
+
+        const date = document.querySelector('.pets-ride .date').value;
+        const time = document.querySelector('.pets-ride .time').value;
+        const pickUp = document.querySelector('.pets-ride .pickup').value;
+        const dropOff = document.querySelector('.pets-ride .dropoff').value;
+        const numberOfPets = document.querySelector('.pets-ride .number').value;
+        const errorContainer = document.querySelector('.pets-ride .error-container');
+        errorEle = document.createElement('div');
+        errorEle.className = 'error-message';
+
+        if ( !date || !time || !pickUp || !dropOff || !numberOfPets ) {
+            errorEle.innerHTML = `<p>Please fill in all the fields!</p>`
+            errorContainer.append(errorEle);
+            return;
+        }
+
+        const formData = {
+            date: date,
+            time: time,
+            pickup: pickUp,
+            dropoff: dropOff,
+            number: numberOfPets
+        }
+
+        const res = await fetch ('/ride-booking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (res.status === 400) {
+            errorEle.innerHTML = `<p>Booking failed, please try again.</p>`
+            errorContainer.append(errorEle);
+        }
+        if (res.status === 500) {
+            errorEle.innerHTML = `<p>Invalid input, please try again.</p>`
+            errorContainer.append(errorEle);
+        }
+        if (res.status === 200) {
+            window.location = '/success.html'
+        }
+    } catch (err) {
+        errorEle.innerHTML = `<p>Something went wrong, please try again.</p>`
+        errorContainer.append(errorEle);
+    }
+});
+
+// const petSittingForm = document.querySelector('.pet-sitting.booking-form');
+
+// petSittingForm.addEventListener('submit', async (event) => {
+//     try {
+//         event.preventDefault();
+
+//         const date = document.querySelector('.date').value;
+//         const time = document.querySelector('.time').value;
+//         const location = document.querySelector('.location').value;
+//         const numberOfPets = document.querySelector('.number').value;
+//         const district = document.querySelector('.district').value;
+
+//         if ( !date || !time || !location || !numberOfPets || district ) {
+//             alert ('Please fill in all the fields!')
+//             return;
+//         }
+
+//         const formData = {
+//             date: date,
+//             time: time,
+//             location: location,
+//             numberofpets: numberOfPets,
+//             district: district
+//         }
+
+//         const res = await fetch ('/sitting-booking', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(formData),
+//         });
+
+//         if (res.status === 400) {
+//             alert ('Booking failed, please try again.')
+//         }
+
+//         if (res.status === 200) {
+//             window.location = '/success.html'
+//         }
+//     } catch (err) {
+//         console.log(err);
+//     }
+// });

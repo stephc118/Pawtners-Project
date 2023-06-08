@@ -159,37 +159,37 @@
 
         <!-- Pet sitting booking form -->
         <div class="booking-form pet-sitting">
-            <form action="http://localhost:3000/sitting-booking" method="post">
+            <form method="post">
                 <label for="date">Date</label>
-                <input type="date" name="date" required>
+                <input type="date" name="date" class="date" required>
                 <br>
                 <label for="time">Time</label>
-                <input type="time" name="time" placeholder="Time" required>
+                <input type="time" name="time" placeholder="Time" class="time" required>
                 <br>
                 <div class="input-group-wrapper frequency">
                     <label for="frequency">Frequency</label>
-                    <select name="frequency">
+                    <select name="frequency" class="frequency">
                         <option value="">Frequency</option>
-                        <option value="1 Day">1 Day</option>
-                        <option value="2 Day">2 Day</option>
-                        <option value="3 Day">3 Day</option>
-                        <option value="4 Day">4 Day</option>
-                        <option value="5 Day">5 Day</option>
-                        <option value="6 Day">6 Day</option>
-                        <option value="7 Day">7 Day</option>
+                        <option value="1">1 Day</option>
+                        <option value="2">2 Day</option>
+                        <option value="3">3 Day</option>
+                        <option value="4">4 Day</option>
+                        <option value="5">5 Day</option>
+                        <option value="6">6 Day</option>
+                        <option value="7">7 Day</option>
                     </select>
                 </div>
                 <label for="location">Location</label>
-                <select name="location" required>
+                <select name="location" class="location"required>
                     <option value="">Location</option>
                     <option value="Pawrents">At Pawrents'</option>
                     <option value="Pawtners">At Pawtners'</option>
                 </select>
                 <label for="number">Number of Pets</label>
-                <input type="text" name="number" placeholder="Number" required>
+                <input type="text" name="number" placeholder="Number" class="number"required>
                 <br>
                 <label for="district">District</label>
-                <input type="text" name="district" placeholder="District" required>
+                <input type="text" name="district" placeholder="District" class="district" required>
                 <br>
                 <p class="reminder">
                     Once we received your booking, we will be contacting you via email for confirmation and payment.
@@ -240,15 +240,16 @@
 
         <!-- Pets grooming booking form -->
         <div class="booking-form pets-grooming">
-            <form action="http://localhost:3000/grooming-booking" method="post">
+            <form method="post">
+                <div class="error-container"></div>
                 <label for="date">Date</label>
-                <input type="date" name="date" required>
+                <input type="date" name="date" class="date">
                 <br>
                 <label for="time">Time</label>
-                <input type="time" name="time" placeholder="Time" required>
+                <input type="time" name="time" placeholder="Time" class="time">
                 <br>
                 <label for="number">Number of Pets</label>
-                <input type="text" name="number" placeholder="Number" required>
+                <input type="text" name="number" placeholder="Number" class="number">
                 <br>
                 <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation and payment.</p>
                 <button type="submit" id="send-btn">Send</button>
@@ -257,25 +258,26 @@
 
         <!-- Pets ride booking form -->
         <div class="booking-form pets-ride">
-            <form action="http://localhost:3000/ride-booking" method="post">
+            <form method="post">
+                <div class="error-container"></div>
                 <label for="date">Date</label>
-                <input type="date" name="date" required>
+                <input type="date" name="date" class="date">
                 <br>
                 <label for="time">Time</label>
-                <input type="time" name="time" placeholder="Time" required>
+                <input type="time" name="time" placeholder="Time" class="time">
                 <br>
                 <label for="pickup">Pick up point</label>
-                <input type="text" name="pickup" placeholder="Location" required>
+                <input type="text" name="pickup" placeholder="Location" class="pickup">
                 <br>
                 <label for="dropoff">Drop off point</label>
-                <input type="text" name="dropoff" placeholder="Location" required>
+                <input type="text" name="dropoff" placeholder="Location" class="dropoff">
                 <br>
                 <label for="number">Number of Pets</label>
-                <input type="text" name="number" placeholder="Number" required>
+                <input type="text" name="number" placeholder="Number" class="number">
                 <br>
                 <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation and payment.</p>
                 <button type="submit" id="send-btn">Send</button>
-            </form>
+            </form>       
         </div>
         <footer>
             <div class="items">
