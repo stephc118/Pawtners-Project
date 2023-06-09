@@ -14,25 +14,25 @@
 
 <body>
     <!-- Nav Bar -->
-<div id="sticky">
-    <div id="topnav">
-        <a href="index.html" class="nav-item logo">PAWTNERS</a>
-        <a href="services.html" class="nav-item">Services</a>
-        <a href="contact.html" class="nav-item">Contact</a>
-        <div id="not-login-nav">
-            <a href="register.html"><button class="topnav-btn outline-btn">Register</button></a>
-            <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
-        </div>
-        <div id="login-nav">
-            <form id="logout" method="post">
-                <button type="submit" class="topnav-btn green-btn logout-btn">Log Out</button>
-                <a id="account-btn" href="history.html">
-                    <p class="user">User 123</p><i class="user fa-solid fa-circle-user"></i>
-                </a>
-            </form>
+    <div id="sticky">
+        <div id="topnav">
+            <a href="index.html" class="nav-item logo">PAWTNERS</a>
+            <a href="services.html" class="nav-item">Services</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+            <div id="not-login-nav">
+                <a href="register.html"><button class="topnav-btn outline-btn">Register</button></a>
+                <a href="login.html"> <button class="topnav-btn green-btn">Log in</button></a>
+            </div>
+            <div id="login-nav">
+                <form id="logout" method="post">
+                    <button type="submit" class="topnav-btn green-btn logout-btn">Log Out</button>
+                    <a id="account-btn" href="history.html">
+                        <p class="user">User 123</p><i class="user fa-solid fa-circle-user"></i>
+                    </a>
+                </form>
+            </div>
         </div>
     </div>
-</div>
     <!-- Heading -->
     <div class="content">
         <h1 id="title">My Booking History</h1>
@@ -47,53 +47,74 @@
             <table class="pet-sitting">
                 <thead>
                     <tr>
-                        <td>Order Number</td>
+                        <td>Order No.</td>
                         <td>Date</td>
                         <td>Location</td>
-                        <td>Number of Pets</td>
+                        <td>No. of Pets</td>
                         <td>Frequency</td>
                         <td>Ordered at</td>
                         <td>Status</td>
+                        <td>Review Stars</td>
+                        <td>Add review comments</td>
                     </tr>
                 </thead>
                 <tbody></tbody>
+                <p id="one" class="default">No relevant Pet Sitting booking at the moment.</p>
             </table>
 
             <h2>Dog Walking</h2>
             <table class="dog-walking">
-                <tr class="title">
-                    <td>Order Number</td>
-                    <td>Date</td>
-                    <td>Duration</td>
-                    <td>Number of Pets</td>
-                    <td>Frequency</td>
-                    <td>Ordered at</td>
-                    <td>Status</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <td>Order No.</td>
+                        <td>Date</td>
+                        <td>Duration</td>
+                        <td>No. of Pets</td>
+                        <td>Frequency</td>
+                        <td>Ordered at</td>
+                        <td>Status</td>
+                        <td>Review Stars</td>
+                        <td>Add review comments</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <p id="two" class="default">No relevant Dog Walking booking at the moment.</p>
             </table>
-    
+
             <h2>Pets Grooming</h2>
             <table class="pets-grooming">
-                <tr class="title">
-                    <td>Order Number</td>
-                    <td>Date</td>
-                    <td>Number of Pets</td>
-                    <td>Ordered at</td>
-                    <td>Status</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <td>Order No.</td>
+                        <td>Date</td>
+                        <td>No. of Pets</td>
+                        <td>Ordered at</td>
+                        <td>Status</td>
+                        <td>Review Stars</td>
+                        <td>Add review comments</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <p id="three" class="default">No relevant Pets Grooming booking at the moment.</p>
             </table>
-    
+
             <h2>Pets Ride</h2>
             <table class="pets-ride">
-                <tr class="title">
-                    <td>Order Number</td>
-                    <td>Date</td>
-                    <td>Pickup Location</td>
-                    <td>Dropoff Location</td>
-                    <td>Number of Pets</td>
-                    <td>Ordered at</td>
-                    <td>Status</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <td>Order No.</td>
+                        <td>Date</td>
+                        <td>Pick Up</td>
+                        <td>Drop Off</td>
+                        <td>No. of Pets</td>
+                        <td>Ordered at</td>
+                        <td>Status</td>
+                        <td>Review Stars</td>
+                        <td>Add review comments</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <p id="four" class="default">No relevant Pets Ride booking at the moment.</p>
             </table>
         </div>
 

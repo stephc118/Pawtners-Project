@@ -80,11 +80,11 @@ CREATE TABLE staff (
 -- ALTER TABLE ride
 -- DROP COLUMN username;
 
--- ALTER TABLE users
--- RENAME COLUMN id to user_id;
+-- ALTER TABLE sitting
+-- RENAME COLUMN user_id to id;
 
--- ALTER TABLE walking
--- RENAME COLUMN id to walking_order_id;
+-- ALTER TABLE ride
+-- RENAME COLUMN ride_order_id to id;
 
 -- SELECT ride.date, ride.time, ride.pickup, ride.dropoff, ride.numberofpets, users.username
 -- FROM ride
