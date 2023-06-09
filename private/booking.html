@@ -163,7 +163,7 @@
                 <input type="date" name="date" class="date">
                 <br>
                 <label for="time">Time</label>
-                <input type="time" name="time" placeholder="Time" class="time">
+                <input type="time" name="time" placeholder="Time" class="time" min="09:00" max="22:00">
                 <br>
                 <div class="input-group-wrapper frequency">
                     <label for="frequency">Frequency</label>
@@ -185,7 +185,7 @@
                     <option value="Pawtners">At Pawtners'</option>
                 </select>
                 <label for="numberOfPets">Number of Pets</label>
-                <input type="text" name="numberOfPets" placeholder="Number" class="numberOfPets">
+                <input type="number" name="numberOfPets" placeholder="Number" class="numberOfPets" min="1" max="3">
                 <br>
                 <label for="district">District</label>
                 <input type="text" name="district" placeholder="District" class="district">
@@ -204,10 +204,10 @@
         <div class="booking-form walking">
             <form method="post">
                 <label for="date">Date</label>
-                <input type="date" name="date">
+                <input type="date" name="date" class="date">
                 <br>
                 <label for="time">Time</label>
-                <input type="time" name="time" placeholder="Time">
+                <input type="time" name="time" placeholder="Time" class="time" min="09:00" max="20:00">
                 <br>
                 <div class="input-group-wrapper frequency">
                     <label for="frequency">Frequency</label>
@@ -224,7 +224,7 @@
                 </div>
                 <div class="input-group-wrapper duration">
                     <label for="duration">Duration</label>
-                    <select name="duration">
+                    <select name="duration" class="duration">
                         <option value="">Duration</option>
                         <option value="15" data-duration="short">15 minutes</option>
                         <option value="30" data-duration="short">30 minutes</option>
@@ -233,7 +233,7 @@
                     </select>
                 </div>
                 <label for="numberOfPets">Number of Pets</label>
-                <input type="text" name="numberOfPets" placeholder="Number" class="numberOfPets">
+                <input type="number" name="numberOfPets" placeholder="Number" class="numberOfPets" min="1" max="3">
                 <br>
                 <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation and payment.</p>
                 <button type="submit" id="send-btn">Send</button>
@@ -250,10 +250,10 @@
                 <input type="date" name="date" class="date">
                 <br>
                 <label for="time">Time</label>
-                <input type="time" name="time" placeholder="Time" class="time">
+                <input type="time" name="time" placeholder="Time" class="time" min="09:00" max="20:00">
                 <br>
                 <label for="numberOfPets">Number of Pets</label>
-                <input type="text" name="numberOfPets" placeholder="Number" class="numberOfPets">
+                <input type="number" name="numberOfPets" placeholder="Number" class="numberOfPets" min="1" max="3">
                 <br>
                 <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation and payment.</p>
                 <button type="submit" id="send-btn">Send</button>
@@ -270,7 +270,7 @@
                 <input type="date" name="date" class="date">
                 <br>
                 <label for="time">Time</label>
-                <input type="time" name="time" placeholder="Time" class="time">
+                <input type="time" name="time" placeholder="Time" class="time" min="09:00" max="20:00">
                 <br>
                 <label for="pickup">Pick up point</label>
                 <input type="text" name="pickup" placeholder="Location" class="pickup">
@@ -279,7 +279,7 @@
                 <input type="text" name="dropoff" placeholder="Location" class="dropoff">
                 <br>
                 <label for="numberOfPets">Number of Pets</label>
-                <input type="text" name="numberOfPets" placeholder="Number" class="numberOfPets">
+                <input type="number" name="numberOfPets" placeholder="Number" class="numberOfPets" min="1" max="3">
                 <br>
                 <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation and payment.</p>
                 <button type="submit" id="send-btn">Send</button>

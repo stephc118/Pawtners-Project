@@ -52,7 +52,6 @@ for (const card of planCards){
         bookingForm.classList.add("selected");
         bookingForm.scrollIntoView({behavior: 'smooth', block: 'nearest'});
 
-        
         // form custom input handling
         //BUG: required custom field doesn't work on dynamic form
         const clickedPlanDiv = event.target.closest(".card");
@@ -67,7 +66,6 @@ for (const card of planCards){
             }
         }
 
-
         const durationEle = document.querySelector(`.booking-form.${serviceSelected} .duration`);
         if (durationEle) {
             durationEle.classList.remove('short');
@@ -79,6 +77,15 @@ for (const card of planCards){
             }
         }
     })
+}
+
+// Set available booking dates to 3 months from today
+const dateEle = document.querySelectorAll(`input.date`);
+for (const date of dateEle) {
+    var today = new Date();
+    date.min = today.toLocaleDateString('en-ca');
+    today.setMonth(today.getMonth() + 2);
+    date.max = today.toLocaleDateString('en-ca');;
 }
 
 //TODO: clean form after send
@@ -141,7 +148,34 @@ const servicesBookingInfo = {
                 location: "select.location",
                 district: "input.district",
                 numberOfPets: "input.numberOfPets"
-            },
+            }
+        }
+    },
+    "walking": {
+        4: {
+            selectors: {
+                date: "input.date",
+                time: "input.time",
+                duration: "select.duration",
+                numberOfPets: "input.numberOfPets"
+            }
+        },
+        5: {
+            selectors: {
+                date: "input.date",
+                time: "input.time",
+                duration: "select.duration",
+                numberOfPets: "input.numberOfPets"
+            }
+        },
+        6: {
+            selectors: {
+                date: "input.date",
+                time: "input.time",
+                frequency: ".frequency select",
+                duration: "select.duration",
+                numberOfPets: "input.numberOfPets"
+            }
         }
     }
 }
@@ -151,12 +185,12 @@ const forms = document.querySelectorAll('.booking-form');
 for (const form of forms) {
     form.addEventListener('submit', async (event) => {
         try {
-            event.preventDefault();
+            event.preventDefault();         
     
             const selectors = servicesBookingInfo[serviceSelected][planIdSelected]
                 ? servicesBookingInfo[serviceSelected][planIdSelected].selectors
                 : servicesBookingInfo[serviceSelected].selectors;
-
+             
             const formData = Object.entries(selectors).reduce((acc, selector) => {
                 const [field, className] = selector;
                 

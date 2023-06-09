@@ -4,7 +4,12 @@ const bookingRoutes = express.Router();
 
 bookingRoutes.post("/ride", async (req, res) => {
     try {
-        if ( !req.body.date || !req.body.time || !req.body.pickup || !req.body.dropoff || !req.body.numberOfPets ) {
+        if ( !req.body.date 
+            || !req.body.time 
+            || !req.body.pickup 
+            || !req.body.dropoff 
+            || !req.body.numberOfPets 
+        ) {
             throw new Error('Please fill in all the fields.');
         }
 
@@ -16,16 +21,14 @@ bookingRoutes.post("/ride", async (req, res) => {
         const numberOfPets = req.body.numberOfPets;
         const userId = req.session.user.id;
 
-        if ( date && time && pickUp && dropOff && numberOfPets && userId ) {
-            const newRide = 'INSERT INTO ride(date, time, pickup, dropoff, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-            const inputRide = [date, time, pickUp, dropOff, numberOfPets, userId]
-            const bookRide = await client.query(newRide, inputRide);
-            if (bookRide.rows.length) {
-                res.sendStatus(200);
-            } else {
-                res.sendStatus(400);
-                throw new Error('Booking failed, please try again');
-            }
+        const newRide = 'INSERT INTO ride(date, time, pickup, dropoff, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+        const inputRide = [date, time, pickUp, dropOff, numberOfPets, userId]
+        const bookRide = await client.query(newRide, inputRide);
+        if (bookRide.rows.length) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(400);
+            throw new Error('Booking failed, please try again');
         }
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -43,17 +46,15 @@ bookingRoutes.post("/grooming", async (req, res) => {
         const time = req.body.time;
         const numberOfPets = req.body.numberOfPets;
         const userId = req.session.user.id;
-        
-        if ( date && time && numberOfPets && userId) {
-            const newGrooming = 'INSERT INTO grooming(date, time, numberofpets, user_id) VALUES($1, $2, $3, $4) RETURNING *';
-            const inputGrooming = [date, time, numberOfPets, userId]
-            const bookGrooming = await client.query(newGrooming, inputGrooming);
-            if (bookGrooming.rows.length) {
-                res.sendStatus(200);
-            } else {
-                res.sendStatus(400);
-                throw new Error('Booking failed, please try again');
-            }
+    
+        const newGrooming = 'INSERT INTO grooming(date, time, numberofpets, user_id) VALUES($1, $2, $3, $4) RETURNING *';
+        const inputGrooming = [date, time, numberOfPets, userId]
+        const bookGrooming = await client.query(newGrooming, inputGrooming);
+        if (bookGrooming.rows.length) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(400);
+            throw new Error('Booking failed, please try again');
         }
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -103,21 +104,37 @@ bookingRoutes.post("/sitting", async (req, res) => {
 
 bookingRoutes.post("/walking", async (req, res) => {
     try {
+        const planId = req.query.plan_id;
+
+        if ( planId === 6 ) {
+            if (!req.body.frequency) throw new Error('Missing field');
+        }
+
+        if (!req.body.date
+            || !req.body.time
+            || !req.body.duration
+            || !req.body.numberOfPets
+        ) {
+            throw new Error('Missing field');
+        }
+
         const client = req.client;
         const date = req.body.date;
         const time = req.body.time;
-        const frequency = req.body.frequency;
+        const frequency = req.body?.frequency || null;
         const duration = req.body.duration;
-        const numberOfPets = req.body.number;
+        const numberOfPets = req.body.numberOfPets;
         const userId = req.session.user.id;
-
 
         const newWalking = 'INSERT INTO walking(date, time, frequency, duration, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
         const inputWalking = [date, time, frequency, duration, numberOfPets, userId]
         const bookWalking = await client.query(newWalking, inputWalking);
-        console.log(bookWalking.rows[0]);
-        res.redirect('/success.html')
-
+        if (bookWalking.rows.length) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(400);
+            throw new Error('Booking failed, please try again');
+        }
     } catch (err) {
         console.log(err);
     }
