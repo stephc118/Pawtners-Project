@@ -59,10 +59,10 @@ const grant = require('grant');
             const foundUser = await client.query(`SELECT * FROM users WHERE email = $1`, [email]);
 
             if (foundUser.rows.length) {
-                const { user_id, username, password: passwordInDB } = foundUser.rows[0];
+                const { id, username, password: passwordInDB } = foundUser.rows[0];
                 const match = await bcrypt.compare(password, passwordInDB);
                 if (match) {
-                    req.session.user = { id: user_id };
+                    req.session.user = { id: id };
                     res.cookie('username', username);
                     res.sendStatus(200);
 
@@ -121,7 +121,7 @@ const grant = require('grant');
             //Add user id in our session
             if (user) {
                 req.session.user = {
-                    id: user.user_id,
+                    id: user.id,
                     username: user.username
                 };
                 res.cookie('username', user.username);
@@ -152,7 +152,7 @@ const grant = require('grant');
                 const register = await client.query(newUser, input);
 
                 if (register.rows.length) {
-                    req.session.user = { id: register.rows[0].user_id };
+                    req.session.user = { id: register.rows[0].id };
                     res.cookie('username', register.rows[0].username);
                     res.sendStatus(200);
 
@@ -184,19 +184,19 @@ const grant = require('grant');
         })
     });
 
+    // TODO: field checking + login checking for form
     /********************Pets Ride Form***************************/
 
     app.post("/ride-booking", async (req, res) => {
         try {
             const date = req.body.date;
-            const time = req.body.time;
             const pickUp = req.body.pickup;
             const dropOff = req.body.dropoff;
             const numberOfPets = req.body.number;
             const userId = req.session.user.id;
 
-            const newRide = 'INSERT INTO ride(date, time, pickup, dropoff, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-            const inputRide = [date, time, pickUp, dropOff, numberOfPets, userId]
+            const newRide = 'INSERT INTO ride(date, pickup, dropoff, numberofpets, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *';
+            const inputRide = [date, pickUp, dropOff, numberOfPets, userId]
             const bookRide = await client.query(newRide, inputRide);
             res.redirect('/success.html')
 
@@ -210,12 +210,11 @@ const grant = require('grant');
     app.post("/grooming-booking", async (req, res) => {
         try {
             const date = req.body.date;
-            const time = req.body.time;
             const numberOfPets = req.body.number;
             const userId = req.session.user.id;
 
-            const newGrooming = 'INSERT INTO grooming(date, time, numberofpets, user_id) VALUES($1, $2, $3, $4) RETURNING *';
-            const inputGrooming = [date, time, numberOfPets, userId]
+            const newGrooming = 'INSERT INTO grooming(date, numberofpets, user_id) VALUES($1, $2, $3) RETURNING *';
+            const inputGrooming = [date, numberOfPets, userId]
             const bookGrooming = await client.query(newGrooming, inputGrooming);
             res.redirect('/success.html')
 
@@ -229,15 +228,14 @@ const grant = require('grant');
     app.post("/sitting-booking", async (req, res) => {
         try {
             const date = req.body.date;
-            const time = req.body.time;
             const frequency = req.body.frequency;
             const location = req.body.location;
             const numberOfPets = req.body.number;
             const district = req.body.district;
             const userId = req.session.user.id;
 
-            const newSitting = 'INSERT INTO sitting (date, time, frequency, location, numberofpets, district, user_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-            const inputSitting = [date, time, frequency, location, numberOfPets, district, userId]
+            const newSitting = 'INSERT INTO sitting (date, frequency, location, numberofpets, district, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+            const inputSitting = [date, frequency, location, numberOfPets, district, userId]
             const bookSitting = await client.query(newSitting, inputSitting);
             res.redirect('/success.html')
 
@@ -251,15 +249,14 @@ const grant = require('grant');
     app.post("/walking-booking", async (req, res) => {
         try {
             const date = req.body.date;
-            const time = req.body.time;
             const frequency = req.body.frequency;
             const duration = req.body.duration;
             const numberOfPets = req.body.number;
             const userId = req.session.user.id;
 
 
-            const newWalking = 'INSERT INTO walking(date, time, frequency, duration, numberofpets, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-            const inputWalking = [date, time, frequency, duration, numberOfPets, userId]
+            const newWalking = 'INSERT INTO walking(date, frequency, duration, numberofpets, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *';
+            const inputWalking = [date, frequency, duration, numberOfPets, userId]
             const bookWalking = await client.query(newWalking, inputWalking);
             res.redirect('/success.html')
 
@@ -304,29 +301,35 @@ const grant = require('grant');
             const sitting = await client.query('SELECT * from sitting where user_id = $1', [userId]);
             const grooming = await client.query('SELECT * from grooming where user_id = $1', [userId]);
             const walking = await client.query('SELECT * from walking where user_id = $1', [userId]);
-            if (ride.rows.length || sitting.rows.length || grooming.rows.length || walking.rows.length) {
-                res.json({orderRide: ride.rows, 
-                    orderSitting: sitting.rows, 
-                    orderGrooming: grooming.rows,
-                    orderWalking: walking.rows});
 
-                    // const booking = await client.query (
-                    //     ` 
-                    //         WITH sitting as ('SELECT * from ride where user_id = $1', [userId]),
-                    //         walking as ('SELECT * from walking where user_id = $1', [userId]),
-                    //         grooming as ('SELECT * from grooming where user_id = $1', [userId]),
-                    //         ride as ('SELECT * from ride where user_id = $1', [userId])
-                    //     `
-                    // )
-        
-                    // if (booking.rows.length) {
-                    //     res.json ({booking: booking.rows});
-                    // } else {
-                    //     res.json ({booking: []});
-                    // }
-            } else {
-                res.json({order: []});
+            if (!ride || !sitting || !grooming || !walking) {
+                throw new Error('unable to get booking history from db');
             }
+
+            res.json({
+                orders: {
+                    ride: ride.rows, 
+                    sitting: sitting.rows, 
+                    grooming: grooming.rows,
+                    walking: walking.rows
+                },
+                total: ride.rows.length + sitting.rows.length + grooming.rows.length + walking.rows.length
+            });
+
+            // const booking = await client.query (
+            //     ` 
+            //         WITH sitting as ('SELECT * from ride where user_id = $1', [userId]),
+            //         walking as ('SELECT * from walking where user_id = $1', [userId]),
+            //         grooming as ('SELECT * from grooming where user_id = $1', [userId]),
+            //         ride as ('SELECT * from ride where user_id = $1', [userId])
+            //     `
+            // )
+
+            // if (booking.rows.length) {
+            //     res.json ({booking: booking.rows});
+            // } else {
+            //     res.json ({booking: []});
+            // }
         } catch (err) {
             console.log(err);
         }

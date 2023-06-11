@@ -60,19 +60,79 @@
     margin: 0;
 }
 
-#table {
-    margin: 50px auto 200px;
+.tables {
+    margin: 50px 100px 150px;
     color: #A18772;
     display: none;
+    flex-direction: column;
+}
+
+.tables h2{
+    color: #56493E;
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 td {
-    padding: 5px 30px;
+    padding: 5px 20px;
 }
 
-#subtitle {
-    font-size: 20px;
+thead {
+    font-size: 16px;
     font-weight: bold;
+    background-color: #a29284;
+    color: #ffffff;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+select {
+    width: 110px;
+    height: 30px;
+    border: solid 2px #c2ae9d;
+    border-radius: 5px;
+    color: #56493E;
+}
+
+select:focus,
+textarea:focus {
+    outline-color: #56493E;
+}
+
+textarea {
+    resize: none;
+    border: solid 2px #c2ae9d;
+    border-radius: 5px;
+    font-family: 'Manrope', sans-serif;
+    color: #56493E;
+    width: 130px;
+}
+
+.tables button {
+    background-color: #A18772;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: absolute;
+    margin: 10px 5px;
+    font-family: 'Manrope', sans-serif; 
+}
+
+button:hover {
+    background-color: #c2ae9d;
+}
+
+.no-booking {
+    display: none;
 }
 
 .no-booking-content {
