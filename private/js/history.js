@@ -31,7 +31,7 @@ var spinner = document.querySelector("#load");
         tables.style.display = 'flex';
 
         if (sitting.length) {
-            const tableBody = document.querySelector("table.pet-sitting tbody");          
+            const tableBody = document.querySelector(".pet-sitting table tbody");
             for (const order of sitting) {
                 console.log(order);
                 const { id, date, location, district, numberofpets, frequency, created_ts } = order;
@@ -45,29 +45,27 @@ var spinner = document.querySelector("#load");
                     <td>${frequency !== null ? frequency : "-"}</td>
                     <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                     <td>Pending</td>
-                    <form method="POST">
-                        <td><select name="stars" required>
-                            <option value="">No. of Stars</option>
-                            <option value="5">5 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="2">2 Stars</option>
-                            <option value="1">1 Star</option>
-                        </select>
-                        <td><textarea name="review" maxlength="200" required></textarea><button type="submit">Submit</button></td>
-                    </form>
+                    <td class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </td> 
+
                 `;
                 tableBody.appendChild(row);
             }
-        } else if (!sitting.length) {
-                const tableHead = document.querySelector('.pet-sitting thead');
-                const defaultMessage = document.getElementById('one');
-                tableHead.style.display = 'none';
-                defaultMessage.style.display = 'block';
+        } else {
+            const table = document.querySelector('.pet-sitting table');
+            table.style.display = 'none';
+
+            const noBookingMessage = document.querySelector('.pet-sitting .no-booking');
+            noBookingMessage.style.display = 'initial';
         }
 
         if (walking.length) {
-            const tableBody = document.querySelector("table.dog-walking tbody");
+            const tableBody = document.querySelector(".dog-walking table tbody");
             for (const order of walking) {
                 const { id, date, duration, numberofpets, frequency, created_ts } = order;
 
@@ -77,31 +75,29 @@ var spinner = document.querySelector("#load");
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
                     <td>${duration}</td>
                     <td>${numberofpets}</td>
-                    <td>${frequency !== null ? frequency : "-"}</td>
+                    <td>${frequency ? frequency : "-"}</td>
                     <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                     <td>Pending</td>
-                    <form method="POST">
-                        <td><select name="stars" required>
-                            <option value="">No. of Stars</option>
-                            <option value="5">5 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="2">2 Stars</option>
-                            <option value="1">1 Star</option>
-                        </select>
-                        <td><textarea name="review" maxlength="200" required></textarea><button type="submit">Submit</button></td>
-                    </form>
+                    <td class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </td> 
                 `;
                 tableBody.appendChild(row);
             }
-        } else if (!walking.length) {
-            const tableHead = document.querySelector('.dog-walking thead');
-            const defaultMessage = document.getElementById('two');
-            tableHead.style.display = 'none';
-            defaultMessage.style.display = 'block';
+        } else {
+            const table = document.querySelector('.dog-walking table');
+            table.style.display = 'none';
+
+            const noBookingMessage = document.querySelector('.dog-walking .no-booking');
+            noBookingMessage.style.display = 'initial';
         }
+
         if (grooming.length) {
-            const tableBody = document.querySelector("table.pets-grooming tbody");
+            const tableBody = document.querySelector(".pets-grooming table tbody");
             for (const order of grooming) {
                 const { id, date, numberofpets, created_ts } = order;
 
@@ -112,29 +108,26 @@ var spinner = document.querySelector("#load");
                     <td>${numberofpets}</td>
                     <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                     <td>Pending</td>
-                    <form method="POST">
-                        <td><select name="stars" required>
-                            <option value="">No. of Stars</option>
-                            <option value="5">5 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="2">2 Stars</option>
-                            <option value="1">1 Star</option>
-                        </select>
-                        <td><textarea name="review" maxlength="200" required></textarea><button type="submit">Submit</button></td>
-                    </form>
+                    <td class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </td> 
                 `;
                 tableBody.appendChild(row);
             }
-        } else if (!grooming.length) {
-            const tableHead = document.querySelector('.pets-grooming thead');
-            const defaultMessage = document.getElementById('three');
-            tableHead.style.display = 'none';
-            defaultMessage.style.display = 'block';
+        } else {
+            const table = document.querySelector('.pets-grooming table');
+            table.style.display = 'none';
+
+            const noBookingMessage = document.querySelector('.pets-grooming .no-booking');
+            noBookingMessage.style.display = 'initial';
         }
        
         if (ride.length) {
-            const tableBody = document.querySelector("table.pets-ride tbody");
+            const tableBody = document.querySelector(".pets-ride table tbody");
             for (const order of ride) {
                 const { id, date, pickup, dropoff, numberofpets, created_ts } = order;
 
@@ -147,25 +140,22 @@ var spinner = document.querySelector("#load");
                     <td>${numberofpets}</td>
                     <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                     <td>Pending</td>
-                    <form method="POST">
-                        <td><select name="stars" required>
-                            <option value="">No. of Stars</option>
-                            <option value="5">5 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="2">2 Stars</option>
-                            <option value="1">1 Star</option>
-                        </select>
-                        <td><textarea name="review" maxlength="200" required></textarea><button type="submit">Submit</button></td>
-                    </form>
+                    <td class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </td>
                 `;
                 tableBody.appendChild(row);
             }
-        } else if (!ride.length) {
-            const tableHead = document.querySelector('.pets-ride thead');
-            const defaultMessage = document.getElementById('four');
-            tableHead.style.display = 'none';
-            defaultMessage.style.display = 'block';
+        } else {
+            const table = document.querySelector('.pets-ride table');
+            table.style.display = 'none';
+
+            const noBookingMessage = document.querySelector('.pets-ride .no-booking');
+            noBookingMessage.style.display = 'initial';
         }      
     } catch (err) {
         console.log(err);

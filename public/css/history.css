@@ -13,11 +13,12 @@
 
 .tables h2{
     color: #56493E;
-    text-decoration: underline;
 }
 
 table {
     border-collapse: collapse;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 td {
@@ -25,10 +26,16 @@ td {
 }
 
 thead {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
-    background-color: #c2ae9d;
-    color: #f3f3f3;
+    background-color: #a29284;
+    color: #ffffff;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
 }
 
 select {
@@ -68,7 +75,7 @@ button:hover {
     background-color: #c2ae9d;
 }
 
-.default {
+.no-booking {
     display: none;
 }
 
