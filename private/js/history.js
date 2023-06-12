@@ -24,7 +24,7 @@ var spinner = document.querySelector("#load");
         }
 
         // Show Profile
-        const {username, user_id, email} = jsonProfile.profile;
+        const {username, id, email} = jsonProfile.profile;
         const leftContainer = document.querySelector('.left');
         const rightContainer = document.querySelector('.right');
 
@@ -32,7 +32,7 @@ var spinner = document.querySelector("#load");
         profileEle.className = 'profile-element';
         profileEle.innerHTML = `
             <p><strong>Username:</strong> ${username}</p>
-            <p><strong>User ID:</strong> ${user_id}</p>
+            <p><strong>User ID:</strong> ${id}</p>
             <p><strong>Email:</strong> ${email}</p>
         `
         leftContainer.append(profileEle);
@@ -46,6 +46,7 @@ var spinner = document.querySelector("#load");
         `
         rightContainer.append(imageEle);
 
+        // Show booking history tables
         spinner.style.display = 'none';
         const { sitting, walking, grooming, ride} = response.orders;
 
@@ -60,7 +61,6 @@ var spinner = document.querySelector("#load");
         if (sitting.length) {
             const tableBody = document.querySelector(".pet-sitting table tbody");
             for (const order of sitting) {
-                console.log(order);
                 const { id, date, location, district, numberofpets, frequency, created_ts } = order;
 
                 const row = document.createElement('tr');

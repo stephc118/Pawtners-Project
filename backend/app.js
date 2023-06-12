@@ -283,7 +283,7 @@ const grant = require('grant');
     app.get('/profile', async (req, res) => {
         try {
             const userId = req.session.user.id;  
-            const profile = await client.query (`SELECT * FROM users where user_id = $1`, [userId]);
+            const profile = await client.query (`SELECT * FROM users where id = $1`, [userId]);
             if (profile.rows.length) {
                 res.json({profile: profile.rows[0]});
             } else {
