@@ -78,10 +78,15 @@ var spinner = document.querySelector("#load");
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
-                    </td> 
-
+                    </td>
                 `;
                 tableBody.appendChild(row);
+                // const starContainers = document.querySelectorAll('.pet-sitting .stars');
+                // for ( let i = 0; i < starContainers.length; i++ ) {
+                //     const stars = starContainers[i].element;
+                //     rating(stars);
+                // }
+             
             }
         } else {
             const table = document.querySelector('.pet-sitting table');
@@ -114,6 +119,10 @@ var spinner = document.querySelector("#load");
                     </td> 
                 `;
                 tableBody.appendChild(row);
+
+                const stars = document.querySelectorAll('.dog-walking .stars i');
+              
+                rating(stars);
             }
         } else {
             const table = document.querySelector('.dog-walking table');
@@ -144,6 +153,8 @@ var spinner = document.querySelector("#load");
                     </td> 
                 `;
                 tableBody.appendChild(row);
+                const stars = document.querySelectorAll('.pets-grooming .stars i');
+                rating(stars);
             }
         } else {
             const table = document.querySelector('.pets-grooming table');
@@ -176,6 +187,8 @@ var spinner = document.querySelector("#load");
                     </td>
                 `;
                 tableBody.appendChild(row);
+                const stars = document.querySelectorAll('.pets-ride .stars i');
+                rating(stars);
             }
         } else {
             const table = document.querySelector('.pets-ride table');
@@ -201,5 +214,32 @@ function capitalize(str){
         return capitalizedWords.join(" ");
     } else {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+}
+
+function rating(stars) {
+    stars.forEach((star, index1) => {
+        star.addEventListener('click', () => {
+        stars.forEach((star, index2) => {
+            index1 >= index2 ? star.classList.add('active'): star.classList.remove('active');
+        })
+    })
+    })
+}
+
+// Show Pop-up
+const openPopUpBtn = document.querySelector('.show-btn');
+const overlay = document.querySelector('.popup-overlay');
+
+const showOverlay = () => {
+    overlay.style.display = 'flex';
+}
+
+openPopUpBtn.addEventListener('click', showOverlay);
+
+// Close Pop-up
+window.onclick = function (event) {
+    if (event.target == overlay) {
+        overlay.style.display = 'none';
     }
 }

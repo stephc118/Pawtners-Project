@@ -1,3 +1,82 @@
+/********************POP-UP*********************/
+
+.popup-overlay {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: #000000b3;
+    /* display: flex; */
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    max-width: 600px;
+    width: 100%;
+    background: white;
+    height: 500px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: popup 1s ease-in-out;
+}
+
+@keyframes popup {
+    0%{
+      transform: scale(0.4);
+    }
+    50%{
+      transform: scale(1.2);
+    }
+    100%{
+      transform: scale(1);
+    }
+
+  }
+
+.heading {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.stars-reviews p {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 30px;
+}
+
+.stars-reviews textarea {
+    resize: none;
+    height: 200px;
+    width: 300px;
+    border: solid 2px #c2ae9d;
+    border-radius: 5px;
+    font-family: 'Manrope', sans-serif;
+    color: #56493E;
+}
+.stars-reviews textarea:focus {
+    outline-color: #56493E;
+}
+
+.submit-btn {
+    border: none;
+    border-radius: 5px;
+    padding: 15px 40px;
+    background-color: #56493E;
+    color: white;
+    font-family: 'Manrope', sans-serif;
+    font-size: 20px;
+    margin: 15px auto;
+}
+
+.submit-btn:hover {
+    background-color: #c2ae9d;
+}
+
 /*********************Profile*******************/
 
 #profile {
@@ -94,41 +173,13 @@ thead {
     gap: 5px;
 }
 
-select {
-    width: 110px;
-    height: 30px;
-    border: solid 2px #c2ae9d;
-    border-radius: 5px;
-    color: #56493E;
+.stars i {
+    color: #cac5c5;
+    cursor: pointer;
 }
 
-select:focus,
-textarea:focus {
-    outline-color: #56493E;
-}
-
-textarea {
-    resize: none;
-    border: solid 2px #c2ae9d;
-    border-radius: 5px;
-    font-family: 'Manrope', sans-serif;
-    color: #56493E;
-    width: 130px;
-}
-
-.tables button {
-    background-color: #A18772;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    position: absolute;
-    margin: 10px 5px;
-    font-family: 'Manrope', sans-serif; 
-}
-
-button:hover {
-    background-color: #c2ae9d;
+.stars .active {
+    color: #f1d133;
 }
 
 .no-booking {
