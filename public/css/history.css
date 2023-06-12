@@ -3,7 +3,7 @@
 .popup-overlay {
     width: 100%;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     background: #000000b3;
     /* display: flex; */
     display: none;
@@ -34,19 +34,29 @@
     100%{
       transform: scale(1);
     }
-
   }
 
 .heading {
     font-size: 25px;
     font-weight: bold;
+    padding-top: 50px;
 }
 
-.stars-reviews p {
+#rating textarea,
+#rating .submit-btn {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 15px;
+}
+
+.star-wrapper {
+    text-align: center;
+    padding: 10px 0 20px;
+}
+
+#rating i {
     font-size: 30px;
+    margin: 5px;
 }
 
 .stars-reviews textarea {
@@ -58,6 +68,7 @@
     font-family: 'Manrope', sans-serif;
     color: #56493E;
 }
+
 .stars-reviews textarea:focus {
     outline-color: #56493E;
 }
@@ -70,13 +81,25 @@
     color: white;
     font-family: 'Manrope', sans-serif;
     font-size: 20px;
-    margin: 15px auto;
+    margin: 30px auto;
 }
 
 .submit-btn:hover {
     background-color: #c2ae9d;
 }
 
+.star-input {
+    display: none;
+}
+
+.star {
+    color: gold;
+    cursor: pointer;
+}
+
+.star-input:checked + .star ~ .star {
+    color: #d4d4d4;
+}
 /*********************Profile*******************/
 
 #profile {
@@ -174,7 +197,7 @@ thead {
 }
 
 .stars i {
-    color: #cac5c5;
+    color: #d4d4d4;
     cursor: pointer;
 }
 

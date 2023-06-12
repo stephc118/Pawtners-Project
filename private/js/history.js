@@ -222,20 +222,21 @@ function rating(stars) {
         star.addEventListener('click', () => {
         stars.forEach((star, index2) => {
             index1 >= index2 ? star.classList.add('active'): star.classList.remove('active');
+            showOverlay()
         })
     })
     })
 }
 
 // Show Pop-up
-const openPopUpBtn = document.querySelector('.show-btn');
+// const openPopUpBtn = document.querySelector('.show-btn');
 const overlay = document.querySelector('.popup-overlay');
 
 const showOverlay = () => {
     overlay.style.display = 'flex';
 }
 
-openPopUpBtn.addEventListener('click', showOverlay);
+// openPopUpBtn.addEventListener('click', showOverlay);
 
 // Close Pop-up
 window.onclick = function (event) {
@@ -243,3 +244,13 @@ window.onclick = function (event) {
         overlay.style.display = 'none';
     }
 }
+
+const form = document.getElementById('rating');
+form.addEventListener('submit', event => {
+    const formData = new FormData(event.target);
+    const rating = formData.get('rating');
+    const text = formData.get('text');
+    console.log(rating);
+    console.log(text);
+    event.preventDefault();
+});

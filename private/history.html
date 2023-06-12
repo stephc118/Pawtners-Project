@@ -40,21 +40,26 @@
                 Your opinion matters to us!
             </div>
             <div class="stars-reviews">
-                <p>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </p>
-                <textarea></textarea>
-            </div>
-            <div>
-                <button class="submit-btn" type="submit">Submit</button>
+                <form id="rating">
+                    <div class="star-wrapper">
+                        <input type="radio" class="star-input" name="rating" id="star-1" value="1">
+                        <label for="star-1" class="star"><i class="fas fa-star"></i></label>
+                        <input type="radio" class="star-input" name="rating" id="star-2" value="2">
+                        <label for="star-2" class="star"><i class="fas fa-star"></i></label>
+                        <input type="radio" class="star-input" name="rating" id="star-3" value="3">
+                        <label for="star-3" class="star"><i class="fas fa-star"></i></label>
+                        <input type="radio" class="star-input" name="rating" id="star-4" value="4">
+                        <label for="star-4" class="star"><i class="fas fa-star"></i></label>
+                        <input type="radio" class="star-input" name="rating" id="star-5" value="5">
+                        <label for="star-5" class="star"><i class="fas fa-star"></i></label>
+                    </div>
+                    <textarea name="text"></textarea>
+                    <button class="submit-btn" type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>
-    <button class="show-btn">Show Pop Up</button>
+    <!-- <button class="show-btn">Show Pop Up</button> -->
 
     <!-- Profile -->
     <div id="profile">
