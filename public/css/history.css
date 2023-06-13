@@ -15,7 +15,7 @@
     max-width: 600px;
     width: 100%;
     background: white;
-    height: 500px;
+    height: 550px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -60,6 +60,7 @@
 }
 
 .stars-reviews textarea {
+    margin: auto;
     resize: none;
     height: 200px;
     width: 300px;
@@ -99,6 +100,12 @@
 
 .star-input:checked + .star ~ .star {
     color: #d4d4d4;
+}
+
+.error-container {
+    display: none;
+    color: #CD3232;
+    font-weight: bold;
 }
 /*********************Profile*******************/
 
@@ -196,13 +203,23 @@ thead {
     gap: 5px;
 }
 
-.stars i {
+.stars .fa-star {
     color: #d4d4d4;
     cursor: pointer;
 }
 
-.stars .active {
+/* .stars {
+    display: flex;
+    flex-direction: row-reverse;
+} */
+
+.stars .fa-star.active {
     color: #f1d133;
+}
+
+.stars .fa-star:hover, .stars .fa-star ~ .stars .fa-star:hover  {
+    color: #f1d133;
+    transition: .3s;
 }
 
 .no-booking {

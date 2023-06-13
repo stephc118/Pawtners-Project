@@ -64,6 +64,7 @@ var spinner = document.querySelector("#load");
                 const { id, date, location, district, numberofpets, frequency, created_ts } = order;
 
                 const row = document.createElement('tr');
+                row.setAttribute("data-booking-id", id);
                 row.innerHTML = `
                     <td>${id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
@@ -73,20 +74,17 @@ var spinner = document.querySelector("#load");
                     <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                     <td>Pending</td>
                     <td class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
                     </td>
                 `;
                 tableBody.appendChild(row);
-                // const starContainers = document.querySelectorAll('.pet-sitting .stars');
-                // for ( let i = 0; i < starContainers.length; i++ ) {
-                //     const stars = starContainers[i].element;
-                //     rating(stars);
-                // }
-             
+                
+                const stars = document.querySelectorAll(`.pet-sitting tr[data-booking-id="${id}"] .stars i`);
+                rating(stars);
             }
         } else {
             const table = document.querySelector('.pet-sitting table');
@@ -102,6 +100,7 @@ var spinner = document.querySelector("#load");
                 const { id, date, duration, numberofpets, frequency, created_ts } = order;
 
                 const row = document.createElement('tr');
+                row.setAttribute("data-booking-id", id);
                 row.innerHTML = `
                     <td>${id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
@@ -111,17 +110,16 @@ var spinner = document.querySelector("#load");
                     <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                     <td>Pending</td>
                     <td class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
                     </td> 
                 `;
                 tableBody.appendChild(row);
 
-                const stars = document.querySelectorAll('.dog-walking .stars i');
-              
+                const stars = document.querySelectorAll(`.dog-walking tr[data-booking-id="${id}"] .stars i`);
                 rating(stars);
             }
         } else {
@@ -138,6 +136,7 @@ var spinner = document.querySelector("#load");
                 const { id, date, numberofpets, created_ts } = order;
 
                 const row = document.createElement('tr');
+                row.setAttribute("data-booking-id", id);
                 row.innerHTML = `
                     <td>${id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
@@ -145,15 +144,16 @@ var spinner = document.querySelector("#load");
                     <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                     <td>Pending</td>
                     <td class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
                     </td> 
                 `;
                 tableBody.appendChild(row);
-                const stars = document.querySelectorAll('.pets-grooming .stars i');
+               
+                const stars = document.querySelectorAll(`.pets-grooming tr[data-booking-id="${id}"] .stars i`);
                 rating(stars);
             }
         } else {
@@ -170,6 +170,7 @@ var spinner = document.querySelector("#load");
                 const { id, date, pickup, dropoff, numberofpets, created_ts } = order;
 
                 const row = document.createElement('tr');
+                row.setAttribute("data-booking-id", id);
                 row.innerHTML = `
                     <td>${id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
@@ -179,15 +180,16 @@ var spinner = document.querySelector("#load");
                     <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
                     <td>Pending</td>
                     <td class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
+                        <i class="fa-solid fa-star star"></i>
                     </td>
                 `;
                 tableBody.appendChild(row);
-                const stars = document.querySelectorAll('.pets-ride .stars i');
+                
+                const stars = document.querySelectorAll(`.pets-ride tr[data-booking-id="${id}"] .stars i`);
                 rating(stars);
             }
         } else {
@@ -229,14 +231,10 @@ function rating(stars) {
 }
 
 // Show Pop-up
-// const openPopUpBtn = document.querySelector('.show-btn');
 const overlay = document.querySelector('.popup-overlay');
-
 const showOverlay = () => {
     overlay.style.display = 'flex';
 }
-
-// openPopUpBtn.addEventListener('click', showOverlay);
 
 // Close Pop-up
 window.onclick = function (event) {
@@ -246,11 +244,64 @@ window.onclick = function (event) {
 }
 
 const form = document.getElementById('rating');
-form.addEventListener('submit', event => {
-    const formData = new FormData(event.target);
-    const rating = formData.get('rating');
-    const text = formData.get('text');
-    console.log(rating);
-    console.log(text);
-    event.preventDefault();
-});
+const errorContainer = document.querySelector('.error-container');
+// const element = document.querySelector('#rating');
+// let service = element.dataset.service;
+
+form.addEventListener('submit', async(event) => {
+    
+    try {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        formData.append('username', getCookie('username'));
+        formData.append('service', 'dog-walking')
+        const username = formData.get('username');
+        const service = formData.get('service');
+        const rating = formData.get('rating');
+        const text = formData.get('text');
+
+        console.log(username);
+        console.log(service);
+        console.log(rating);
+        console.log(text);
+
+        // Check if all fields are filled
+        if ( !rating || !text ) {
+            errorContainer.style.display = 'initial';
+            return;
+        }
+
+        const reviewData = {
+            username: username,
+            service: service,
+            rating: rating,
+            text: text
+        }
+        
+        console.log(reviewData);
+
+        const respReview = await fetch ('/reviews', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reviewData)
+        })
+
+        if (respReview.status === 200) {
+            window.location = '/history.html'
+        } else {
+            alert('Failed to submit review, please try again.')
+        }
+    } catch (err) {
+    console.log(err);
+    }   
+})
+
+function getCookie(key){
+    const regex = new RegExp('(?:^|;\s*)' + key + '=([^;]*)');
+    const match = regex.exec(document.cookie);
+
+    return match && match[1] ? decodeURIComponent(match[1]) : null;
+}

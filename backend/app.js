@@ -384,6 +384,24 @@ const grant = require('grant');
         }
      });
 
+     app.post('/reviews', async (req, res) => {
+        try {
+            if ( !req.body.rating || !req.body.text ) {
+                throw new Error ('Missing fields')
+            }
+            const { username, service, rating, text } = req.body;
+            
+            const postReview = await client.query(`INSERT INTO reviews (username, service, star, text) VALUES ($1, $2, $3, $4) RETURNING *`,
+            [username, service, rating, text])
+            console.log(postReview.rows);
+            if ( postReview.rows.length ) {
+                res.sendStatus(200);
+            }
+        } catch (err) {
+            console.log(err.message);
+            res.json({error: err.message}) 
+        }
+     })
     /*************************Use static file********************/
 
     app.use(express.static(path.join(__dirname, '../public/html')));
