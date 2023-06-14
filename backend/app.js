@@ -384,12 +384,14 @@ const grant = require('grant');
         }
      });
 
-     app.post('/reviews', async (req, res) => {
+     app.post('/reviews', isLoggedIn, async (req, res) => {
         try {
             if ( !req.body.rating || !req.body.text ) {
                 throw new Error ('Missing fields')
             }
-            const { username, service, rating, text } = req.body;
+
+            const username = req.session.user.username;
+            const { service, rating, text } = req.body;
             
             const postReview = await client.query(`INSERT INTO reviews (username, service, star, text) VALUES ($1, $2, $3, $4) RETURNING *`,
             [username, service, rating, text])

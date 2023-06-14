@@ -219,20 +219,40 @@ function capitalize(str){
     }
 }
 
+let serviceToBeReviewed = "";
+let starIndexSelected = 4;
+
 function rating(stars) {
-    stars.forEach((star, index1) => {
+    stars.forEach((star, currentStarIndex) => {
         star.addEventListener('click', () => {
-        stars.forEach((star, index2) => {
-            index1 >= index2 ? star.classList.add('active'): star.classList.remove('active');
-            showOverlay()
+            stars.forEach((star, index) => {
+                currentStarIndex >= index ? star.classList.add('active'): star.classList.remove('active');
+            })
+
+            starIndexSelected = currentStarIndex;
+            const clickedRow = star.closest("table");
+            serviceToBeReviewed = clickedRow.dataset.serviceName;
+            showOverlay();
         })
-    })
+        star.addEventListener('mouseenter', () => {
+            const highlightedStars = [...stars].slice(0, currentStarIndex + 1); // spread to convert NodeList to Array
+            highlightedStars.map(star => star.classList.add('hover'));
+        })
+
+        star.addEventListener('mouseleave', () => {
+            const highlightedStars = [...stars].slice(0, currentStarIndex + 1);
+            highlightedStars.map(star => star.classList.remove('hover'));
+        })
     })
 }
 
 // Show Pop-up
 const overlay = document.querySelector('.popup-overlay');
+const errorContainer = document.querySelector('.error-container');
+
 const showOverlay = () => {
+    document.querySelector(`#rating #star-${starIndexSelected + 1}`).checked = true;
+    errorContainer.style.display = 'none';
     overlay.style.display = 'flex';
 }
 
@@ -244,27 +264,14 @@ window.onclick = function (event) {
 }
 
 const form = document.getElementById('rating');
-const errorContainer = document.querySelector('.error-container');
-// const element = document.querySelector('#rating');
-// let service = element.dataset.service;
 
 form.addEventListener('submit', async(event) => {
-    
     try {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        formData.append('username', getCookie('username'));
-        formData.append('service', 'dog-walking')
-        const username = formData.get('username');
-        const service = formData.get('service');
         const rating = formData.get('rating');
         const text = formData.get('text');
-
-        console.log(username);
-        console.log(service);
-        console.log(rating);
-        console.log(text);
 
         // Check if all fields are filled
         if ( !rating || !text ) {
@@ -273,14 +280,11 @@ form.addEventListener('submit', async(event) => {
         }
 
         const reviewData = {
-            username: username,
-            service: service,
+            service: serviceToBeReviewed,
             rating: rating,
             text: text
         }
         
-        console.log(reviewData);
-
         const respReview = await fetch ('/reviews', {
             method: 'POST',
             headers: {
@@ -295,13 +299,6 @@ form.addEventListener('submit', async(event) => {
             alert('Failed to submit review, please try again.')
         }
     } catch (err) {
-    console.log(err);
+        console.log(err);
     }   
 })
-
-function getCookie(key){
-    const regex = new RegExp('(?:^|;\s*)' + key + '=([^;]*)');
-    const match = regex.exec(document.cookie);
-
-    return match && match[1] ? decodeURIComponent(match[1]) : null;
-}
