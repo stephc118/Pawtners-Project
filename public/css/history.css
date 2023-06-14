@@ -5,7 +5,8 @@
     height: 100vh;
     position: fixed;
     background: #000000b3;
-    display: none;
+    display: flex;
+    /* display: none; */
     justify-content: center;
     align-items: center;
 }
@@ -21,6 +22,7 @@
     justify-content: center;
     align-items: center;
     animation: popup 1s ease-in-out;
+    position: relative;
 }
 
 @keyframes popup {
@@ -34,6 +36,20 @@
       transform: scale(1);
     }
   }
+
+.fa-xmark {
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+}
+
+.fa-xmark:hover {
+    color: #c2ae9d;
+    transition: .3s;
+}
 
 .heading {
     font-size: 25px;

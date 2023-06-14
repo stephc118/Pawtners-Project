@@ -256,13 +256,27 @@ const showOverlay = () => {
     overlay.style.display = 'flex';
 }
 
-// Close Pop-up
-window.onclick = function (event) {
+// Close Pop-up by clicking outside Pop-up
+window.addEventListener('click', (event) => {
     if (event.target == overlay) {
         overlay.style.display = 'none';
     }
-}
+})
+// window.onclick = function (event) {
+//     if (event.target == overlay) {
+//         console.log(event.target);
+//         overlay.style.display = 'none';
+//     }
+// }
 
+// Close Pop-Up by clicking close button
+const closeBtn = document.querySelector('.fa-xmark');
+
+closeBtn.addEventListener('click', () => {
+    overlay.style.display = 'none';
+})
+
+// Fetch API to submit review form
 const form = document.getElementById('rating');
 
 form.addEventListener('submit', async(event) => {
