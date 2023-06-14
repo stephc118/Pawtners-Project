@@ -371,7 +371,12 @@ const grant = require('grant');
         try {
             const { service } = req.params;
             const { limit } = req.query;
-            const review = await client.query(`SELECT * FROM reviews where service = $1 limit $2`, [service, limit]);
+            const review = await client.query (`
+                SELECT users.username, reviews.service, reviews.star, reviews.text
+                FROM reviews
+                INNER JOIN users ON reviews.user_id=users.id
+                where service = $1 limit $2
+            `, [service, limit])
             if (review.rows.length) {
                 res.json ({review: review.rows});
         
@@ -390,12 +395,11 @@ const grant = require('grant');
                 throw new Error ('Missing fields')
             }
 
-            const username = req.session.user.username;
+            const userId = req.session.user.id;
             const { service, rating, text } = req.body;
             
-            const postReview = await client.query(`INSERT INTO reviews (username, service, star, text) VALUES ($1, $2, $3, $4) RETURNING *`,
-            [username, service, rating, text])
-            console.log(postReview.rows);
+            const postReview = await client.query(`INSERT INTO reviews (user_id, service, star, text) VALUES ($1, $2, $3, $4) RETURNING *`,
+            [userId, service, rating, text])
             if ( postReview.rows.length ) {
                 res.sendStatus(200);
             }

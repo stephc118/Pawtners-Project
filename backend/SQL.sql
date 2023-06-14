@@ -90,6 +90,16 @@ CREATE TABLE staff (
 -- FROM ride
 -- INNER JOIN users ON users.user_id=ride.user_id;
 
+SELECT users.username, reviews.service, reviews.star, reviews.text
+FROM users
+INNER JOIN reviews ON reviews.user_id=users.id;
+
+ALTER TABLE reviews
+ADD user_id INT;
+
+ALTER TABLE reviews
+DROP COLUMN username;
+
 -- INSERT INTO staff VALUES (
 --     1,
 --     'steph',
@@ -144,7 +154,7 @@ CREATE TABLE staff (
 
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
+    user_id INT references users(id),
     service TEXT NOT NULL,
     star INT NOT NULL,
     text VARCHAR(255) NOT NULL
@@ -152,7 +162,7 @@ CREATE TABLE reviews (
 
 INSERT INTO reviews VALUES(
     1,
-    'dau',
+    13,
     'pet-sitting',
     4,
     'Good Service. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
@@ -160,24 +170,24 @@ INSERT INTO reviews VALUES(
 
 INSERT INTO reviews VALUES(
     2,
-    'mung',
-    'pet-sitting',
+    9,
+    'dog-walking',
     5,
     'Very Nice. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
 );
 
 INSERT INTO reviews VALUES(
     3,
-    'bak',
-    'pet-sitting',
+    15,
+    'pets-grooming',
     5,
     'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
 );
 
 INSERT INTO reviews VALUES(
     4,
-    'morgu',
-    'dog-walking',
+    44,
+    'pets-ride',
     5,
     'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
 );
@@ -220,4 +230,22 @@ INSERT INTO reviews VALUES(
     'dog-walking',
     4,
     'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.'
+);
+
+INSERT INTO reviews VALUES(
+    10,
+    'Dau Chu',
+    'dog-walking',
+    4,
+    'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.',
+    13
+);
+
+INSERT INTO reviews VALUES(
+    11,
+    'Bak Bak',
+    'pet-sitting',
+    5,
+    'Excellent! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.',
+    9
 );

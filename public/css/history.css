@@ -5,8 +5,8 @@
     height: 100vh;
     position: fixed;
     background: #000000b3;
-    display: flex;
-    /* display: none; */
+    /* display: flex; */
+    display: none;
     justify-content: center;
     align-items: center;
 }
