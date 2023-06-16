@@ -367,6 +367,27 @@ const grant = require('grant');
 
      /*************************Reviews********************/
 
+     app.get('/reviews', async (req, res) => {
+        try {
+            const userId = req.session.user.id;
+            const review = await client.query(`
+            SELECT sitting.id, sitting.date, sitting.district, 
+            sitting.location, sitting.numberofpets, sitting.frequency, 
+            sitting.created_ts, reviews.booking_id, reviews.star, reviews.text, reviews.service
+            FROM sitting
+            INNER JOIN reviews ON reviews.booking_id = sitting.id where sitting.user_id = $1`, [userId]);
+            console.log(review.rows);
+            if (review.rows.length) {
+                res.json({review: review.rows});
+            } else {
+                res.json({review: []});
+            }
+        } catch (err) {
+              console.log(err);
+            res.json({error: err.message});
+        }
+     });
+
      app.get('/reviews/:service', async (req, res) => {
         try {
             const { service } = req.params;
@@ -377,6 +398,7 @@ const grant = require('grant');
                 INNER JOIN users ON reviews.user_id=users.id
                 where service = $1 limit $2
             `, [service, limit])
+            console.log(review.rows);
             if (review.rows.length) {
                 res.json ({review: review.rows});
         
@@ -396,10 +418,10 @@ const grant = require('grant');
             }
 
             const userId = req.session.user.id;
-            const { service, rating, text } = req.body;
+            const { bookingId, service, rating, text } = req.body;
             
-            const postReview = await client.query(`INSERT INTO reviews (user_id, service, star, text) VALUES ($1, $2, $3, $4) RETURNING *`,
-            [userId, service, rating, text])
+            const postReview = await client.query(`INSERT INTO reviews (user_id, booking_id, service, star, text) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            [userId, bookingId, service, rating, text])
             if ( postReview.rows.length ) {
                 res.sendStatus(200);
             }

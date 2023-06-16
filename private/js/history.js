@@ -17,6 +17,10 @@ var spinner = document.querySelector("#load");
         const res = await fetch('/history');
         const response = await res.json();
 
+        // Get booking reviews
+        const resReview = await fetch(`/reviews`);
+        const jsonReview = await resReview.json();
+
         clearTimeout(timeoutId); //remove spinner
 
         if (res.status !== 200) {
@@ -24,7 +28,7 @@ var spinner = document.querySelector("#load");
         }
 
         // Show Profile
-        const {username, id, email} = jsonProfile.profile;
+        const { username, id, email } = jsonProfile.profile;
         const leftContainer = document.querySelector('.left');
         const rightContainer = document.querySelector('.right');
 
@@ -48,9 +52,9 @@ var spinner = document.querySelector("#load");
 
         // Show booking history tables
         spinner.style.display = 'none';
-        const { sitting, walking, grooming, ride} = response.orders;
+        const { sitting, walking, grooming, ride } = response.orders;
 
-        if (!Object.values(response.orders).flat().length){
+        if (!Object.values(response.orders).flat().length) {
             const bookBtn = document.querySelector(".no-booking-content");
             bookBtn.style.display = 'block';
             return;
@@ -58,33 +62,65 @@ var spinner = document.querySelector("#load");
 
         tables.style.display = 'flex';
 
-        if (sitting.length) {
-            const tableBody = document.querySelector(".pet-sitting table tbody");
-            for (const order of sitting) {
-                const { id, date, location, district, numberofpets, frequency, created_ts } = order;
+        // Check if have review or not
 
-                const row = document.createElement('tr');
-                row.setAttribute("data-booking-id", id);
-                row.innerHTML = `
-                    <td>${id}</td>
-                    <td>${new Date(date).toLocaleString('en-GB')}</td>
-                    <td>At ${location}: ${capitalize(district)}</td>
-                    <td>${numberofpets}</td>
-                    <td>${frequency !== null ? frequency : "-"}</td>
-                    <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                    <td>Pending</td>
-                    <td class="stars">
-                        <i class="fa-solid fa-star star"></i>
-                        <i class="fa-solid fa-star star"></i>
-                        <i class="fa-solid fa-star star"></i>
-                        <i class="fa-solid fa-star star"></i>
-                        <i class="fa-solid fa-star star"></i>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-                
-                const stars = document.querySelectorAll(`.pet-sitting tr[data-booking-id="${id}"] .stars i`);
-                rating(stars);
+        const reviews = jsonReview.review;
+        console.log('reviews', reviews);
+        console.log('sitting', sitting);
+        if (sitting.length) {
+            if (reviews.length) {
+                const tableBody = document.querySelector(".pet-sitting table tbody");
+                for (const review of reviews) {
+                    const { booking_id, created_ts, date, frequency, location, district, numberofpets, star, text } = review;
+                    const row = document.createElement('tr');
+                    row.setAttribute("data-booking-id", booking_id);
+                    row.innerHTML = `
+                        <td>${booking_id}</td>
+                        <td>${new Date(date).toLocaleString('en-GB')}</td>
+                        <td>At ${location}: ${capitalize(district)}</td>
+                        <td>${numberofpets}</td>
+                        <td>${frequency !== null ? frequency : "-"}</td>
+                        <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
+                        <td>Fulfilled</td>
+                        <td class='submitted'>Review Submitted</td>
+                        `;
+                    tableBody.appendChild(row);
+
+                    const readReview = document.querySelector(`.pet-sitting tr[data-booking-id="${booking_id}"] td.submitted`);
+                    const reviewOverlay = document.querySelector('.review-overlay');
+                    readReview.addEventListener('click', () => {
+                        reviewOverlay.style.display = 'flex';
+                        const reviewContainer = document.querySelector('.review-container');
+                        reviewContainer.innerHTML = `You rated ${star} stars & you said: ${text}`;
+                    })
+                }
+
+                for (const order of sitting) {
+                    const tableBody = document.querySelector(".pet-sitting table tbody");
+                    const { id, date, location, district, numberofpets, frequency, created_ts } = order;
+                    const row = document.createElement('tr');
+                    row.setAttribute("data-booking-id", id);
+                    row.innerHTML = `
+                            <td>${id}</td>
+                            <td>${new Date(date).toLocaleString('en-GB')}</td>
+                            <td>At ${location}: ${capitalize(district)}</td>
+                            <td>${numberofpets}</td>
+                            <td>${frequency !== null ? frequency : "-"}</td>
+                            <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
+                            <td>Pending</td>
+                            <td class="stars">
+                                <i class="fa-solid fa-star star"></i>
+                                <i class="fa-solid fa-star star"></i>
+                                <i class="fa-solid fa-star star"></i>
+                                <i class="fa-solid fa-star star"></i>
+                                <i class="fa-solid fa-star star"></i>
+                            </td>
+                            `;
+                    tableBody.appendChild(row);
+
+                    const stars = document.querySelectorAll(`.pet-sitting tr[data-booking-id="${id}"] .stars i`);
+                    rating(stars);
+                }
             }
         } else {
             const table = document.querySelector('.pet-sitting table');
@@ -152,7 +188,7 @@ var spinner = document.querySelector("#load");
                     </td> 
                 `;
                 tableBody.appendChild(row);
-               
+
                 const stars = document.querySelectorAll(`.pets-grooming tr[data-booking-id="${id}"] .stars i`);
                 rating(stars);
             }
@@ -163,7 +199,7 @@ var spinner = document.querySelector("#load");
             const noBookingMessage = document.querySelector('.pets-grooming .no-booking');
             noBookingMessage.style.display = 'initial';
         }
-       
+
         if (ride.length) {
             const tableBody = document.querySelector(".pets-ride table tbody");
             for (const order of ride) {
@@ -188,7 +224,7 @@ var spinner = document.querySelector("#load");
                     </td>
                 `;
                 tableBody.appendChild(row);
-                
+
                 const stars = document.querySelectorAll(`.pets-ride tr[data-booking-id="${id}"] .stars i`);
                 rating(stars);
             }
@@ -198,18 +234,18 @@ var spinner = document.querySelector("#load");
 
             const noBookingMessage = document.querySelector('.pets-ride .no-booking');
             noBookingMessage.style.display = 'initial';
-        }      
+        }
     } catch (err) {
         console.log(err);
     }
 })()
 
-const loadFile = function(event) {
+const loadFile = function (event) {
     const image = document.getElementById('output');
     image.src = URL.createObjectURL(event.target.files[0]);
 }
 
-function capitalize(str){
+function capitalize(str) {
     const words = str.split(" ");
     if (words.length > 1) {
         const capitalizedWords = words.map(word => capitalize(word));
@@ -221,17 +257,21 @@ function capitalize(str){
 
 let serviceToBeReviewed = "";
 let starIndexSelected = 4;
+let bookingId;
 
 function rating(stars) {
     stars.forEach((star, currentStarIndex) => {
         star.addEventListener('click', () => {
             stars.forEach((star, index) => {
-                currentStarIndex >= index ? star.classList.add('active'): star.classList.remove('active');
+                currentStarIndex >= index ? star.classList.add('active') : star.classList.remove('active');
             })
 
             starIndexSelected = currentStarIndex;
             const clickedRow = star.closest("table");
             serviceToBeReviewed = clickedRow.dataset.serviceName;
+            const clickedOrder = star.closest('tr');
+            bookingId = clickedOrder.dataset.bookingId;
+
             showOverlay();
         })
         star.addEventListener('mouseenter', () => {
@@ -279,7 +319,7 @@ closeBtn.addEventListener('click', () => {
 // Fetch API to submit review form
 const form = document.getElementById('rating');
 
-form.addEventListener('submit', async(event) => {
+form.addEventListener('submit', async (event) => {
     try {
         event.preventDefault();
 
@@ -288,18 +328,19 @@ form.addEventListener('submit', async(event) => {
         const text = formData.get('text');
 
         // Check if all fields are filled
-        if ( !rating || !text ) {
+        if (!rating || !text) {
             errorContainer.style.display = 'initial';
             return;
         }
 
         const reviewData = {
             service: serviceToBeReviewed,
+            bookingId: bookingId,
             rating: rating,
             text: text
         }
-        
-        const respReview = await fetch ('/reviews', {
+
+        const respReview = await fetch('/reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -314,5 +355,5 @@ form.addEventListener('submit', async(event) => {
         }
     } catch (err) {
         console.log(err);
-    }   
+    }
 })

@@ -95,10 +95,18 @@ FROM users
 INNER JOIN reviews ON reviews.user_id=users.id;
 
 ALTER TABLE reviews
-ADD user_id INT;
+ADD booking_id INT NOT NULL;
 
 ALTER TABLE reviews
 DROP COLUMN username;
+
+SELECT reviews.star, reviews.text, sitting.date, sitting.location, sitting.numberofpets, sitting.frequency, sitting.created_ts
+FROM sitting
+INNER JOIN reviews ON reviews.booking_id=sitting.id;
+
+SELECT sitting.date, sitting.location, sitting.numberofpets, sitting.frequency, sitting.created_ts, reviews.star, reviews.text, reviews.service, reviews.booking_id
+FROM sitting
+INNER JOIN reviews ON reviews.user_id = sitting.user_id where service = 'pet-sitting';
 
 -- INSERT INTO staff VALUES (
 --     1,
@@ -156,6 +164,7 @@ CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     user_id INT references users(id),
     service TEXT NOT NULL,
+    booking_id INT NOT NULL,
     star INT NOT NULL,
     text VARCHAR(255) NOT NULL
 );
