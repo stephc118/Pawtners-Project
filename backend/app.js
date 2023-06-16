@@ -64,10 +64,10 @@ const { bookingRoutes } = require("./api/booking");
             const foundUser = await client.query(`SELECT * FROM users WHERE email = $1`, [email]);
 
             if (foundUser.rows.length) {
-                const { user_id, username, password: passwordInDB } = foundUser.rows[0];
+                const { id, username, password: passwordInDB } = foundUser.rows[0];
                 const match = await bcrypt.compare(password, passwordInDB);
                 if (match) {
-                    req.session.user = { id: user_id };
+                    req.session.user = { id: id };
                     res.cookie('username', username);
                     res.sendStatus(200);
 
@@ -124,7 +124,7 @@ const { bookingRoutes } = require("./api/booking");
             //Add user id in our session
             if (user) {
                 req.session.user = {
-                    id: user.user_id,
+                    id: user.id,
                     username: user.username
                 };
                 res.cookie('username', user.username);
@@ -155,7 +155,7 @@ const { bookingRoutes } = require("./api/booking");
                 const register = await client.query(newUser, input);
 
                 if (register.rows.length) {
-                    req.session.user = { id: register.rows[0].user_id };
+                    req.session.user = { id: register.rows[0].id };
                     res.cookie('username', register.rows[0].username);
                     res.sendStatus(200);
 
@@ -208,29 +208,35 @@ const { bookingRoutes } = require("./api/booking");
             const sitting = await client.query('SELECT * from sitting where user_id = $1', [userId]);
             const grooming = await client.query('SELECT * from grooming where user_id = $1', [userId]);
             const walking = await client.query('SELECT * from walking where user_id = $1', [userId]);
-            if (ride.rows.length || sitting.rows.length || grooming.rows.length || walking.rows.length) {
-                res.json({orderRide: ride.rows, 
-                    orderSitting: sitting.rows, 
-                    orderGrooming: grooming.rows,
-                    orderWalking: walking.rows});
 
-                    // const booking = await client.query (
-                    //     ` 
-                    //         WITH sitting as ('SELECT * from ride where user_id = $1', [userId]),
-                    //         walking as ('SELECT * from walking where user_id = $1', [userId]),
-                    //         grooming as ('SELECT * from grooming where user_id = $1', [userId]),
-                    //         ride as ('SELECT * from ride where user_id = $1', [userId])
-                    //     `
-                    // )
-        
-                    // if (booking.rows.length) {
-                    //     res.json ({booking: booking.rows});
-                    // } else {
-                    //     res.json ({booking: []});
-                    // }
-            } else {
-                res.json({order: []});
+            if (!ride || !sitting || !grooming || !walking) {
+                throw new Error('unable to get booking history from db');
             }
+
+            res.json({
+                orders: {
+                    ride: ride.rows, 
+                    sitting: sitting.rows, 
+                    grooming: grooming.rows,
+                    walking: walking.rows
+                },
+                total: ride.rows.length + sitting.rows.length + grooming.rows.length + walking.rows.length
+            });
+
+            // const booking = await client.query (
+            //     ` 
+            //         WITH sitting as ('SELECT * from ride where user_id = $1', [userId]),
+            //         walking as ('SELECT * from walking where user_id = $1', [userId]),
+            //         grooming as ('SELECT * from grooming where user_id = $1', [userId]),
+            //         ride as ('SELECT * from ride where user_id = $1', [userId])
+            //     `
+            // )
+
+            // if (booking.rows.length) {
+            //     res.json ({booking: booking.rows});
+            // } else {
+            //     res.json ({booking: []});
+            // }
         } catch (err) {
             console.log(err);
         }
