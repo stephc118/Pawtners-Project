@@ -33,7 +33,6 @@ var spinner = document.querySelector("#load");
         if (sitting.length) {
             const tableBody = document.querySelector(".pet-sitting table tbody");
             for (const order of sitting) {
-                console.log(order);
                 const { id, date, location, district, numberofpets, frequency, created_ts } = order;
 
                 const row = document.createElement('tr');
