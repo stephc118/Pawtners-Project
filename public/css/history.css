@@ -1,3 +1,13 @@
+h1 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 2rem;
+}
+
+section {
+    padding-top: 1rem;
+}
+
 /********************POP-UP*********************/
 
 .popup-overlay, 
@@ -134,65 +144,61 @@ td.submitted:hover {
 }
 /*********************Profile*******************/
 
-#profile {
-    text-align: center;
-    padding-top: 50px;
-}
-
-.profile-container {
-    display: flex;
-    flex-direction: row;
-    color: #A18772;
-    margin: 0 400px;
-}
-
-.left, .right {
-    width: 50%;
-    margin: auto 0;
-    text-align: initial;
+.profile {
     display: flex;
     justify-content: center;
+    color: #A18772;
 }
 
-.profile-element {
+.profile .information {
     display: flex;
     flex-direction: column;
 }
 
-#file {
-    display: none;
+.profile .information span {
+    color: #ae9e91;
+    margin-left: 8px;
 }
 
-.right label {
-    cursor: pointer;
+.profile > div:first-of-type {
+    margin-right: 6rem;
 }
 
-.right label:hover {
-    color: #56493E;
+.profile .propic{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.right input[type="submit"]:hover {
-    background-color: #A18772;
+.profile .img-overlay{
+    /* size based on img */
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.right input[type="submit"] {
+.profile .propic .button {
     font-family: 'Manrope', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     background-color: #56493E;
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-top: 1rem;
     cursor: pointer;
 }
 
-/***********************Booking Table**************/
-
-#title {
-    text-align: center;
-    padding-top: 100px;
-    margin: 0;
+.profile .propic .button:hover{
+    background-color: #A18772;   
 }
+
+.profile .propic .button.submit{
+    display: none;
+}
+
+/***********************Booking Table**************/
 
 .tables {
     margin: 50px 100px 150px;

@@ -1,54 +1,90 @@
 // BUG: gromming missing plan
 var spinner = document.querySelector("#load");
 
+async function showUserProfile() {
+    const resp = await fetch('/profile');
+    const json = await resp.json();
+
+    const { username, id, email } = json.profile;
+    const idRow = document.querySelector('.information p[data-row="id"] span');
+    const usernameRow = document.querySelector('.information p[data-row="username"] span');
+    const emailRow = document.querySelector('.information p[data-row="email"] span');
+
+    idRow.innerHTML = id;
+    usernameRow.innerHTML = username;
+    emailRow.innerHTML = email;
+
+    const propicDOM = document.querySelector(".propic img");
+
+    const getPropicResp = await fetch(`/uploads/propic/${id}.jpg`);
+    if (getPropicResp.ok) {
+        //set propic
+        const blob = await getPropicResp.blob();
+        propicDOM.src = URL.createObjectURL(blob);
+    }
+
+    // set profile picture
+    const propicInput = document.getElementById("propic-upload");
+    propicInput.addEventListener("change", (event) => {
+        propicDOM.src = URL.createObjectURL(event.target.files[0]);
+
+        const submitButton = document.querySelector(".propic .button.submit");
+        submitButton.style.display = "inherit";
+        const editButton = document.querySelector(".propic label.button");
+        editButton.style.display = "none";
+    })
+
+    //submit profile picture
+    const propicForm = document.querySelector("form.propic");
+    propicForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        try {
+            const formData = new FormData(event.currentTarget);
+            const response = await fetch("/propic", {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.status === 200) {
+                const submitButton = document.querySelector(".propic .button.submit");
+                submitButton.style.display = "none";
+                const editButton = document.querySelector(".propic label.button");
+                editButton.style.display = "inherit";
+            } else {
+                // TODO: show error if failed to submit
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    })
+}
+
 (async () => {
     try {
+        // Get User Info
+        // TODO: check loading speed
+        await showUserProfile();
+
         const tables = document.querySelector(".tables");
         const timeoutId = setTimeout(() => {
             // show spinner
             spinner.style.display = 'flex';
         }, 1000)
 
-        // Get User Info
-        const resProfile = await fetch('/profile');
-        const jsonProfile = await resProfile.json();
-
         // Get booking history
         const res = await fetch('/history');
         const response = await res.json();
 
         // Get booking reviews
-        const resReview = await fetch(`/reviews`);
-        const jsonReview = await resReview.json();
+        // const resReview = await fetch(`/reviews`);
+        // const jsonReview = await resReview.json();
 
         clearTimeout(timeoutId); //remove spinner
 
         if (res.status !== 200) {
             throw new Error('Something went wrong with your booking history, please try again.')
         }
-
-        // Show Profile
-        const { username, id, email } = jsonProfile.profile;
-        const leftContainer = document.querySelector('.left');
-        const rightContainer = document.querySelector('.right');
-
-        const profileEle = document.createElement('div');
-        profileEle.className = 'profile-element';
-        profileEle.innerHTML = `
-            <p><strong>Username:</strong> ${username}</p>
-            <p><strong>User ID:</strong> ${id}</p>
-            <p><strong>Email:</strong> ${email}</p>
-        `
-        leftContainer.append(profileEle);
-
-        const imageEle = document.createElement('div');
-        imageEle.innerHTML = `
-            <p><strong><label for="file">Choose Your Profile Picture
-            <p><input type="file" accept="image/png, image/jpeg" name="image" id="file" onchange="loadFile(event)"></p>
-            <p><img id="output" width="150px" /></p>
-            <p><input type="submit" name="submit" value="Upload"></p>
-        `
-        rightContainer.append(imageEle);
 
         // Show booking history tables
         spinner.style.display = 'none';
@@ -64,36 +100,36 @@ var spinner = document.querySelector("#load");
 
         // Check if have review or not
 
-        const reviews = jsonReview.review;
-        console.log('reviews', reviews);
+        // const reviews = jsonReview.review;
+        // console.log('reviews', reviews);
         console.log('sitting', sitting);
         if (sitting.length) {
-            if (reviews.length) {
+            // if (reviews.length) {
                 const tableBody = document.querySelector(".pet-sitting table tbody");
-                for (const review of reviews) {
-                    const { booking_id, created_ts, date, frequency, location, district, numberofpets, star, text } = review;
-                    const row = document.createElement('tr');
-                    row.setAttribute("data-booking-id", booking_id);
-                    row.innerHTML = `
-                        <td>${booking_id}</td>
-                        <td>${new Date(date).toLocaleString('en-GB')}</td>
-                        <td>At ${location}: ${capitalize(district)}</td>
-                        <td>${numberofpets}</td>
-                        <td>${frequency !== null ? frequency : "-"}</td>
-                        <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                        <td>Fulfilled</td>
-                        <td class='submitted'>Review Submitted</td>
-                        `;
-                    tableBody.appendChild(row);
+                // for (const review of reviews) {
+                //     const { booking_id, created_ts, date, frequency, location, district, numberofpets, star, text } = review;
+                //     const row = document.createElement('tr');
+                //     row.setAttribute("data-booking-id", booking_id);
+                //     row.innerHTML = `
+                //         <td>${booking_id}</td>
+                //         <td>${new Date(date).toLocaleString('en-GB')}</td>
+                //         <td>At ${location}: ${capitalize(district)}</td>
+                //         <td>${numberofpets}</td>
+                //         <td>${frequency !== null ? frequency : "-"}</td>
+                //         <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
+                //         <td>Fulfilled</td>
+                //         <td class='submitted'>Review Submitted</td>
+                //         `;
+                //     tableBody.appendChild(row);
 
-                    const readReview = document.querySelector(`.pet-sitting tr[data-booking-id="${booking_id}"] td.submitted`);
-                    const reviewOverlay = document.querySelector('.review-overlay');
-                    readReview.addEventListener('click', () => {
-                        reviewOverlay.style.display = 'flex';
-                        const reviewContainer = document.querySelector('.review-container');
-                        reviewContainer.innerHTML = `You rated ${star} stars & you said: ${text}`;
-                    })
-                }
+                //     const readReview = document.querySelector(`.pet-sitting tr[data-booking-id="${booking_id}"] td.submitted`);
+                //     const reviewOverlay = document.querySelector('.review-overlay');
+                //     readReview.addEventListener('click', () => {
+                //         reviewOverlay.style.display = 'flex';
+                //         const reviewContainer = document.querySelector('.review-container');
+                //         reviewContainer.innerHTML = `You rated ${star} stars & you said: ${text}`;
+                //     })
+                // }
 
                 for (const order of sitting) {
                     const tableBody = document.querySelector(".pet-sitting table tbody");
@@ -121,7 +157,7 @@ var spinner = document.querySelector("#load");
                     const stars = document.querySelectorAll(`.pet-sitting tr[data-booking-id="${id}"] .stars i`);
                     rating(stars);
                 }
-            }
+            // }
         } else {
             const table = document.querySelector('.pet-sitting table');
             table.style.display = 'none';
@@ -239,11 +275,6 @@ var spinner = document.querySelector("#load");
         console.log(err);
     }
 })()
-
-const loadFile = function (event) {
-    const image = document.getElementById('output');
-    image.src = URL.createObjectURL(event.target.files[0]);
-}
 
 function capitalize(str) {
     const words = str.split(" ");

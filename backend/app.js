@@ -7,6 +7,7 @@ const saltRounds = 10;
 const path = require("path");
 const session = require("express-session");
 const grant = require('grant');
+const multer = require('multer');
 
 (async () => {
 
@@ -46,6 +47,22 @@ const grant = require('grant');
     });
 
     app.use(grantExpress);
+
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './uploads/propic')
+        },
+        filename: function (req, file, cb) {            
+            const userId = req.session.user.id;
+            cb(null, `${userId}.jpg`);
+        }
+    })
+    const upload = multer({ storage: storage })
+
+    app.post('/propic', isLoggedIn, upload.single('propic'), function (req, res) {
+        // TODO: error handling
+        return res.sendStatus(200);
+    })
 
     /*******************LOG IN***********************/
 
@@ -430,10 +447,12 @@ const grant = require('grant');
             res.json({error: err.message}) 
         }
      })
+
     /*************************Use static file********************/
 
     app.use(express.static(path.join(__dirname, '../public/html')));
     app.use(express.static(path.join(__dirname, '../public')));
+    app.use('/uploads/propic', isLoggedIn, express.static('uploads/propic'));
     app.use(isLoggedIn, express.static(path.join(__dirname, '../private'))); //server private page for logged in user
 
     function isLoggedIn(req, res, next) {
