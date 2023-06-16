@@ -139,3 +139,65 @@ CREATE TABLE staff (
 -- UPDATE staff
 -- SET district = 'sha-tin'
 -- WHERE pawtner_id = 3;
+
+/**************************NEW DB DESIGN**********************/
+
+CREATE TABLE booking (
+    id SERIAL PRIMARY KEY,
+    service_id INT NOT NULL,
+    user_id INT NOT NULL,
+    status TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE service (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+CREATE TABLE sitting (
+    id SERIAL PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
+    frequency VARCHAR(255),
+    location VARCHAR(255) NOT NULL,
+    numberofpets INT NOT NULL,
+    district VARCHAR(255) NOT NULL,
+    service_id INT REFERENCES service(id),
+    booking id INT REFERENCES booking(id)
+);
+
+CREATE TABLE walking (
+    id SERIAL PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
+    frequency VARCHAR(255),
+    duration VARCHAR(255) NOT NULL,
+    numberofpets INT NOT NULL,
+    service_id INT REFERENCES service(id),
+    booking id INT REFERENCES booking(id)
+);
+
+CREATE TABLE grooming (
+    id SERIAL PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
+    numberofpets INT NOT NULL,
+    service_id INT REFERENCES service(id),
+    booking id INT REFERENCES booking(id)
+);
+
+CREATE TABLE ride (
+    id SERIAL PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
+    pickup VARCHAR(255) NOT NULL,
+    dropoff VARCHAR(255) NOT NULL,
+    numberofpets INT NOT NULL,
+    service_id INT REFERENCES service(id),
+    booking id INT REFERENCES booking(id)
+);
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    star INT NOT NULL,
+    text VARCHAR(255) NOT NULL,
+    booking_id INT REFERENCES booking(id)
+);
