@@ -410,7 +410,7 @@ const multer = require('multer');
             const { service } = req.params;
             const { limit } = req.query;
             const review = await client.query (`
-                SELECT users.username, reviews.service, reviews.star, reviews.text
+                SELECT users.username, reviews.user_id, reviews.service, reviews.star, reviews.text
                 FROM reviews
                 INNER JOIN users ON reviews.user_id=users.id
                 where service = $1 limit $2

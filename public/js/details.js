@@ -28,7 +28,7 @@
                 const imageContainer = document.createElement('div');
                 imageContainer.classList.add('image-container');
                 const imageElement = document.createElement('img');
-                imageElement.setAttribute('src', '../image/image.jpeg');
+                imageElement.setAttribute('src', `../uploads/propic/${review.user_id}.jpg`);
                 imageElement.setAttribute('alt', 'pro-pic');
                 imageContainer.appendChild(imageElement);
 

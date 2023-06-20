@@ -242,15 +242,14 @@ li {
 }
 
 .image-container {
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     overflow: hidden;
 }
 
 .image-container img {
-    height: 100%;
-    margin-left: -25%;
+    width: 110px;
 }
 
 .name-container {
