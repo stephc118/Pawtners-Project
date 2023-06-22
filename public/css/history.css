@@ -145,7 +145,7 @@ td.submitted:hover {
 /*********************Profile*******************/
 
 .profile {
-    display: flex;
+    display: none;
     justify-content: center;
     color: #A18772;
 }
@@ -176,6 +176,13 @@ td.submitted:hover {
     height: 110px;
     border-radius: 50%;
     overflow: hidden;
+}
+
+.profile .img-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .profile .propic .button {

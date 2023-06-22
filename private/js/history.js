@@ -62,15 +62,19 @@ async function showUserProfile() {
 
 (async () => {
     try {
-        // Get User Info
-        // TODO: check loading speed
-        await showUserProfile();
-
-        const tables = document.querySelector(".tables");
         const timeoutId = setTimeout(() => {
             // show spinner
             spinner.style.display = 'flex';
-        }, 1000)
+        }, 100)
+
+        // Get User Info
+        // TODO: check loading speed
+        await showUserProfile();
+        const profile = document.querySelector(".profile");
+        profile.style.display = 'flex';
+
+        const tables = document.querySelector(".tables");
+    
 
         // Get booking history
         const res = await fetch('/history');
