@@ -107,14 +107,12 @@ const servicesBookingInfo = {
     "grooming": {
         selectors: {
             date: "input.date",
-            time: "input.time",
             numberOfPets: "input.numberOfPets"
         }
     },
     "ride": {
         selectors: {
             date: "input.date",
-            time: "input.time",
             pickup: "input.pickup",
             dropoff: "input.dropoff",
             numberOfPets: "input.numberOfPets"
@@ -124,7 +122,6 @@ const servicesBookingInfo = {
         1: {
             selectors: {
                 date: "input.date",
-                time: "input.time",
                 location: "select.location",
                 district: "input.district",
                 numberOfPets: "input.numberOfPets"
@@ -133,7 +130,6 @@ const servicesBookingInfo = {
         2: {
             selectors: {
                 date: "input.date",
-                time: "input.time",
                 frequency: ".frequency select",
                 location: "select.location",
                 district: "input.district",
@@ -143,7 +139,6 @@ const servicesBookingInfo = {
         3: {
             selectors: {
                 date: "input.date",
-                time: "input.time",
                 frequency: ".frequency select",
                 location: "select.location",
                 district: "input.district",
@@ -155,7 +150,6 @@ const servicesBookingInfo = {
         4: {
             selectors: {
                 date: "input.date",
-                time: "input.time",
                 duration: "select.duration",
                 numberOfPets: "input.numberOfPets"
             }
@@ -163,7 +157,6 @@ const servicesBookingInfo = {
         5: {
             selectors: {
                 date: "input.date",
-                time: "input.time",
                 duration: "select.duration",
                 numberOfPets: "input.numberOfPets"
             }
@@ -171,7 +164,6 @@ const servicesBookingInfo = {
         6: {
             selectors: {
                 date: "input.date",
-                time: "input.time",
                 frequency: ".frequency select",
                 duration: "select.duration",
                 numberOfPets: "input.numberOfPets"
