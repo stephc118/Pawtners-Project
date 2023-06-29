@@ -182,6 +182,7 @@ footer {
     border-top: solid 1px #3C3C3C;
     height: 230px;
     box-sizing: border-box;
+    margin-top: 10rem;
 }
 
 .items {

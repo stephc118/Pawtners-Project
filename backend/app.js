@@ -8,6 +8,7 @@ const path = require("path");
 const session = require("express-session");
 const grant = require('grant');
 const multer = require('multer');
+const { bookingRoutes } = require("./api/booking");
 
 (async () => {
 
@@ -20,6 +21,10 @@ const multer = require('multer');
     })
     await client.connect()
 
+    app.use((req, res, next) => {
+        req.client = client;
+        next();
+    })
 
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -201,87 +206,6 @@ const multer = require('multer');
         })
     });
 
-    // TODO: field checking + login checking for form
-    /********************Pets Ride Form***************************/
-
-    app.post("/ride-booking", async (req, res) => {
-        try {
-            const date = req.body.date;
-            const pickUp = req.body.pickup;
-            const dropOff = req.body.dropoff;
-            const numberOfPets = req.body.number;
-            const userId = req.session.user.id;
-
-            const newRide = 'INSERT INTO ride(date, pickup, dropoff, numberofpets, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *';
-            const inputRide = [date, pickUp, dropOff, numberOfPets, userId]
-            const bookRide = await client.query(newRide, inputRide);
-            res.redirect('/success.html')
-
-        } catch (err) {
-            console.log(err);
-        }
-    });
-
-    /******************Pets Grooming Form**********************/
-
-    app.post("/grooming-booking", async (req, res) => {
-        try {
-            const date = req.body.date;
-            const numberOfPets = req.body.number;
-            const userId = req.session.user.id;
-
-            const newGrooming = 'INSERT INTO grooming(date, numberofpets, user_id) VALUES($1, $2, $3) RETURNING *';
-            const inputGrooming = [date, numberOfPets, userId]
-            const bookGrooming = await client.query(newGrooming, inputGrooming);
-            res.redirect('/success.html')
-
-        } catch (err) {
-            console.log(err);
-        }
-    });
-
-    /**********************Pet Sitting***************************/
-
-    app.post("/sitting-booking", async (req, res) => {
-        try {
-            const date = req.body.date;
-            const frequency = req.body.frequency;
-            const location = req.body.location;
-            const numberOfPets = req.body.number;
-            const district = req.body.district;
-            const userId = req.session.user.id;
-
-            const newSitting = 'INSERT INTO sitting (date, frequency, location, numberofpets, district, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-            const inputSitting = [date, frequency, location, numberOfPets, district, userId]
-            const bookSitting = await client.query(newSitting, inputSitting);
-            res.redirect('/success.html')
-
-        } catch (err) {
-            console.log(err);
-        }
-    });
-
-    /**********************Dog Walking***************************/
-
-    app.post("/walking-booking", async (req, res) => {
-        try {
-            const date = req.body.date;
-            const frequency = req.body.frequency;
-            const duration = req.body.duration;
-            const numberOfPets = req.body.number;
-            const userId = req.session.user.id;
-
-
-            const newWalking = 'INSERT INTO walking(date, frequency, duration, numberofpets, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *';
-            const inputWalking = [date, frequency, duration, numberOfPets, userId]
-            const bookWalking = await client.query(newWalking, inputWalking);
-            res.redirect('/success.html')
-
-        } catch (err) {
-            console.log(err);
-        }
-    });
-
     /****************************Contact Form*******************/
 
     app.post('/contact', async (req, res) => {
@@ -447,6 +371,8 @@ const multer = require('multer');
             res.json({error: err.message}) 
         }
      })
+
+    app.use("/booking", bookingRoutes);
 
     /*************************Use static file********************/
 

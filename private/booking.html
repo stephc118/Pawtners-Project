@@ -34,26 +34,26 @@
         <div class="service-selection">
             <h1>Choose a service for your fur babies first.</h1>
             <div class="card-container">
-                <div class="card" data-service-name="pet-sitting">
+                <div class="card" data-service-name="sitting">
                     <h3>Pet Sitting</h3>
                 </div>
-                <div class="card" data-service-name="dog-walking">
+                <div class="card" data-service-name="walking">
                     <h3>Dog Walking</h3>
                 </div>
-                <div class="card" data-service-name="pets-grooming">
+                <div class="card" data-service-name="grooming">
                     <h3>Pets Grooming</h3>
                 </div>
-                <div class="card" data-service-name="pets-ride">
+                <div class="card" data-service-name="ride">
                     <h3>Pets ride</h3>
                 </div>
             </div>
         </div>
         
         <!-- Pet sitting plans -->
-        <div class="plan-selection pet-sitting">
+        <div class="plan-selection sitting">
             <h1>Choose the best suitable plan for your fur babies.</h1>
             <div class="card-container">
-                <div class="card">
+                <div class="card"  data-plan-id=1>
                     <h3>One-Time Plan</h3>
                     <div class="list-item">
                         <ul>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <div class="card" data-frequency="regular">
+                <div class="card" data-frequency="regular" data-plan-id=2>
                     <h3>Regular Day Plan</h3>
                     <div class="list-item">
                         <ul>
@@ -74,7 +74,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card" data-frequency="regular">
+                <div class="card" data-frequency="regular" data-plan-id=3>
                     <h3>Regular Overnight Plan</h3>
                     <div class="list-item">
                         <ul>
@@ -88,10 +88,10 @@
         </div>
 
         <!-- Dog walking plans -->
-        <div class="plan-selection dog-walking">
+        <div class="plan-selection walking">
             <h1>Choose the best suitable plan for your fur babies.</h1>
             <div class="card-container">
-                <div class="card" data-duration="short">
+                <div class="card" data-duration="short" data-plan-id=4>
                     <h3>Every Other Day Plan</h3>
                     <div class="list-item">
                         <ul>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
 
-                <div class="card" data-duration="short">
+                <div class="card" data-duration="short" data-plan-id=5>
                     <h3>Daily Plan</h3>
                     <div class="list-item">
                         <ul>
@@ -110,7 +110,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card" data-frequency="regular" data-duration="long">
+                <div class="card" data-frequency="regular" data-duration="long" data-plan-id=6>
                     <h3>Regular Active Plan</h3>
                     <div class="list-item">
                         <ul>
@@ -123,10 +123,10 @@
         </div>
 
         <!-- Grooming plans -->
-        <div class="plan-selection pets-grooming">
+        <div class="plan-selection grooming">
             <h1>Choose the best suitable plan for your fur babies.</h1>
             <div class="card-container">
-                <div class="card">
+                <div class="card" data-plan-id=7>
                     <h3>Regular Showers</h3>
                     <div class="list-item">
                         <ul>
@@ -135,8 +135,7 @@
                         </ul>
                     </div>
                 </div>
-
-                <div class="card">
+                <div class="card" data-plan-id=8>
                     <h3>Hair Trimming</h3>
                     <div class="list-item">
                         <ul>
@@ -145,7 +144,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" data-plan-id=9>
                     <h3>Spa & Treatment</h3>
                     <div class="list-item">
                         <ul>
@@ -158,10 +157,10 @@
         </div>
 
         <!-- Pet sitting booking form -->
-        <div class="booking-form pet-sitting">
-            <form action="http://localhost:3000/sitting-booking" method="post">
+        <div class="booking-form sitting">
+            <form method="post">
                 <label for="date">Date</label>
-                <input type="datetime-local" name="date" required>
+                <input type="datetime-local" name="date" class="date" required>
                 <br>                
                 <div class="input-group-wrapper frequency">
                     <label for="frequency">Frequency</label>
@@ -177,29 +176,32 @@
                     </select>
                 </div>
                 <label for="location">Location</label>
-                <select name="location" required>
+                <select name="location" class="location">
                     <option value="">Location</option>
                     <option value="Pawrents">At Pawrents'</option>
                     <option value="Pawtners">At Pawtners'</option>
                 </select>
-                <label for="number">Number of Pets</label>
-                <input type="text" name="number" placeholder="Number" required>
+                <label for="numberOfPets">Number of Pets</label>
+                <input type="number" name="numberOfPets" placeholder="Number" class="numberOfPets" min="1" max="3">
                 <br>
                 <label for="district">District</label>
-                <input type="text" name="district" placeholder="District" required>
+                <input type="text" name="district" placeholder="District" class="district">
                 <br>
                 <p class="reminder">
                     Once we received your booking, we will be contacting you via email for confirmation and payment.
                 </p>
                 <button type="submit" id="send-btn">Send</button>
             </form>
+            <div class="error-message">
+                <p>Something went wrong, please try again.</p>
+            </div>
         </div>
 
         <!-- Dog walking booking form -->
-        <div class="booking-form dog-walking">
-            <form action="http://localhost:3000/walking-booking" method="post">
+        <div class="booking-form walking">
+            <form method="post">
                 <label for="date">Date</label>
-                <input type="datetime-local" name="date" required>
+                <input type="datetime-local" name="date" class="date" required>
                 <br>
                 <div class="input-group-wrapper frequency">
                     <label for="frequency">Frequency</label>
@@ -216,7 +218,7 @@
                 </div>
                 <div class="input-group-wrapper duration">
                     <label for="duration">Duration</label>
-                    <select name="duration" required>
+                    <select name="duration" class="duration">
                         <option value="">Duration</option>
                         <option value=15 data-duration="short">15 minutes</option>
                         <option value=30 data-duration="short">30 minutes</option>
@@ -224,46 +226,55 @@
                         <option value=60 data-duration="long">1 hour</option>
                     </select>
                 </div>
-                <label for="number">Number of Pets</label>
-                <input type="text" name="number" placeholder="Number" required>
+                <label for="numberOfPets">Number of Pets</label>
+                <input type="number" name="numberOfPets" placeholder="Number" class="numberOfPets" min="1" max="3">
                 <br>
                 <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation and payment.</p>
                 <button type="submit" id="send-btn">Send</button>
             </form>
+            <div class="error-message">
+                <p>Something went wrong, please try again.</p>
+            </div>
         </div>
 
         <!-- Pets grooming booking form -->
-        <div class="booking-form pets-grooming">
-            <form action="http://localhost:3000/grooming-booking" method="post">
+        <div class="booking-form grooming">
+            <form method="post">
                 <label for="date">Date</label>
-                <input type="datetime-local" name="date" required>
+                <input type="datetime-local" name="date" class="date" required>
                 <br>
-                <label for="number">Number of Pets</label>
-                <input type="text" name="number" placeholder="Number" required>
+                <label for="numberOfPets">Number of Pets</label>
+                <input type="number" name="numberOfPets" placeholder="Number" class="numberOfPets" min="1" max="3">
                 <br>
                 <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation and payment.</p>
                 <button type="submit" id="send-btn">Send</button>
             </form>
+            <div class="error-message">
+                <p>Something went wrong, please try again.</p>
+            </div>
         </div>
 
         <!-- Pets ride booking form -->
-        <div class="booking-form pets-ride">
-            <form action="http://localhost:3000/ride-booking" method="post">
+        <div class="booking-form ride">
+            <form method="post">
                 <label for="date">Date</label>
-                <input type="datetime-local" name="date" required>
+                <input type="datetime-local" name="date" class="date" required>
                 <br>
                 <label for="pickup">Pick up point</label>
-                <input type="text" name="pickup" placeholder="Location" required>
+                <input type="text" name="pickup" placeholder="Location" class="pickup">
                 <br>
                 <label for="dropoff">Drop off point</label>
-                <input type="text" name="dropoff" placeholder="Location" required>
+                <input type="text" name="dropoff" placeholder="Location" class="dropoff">
                 <br>
-                <label for="number">Number of Pets</label>
-                <input type="text" name="number" placeholder="Number" required>
+                <label for="numberOfPets">Number of Pets</label>
+                <input type="number" name="numberOfPets" placeholder="Number" class="numberOfPets" min="1" max="3">
                 <br>
                 <p class="reminder">Once we received your booking, we will be contacting you via email for confirmation and payment.</p>
                 <button type="submit" id="send-btn">Send</button>
             </form>
+            <div class="error-message">
+                <p>Something went wrong, please try again.</p>
+            </div>   
         </div>
         <footer>
             <div class="items">
