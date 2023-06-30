@@ -147,8 +147,8 @@ CREATE TABLE booking (
     service_id INT NOT NULL,
     user_id INT NOT NULL,
     status TEXT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE service (
@@ -156,7 +156,7 @@ CREATE TABLE service (
     name TEXT NOT NULL
 );
 
-CREATE TABLE sitting (
+CREATE TABLE sitting2 (
     id SERIAL PRIMARY KEY,
     date TIMESTAMP NOT NULL,
     frequency VARCHAR(255),
@@ -164,35 +164,35 @@ CREATE TABLE sitting (
     numberofpets INT NOT NULL,
     district VARCHAR(255) NOT NULL,
     service_id INT REFERENCES service(id),
-    booking id INT REFERENCES booking(id)
+    booking_id INT REFERENCES booking(id)
 );
 
-CREATE TABLE walking (
+CREATE TABLE walking2 (
     id SERIAL PRIMARY KEY,
     date TIMESTAMP NOT NULL,
     frequency VARCHAR(255),
     duration VARCHAR(255) NOT NULL,
     numberofpets INT NOT NULL,
     service_id INT REFERENCES service(id),
-    booking id INT REFERENCES booking(id)
+    booking_id INT REFERENCES booking(id)
 );
 
-CREATE TABLE grooming (
+CREATE TABLE grooming2 (
     id SERIAL PRIMARY KEY,
     date TIMESTAMP NOT NULL,
     numberofpets INT NOT NULL,
     service_id INT REFERENCES service(id),
-    booking id INT REFERENCES booking(id)
+    booking_id INT REFERENCES booking(id)
 );
 
-CREATE TABLE ride (
+CREATE TABLE ride2 (
     id SERIAL PRIMARY KEY,
     date TIMESTAMP NOT NULL,
     pickup VARCHAR(255) NOT NULL,
     dropoff VARCHAR(255) NOT NULL,
     numberofpets INT NOT NULL,
     service_id INT REFERENCES service(id),
-    booking id INT REFERENCES booking(id)
+    booking_id INT REFERENCES booking(id)
 );
 
 CREATE TABLE reviews (

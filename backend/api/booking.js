@@ -45,18 +45,34 @@ bookingRoutes.post("/grooming", async (req, res) => {
         const date = req.body.date;
         const numberOfPets = req.body.numberOfPets;
         const userId = req.session.user.id;
+        const serviceId = 3;
+        const status = "pending";
         
-    
-        const newGrooming = 'INSERT INTO grooming(date, numberofpets, user_id) VALUES($1, $2, $3) RETURNING *';
-        const inputGrooming = [date, numberOfPets, userId]
-        const bookGrooming = await client.query(newGrooming, inputGrooming);
-        if (bookGrooming.rows.length) {
-            res.sendStatus(200);
+        // Insert into booking table
+        const newBooking = await client.query(`
+            INSERT INTO booking(service_id, user_id, status) VALUES($1, $2, $3) RETURNING id`, [serviceId, userId, status]
+        );
+       
+        if (newBooking.rows.length) {
+        
+            // Get booking id from booking table's returning 
+            console.log(newBooking.rows[0].id);
+
+            // Insert booking id & booking details into grooming table
+            const newGrooming = 'INSERT INTO grooming2(date, numberofpets, service_id, booking_id) VALUES($1, $2, $3, $4) RETURNING *';
+            const inputGrooming = [date, numberOfPets, serviceId, newBooking.rows[0].id]
+            const bookGrooming = await client.query(newGrooming, inputGrooming);
+
+            if ( bookGrooming.rows.length) {
+                res.sendStatus(200);
+            } else {
+                throw new Error('Booking failed, please try again');
+            }
         } else {
-            res.sendStatus(400);
             throw new Error('Booking failed, please try again');
-        }
+        }    
     } catch (err) {
+        console.error(err);
         res.status(500).json({ message: err.message });
     }
 })
