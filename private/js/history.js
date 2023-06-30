@@ -109,7 +109,7 @@ async function showUserProfile() {
         console.log('sitting', sitting);
         if (sitting.length) {
             // if (reviews.length) {
-                const tableBody = document.querySelector(".pet-sitting table tbody");
+                // const tableBody = document.querySelector(".pet-sitting table tbody");
                 // for (const review of reviews) {
                 //     const { booking_id, created_ts, date, frequency, location, district, numberofpets, star, text } = review;
                 //     const row = document.createElement('tr');
@@ -134,34 +134,54 @@ async function showUserProfile() {
                 //         reviewContainer.innerHTML = `You rated ${star} stars & you said: ${text}`;
                 //     })
                 // }
+            const tableBody = document.querySelector(".pet-sitting table tbody");
+            for (const order of sitting) {
+                const { booking_id, date, location, district, numberofpets, frequency, created_at, status } = order;
 
-                for (const order of sitting) {
-                    const tableBody = document.querySelector(".pet-sitting table tbody");
-                    const { id, date, location, district, numberofpets, frequency, created_ts } = order;
-                    const row = document.createElement('tr');
-                    row.setAttribute("data-booking-id", id);
-                    row.innerHTML = `
-                            <td>${id}</td>
-                            <td>${new Date(date).toLocaleString('en-GB')}</td>
-                            <td>At ${location}: ${capitalize(district)}</td>
-                            <td>${numberofpets}</td>
-                            <td>${frequency !== null ? frequency : "-"}</td>
-                            <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                            <td>Pending</td>
-                            <td class="stars">
-                                <i class="fa-solid fa-star star"></i>
-                                <i class="fa-solid fa-star star"></i>
-                                <i class="fa-solid fa-star star"></i>
-                                <i class="fa-solid fa-star star"></i>
-                                <i class="fa-solid fa-star star"></i>
-                            </td>
-                            `;
+                const row = document.createElement('tr');
+                row.setAttribute("data-booking-id", booking_id);
+                row.innerHTML = `
+                    <td>${booking_id}</td>
+                    <td>${new Date(date).toLocaleString('en-GB')}</td>
+                    <td>At ${location}: ${capitalize(district)}</td>
+                    <td>${numberofpets}</td>
+                    <td>${frequency !== null ? frequency : "-"}</td>
+                    <td>${new Date(created_at).toLocaleString('en-GB')}</td>
+                    <td>${status}</td>
+                    <td class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </td> 
+                    `;
+                // for (const order of sitting) {
+                //     const tableBody = document.querySelector(".pet-sitting table tbody");
+                //     const { id, date, location, district, numberofpets, frequency, created_ts } = order;
+                //     const row = document.createElement('tr');
+                //     row.setAttribute("data-booking-id", id);
+                //     row.innerHTML = `
+                //             <td>${id}</td>
+                //             <td>${new Date(date).toLocaleString('en-GB')}</td>
+                //             <td>At ${location}: ${capitalize(district)}</td>
+                //             <td>${numberofpets}</td>
+                //             <td>${frequency !== null ? frequency : "-"}</td>
+                //             <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
+                //             <td>Pending</td>
+                //             <td class="stars">
+                //                 <i class="fa-solid fa-star star"></i>
+                //                 <i class="fa-solid fa-star star"></i>
+                //                 <i class="fa-solid fa-star star"></i>
+                //                 <i class="fa-solid fa-star star"></i>
+                //                 <i class="fa-solid fa-star star"></i>
+                //             </td>
+                //             `;
                     tableBody.appendChild(row);
 
-                    const stars = document.querySelectorAll(`.pet-sitting tr[data-booking-id="${id}"] .stars i`);
+                    const stars = document.querySelectorAll(`.pet-sitting tr[data-booking-id="${booking_id}"] .stars i`);
                     rating(stars);
                 }
-            // }
         } else {
             const table = document.querySelector('.pet-sitting table');
             table.style.display = 'none';
@@ -173,18 +193,18 @@ async function showUserProfile() {
         if (walking.length) {
             const tableBody = document.querySelector(".dog-walking table tbody");
             for (const order of walking) {
-                const { id, date, duration, numberofpets, frequency, created_ts } = order;
+                const { booking_id, date, duration, numberofpets, frequency, created_at, status } = order;
 
                 const row = document.createElement('tr');
-                row.setAttribute("data-booking-id", id);
+                row.setAttribute("data-booking-id", booking_id);
                 row.innerHTML = `
-                    <td>${id}</td>
+                    <td>${booking_id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
                     <td>${duration}</td>
                     <td>${numberofpets}</td>
                     <td>${frequency ? frequency : "-"}</td>
-                    <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                    <td>Pending</td>
+                    <td>${new Date(created_at).toLocaleString('en-GB')}</td>
+                    <td>${status}</td>
                     <td class="stars">
                         <i class="fa-solid fa-star star"></i>
                         <i class="fa-solid fa-star star"></i>
@@ -195,7 +215,7 @@ async function showUserProfile() {
                 `;
                 tableBody.appendChild(row);
 
-                const stars = document.querySelectorAll(`.dog-walking tr[data-booking-id="${id}"] .stars i`);
+                const stars = document.querySelectorAll(`.dog-walking tr[data-booking-id="${booking_id}"] .stars i`);
                 rating(stars);
             }
         } else {
@@ -209,16 +229,16 @@ async function showUserProfile() {
         if (grooming.length) {
             const tableBody = document.querySelector(".pets-grooming table tbody");
             for (const order of grooming) {
-                const { id, date, numberofpets, created_ts } = order;
+                const { booking_id, date, numberofpets, created_at, status } = order;
 
                 const row = document.createElement('tr');
-                row.setAttribute("data-booking-id", id);
+                row.setAttribute("data-booking-id", booking_id);
                 row.innerHTML = `
-                    <td>${id}</td>
+                    <td>${booking_id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
                     <td>${numberofpets}</td>
-                    <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                    <td>Pending</td>
+                    <td>${new Date(created_at).toLocaleString('en-GB')}</td>
+                    <td>${status}</td>
                     <td class="stars">
                         <i class="fa-solid fa-star star"></i>
                         <i class="fa-solid fa-star star"></i>
@@ -229,7 +249,7 @@ async function showUserProfile() {
                 `;
                 tableBody.appendChild(row);
 
-                const stars = document.querySelectorAll(`.pets-grooming tr[data-booking-id="${id}"] .stars i`);
+                const stars = document.querySelectorAll(`.pets-grooming tr[data-booking-id="${booking_id}"] .stars i`);
                 rating(stars);
             }
         } else {
@@ -243,18 +263,18 @@ async function showUserProfile() {
         if (ride.length) {
             const tableBody = document.querySelector(".pets-ride table tbody");
             for (const order of ride) {
-                const { id, date, pickup, dropoff, numberofpets, created_ts } = order;
+                const { booking_id, date, pickup, dropoff, numberofpets, created_at, status } = order;
 
                 const row = document.createElement('tr');
-                row.setAttribute("data-booking-id", id);
+                row.setAttribute("data-booking-id", booking_id);
                 row.innerHTML = `
-                    <td>${id}</td>
+                    <td>${booking_id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
                     <td>${capitalize(pickup)}</td>
                     <td>${capitalize(dropoff)}</td>
                     <td>${numberofpets}</td>
-                    <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                    <td>Pending</td>
+                    <td>${new Date(created_at).toLocaleString('en-GB')}</td>
+                    <td>${status}</td>
                     <td class="stars">
                         <i class="fa-solid fa-star star"></i>
                         <i class="fa-solid fa-star star"></i>
@@ -265,7 +285,7 @@ async function showUserProfile() {
                 `;
                 tableBody.appendChild(row);
 
-                const stars = document.querySelectorAll(`.pets-ride tr[data-booking-id="${id}"] .stars i`);
+                const stars = document.querySelectorAll(`.pets-ride tr[data-booking-id="${booking_id}"] .stars i`);
                 rating(stars);
             }
         } else {
