@@ -237,11 +237,17 @@ const { bookingRoutes } = require("./api/booking");
 
     app.get('/history', async(req, res) => {
         try {
+            // const userId = 44;
             const userId = req.session.user.id;  
             const ride = await client.query(`
-            SELECT ride2.date, ride2.pickup, ride2.dropoff, ride2.numberofpets, ride2.booking_id, booking.created_at, booking.status
+            SELECT *
             FROM ride2
             INNER JOIN booking ON ride2.booking_id=booking.id where booking.user_id = $1`, [userId]);
+
+            // const sitting = await client.query(`SELECT *
+            // FROM sitting2
+            // INNER JOIN booking ON sitting2.booking_id=booking.id
+            // INNER JOIN reviews2 on reviews2.booking_id=booking.id where booking.user_id = $1`, [userId]);
 
             const sitting = await client.query(`
             SELECT sitting2.date, sitting2.frequency, sitting2.location, sitting2.numberofpets, sitting2.district, sitting2.booking_id, booking.created_at, booking.status
@@ -249,12 +255,12 @@ const { bookingRoutes } = require("./api/booking");
             INNER JOIN booking ON sitting2.booking_id=booking.id where booking.user_id = $1`, [userId]);
 
             const grooming = await client.query(`
-            SELECT grooming2.date, grooming2.numberofpets, grooming2.booking_id, booking.created_at, booking.status
+            SELECT *
             FROM grooming2
             INNER JOIN booking ON grooming2.booking_id=booking.id where booking.user_id = $1`, [userId]);
 
             const walking = await client.query(`
-            SELECT walking2.date, walking2.frequency, walking2.duration, walking2.numberofpets, walking2.booking_id, booking.created_at, booking.status
+            SELECT *
             FROM walking2
             INNER JOIN booking ON walking2.booking_id=booking.id where booking.user_id = $1`, [userId]);
 
@@ -312,11 +318,9 @@ const { bookingRoutes } = require("./api/booking");
         try {
             const userId = req.session.user.id;
             const review = await client.query(`
-            SELECT sitting.id, sitting.date, sitting.district, 
-            sitting.location, sitting.numberofpets, sitting.frequency, 
-            sitting.created_ts, reviews.booking_id, reviews.star, reviews.text, reviews.service
-            FROM sitting
-            INNER JOIN reviews ON reviews.booking_id = sitting.id where sitting.user_id = $1`, [userId]);
+            SELECT * 
+            FROM reviews2 
+            INNER JOIN booking on reviews2.booking_id=booking.id where booking.user_id = $1`, [userId]);
             console.log(review.rows);
             if (review.rows.length) {
                 res.json({review: review.rows});
@@ -357,14 +361,15 @@ const { bookingRoutes } = require("./api/booking");
             if ( !req.body.rating || !req.body.text ) {
                 throw new Error ('Missing fields')
             }
-
-            const userId = req.session.user.id;
-            const { bookingId, service, rating, text } = req.body;
+            const { rating, text, bookingId } = req.body;
             
-            const postReview = await client.query(`INSERT INTO reviews (user_id, booking_id, service, star, text) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-            [userId, bookingId, service, rating, text])
+            const postReview = await client.query(`
+                INSERT INTO reviews2 ( star, text, booking_id) VALUES ($1, $2, $3) RETURNING *`,[rating, text, bookingId]);
             if ( postReview.rows.length ) {
+                console.log(postReview.rows.length);
                 res.sendStatus(200);
+            } else {
+                throw new Error ('Failed to post review.')
             }
         } catch (err) {
             console.log(err.message);

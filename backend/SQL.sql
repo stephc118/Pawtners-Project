@@ -336,3 +336,12 @@ INNER JOIN booking ON sitting2.booking_id=booking.id;
 SELECT walking2.date, walking2.frequency, walking2.duration, walking2.numberofpets, walking2.booking_id, booking.created_at, booking.status
 FROM walking2
 INNER JOIN booking ON walking2.booking_id=booking.id;
+
+SELECT *
+FROM grooming2
+INNER JOIN booking ON grooming2.booking_id=booking.id
+INNER JOIN reviews2 on reviews2.booking_id=booking.id;
+
+SELECT * 
+FROM reviews2 
+INNER JOIN booking on reviews2.booking_id=booking.id where booking.user_id = 44;

@@ -106,7 +106,7 @@ async function showUserProfile() {
 
         // const reviews = jsonReview.review;
         // console.log('reviews', reviews);
-        console.log('sitting', sitting);
+
         if (sitting.length) {
             // if (reviews.length) {
                 // const tableBody = document.querySelector(".pet-sitting table tbody");
@@ -387,9 +387,8 @@ form.addEventListener('submit', async (event) => {
             errorContainer.style.display = 'initial';
             return;
         }
-
         const reviewData = {
-            service: serviceToBeReviewed,
+            // service: serviceToBeReviewed,
             bookingId: bookingId,
             rating: rating,
             text: text
