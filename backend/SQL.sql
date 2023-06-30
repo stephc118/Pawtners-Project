@@ -201,3 +201,20 @@ CREATE TABLE reviews (
     text VARCHAR(255) NOT NULL,
     booking_id INT REFERENCES booking(id)
 );
+
+
+SELECT grooming2.date, grooming2.numberofpets, grooming2.booking_id, booking.user_id, grooming.created_at
+FROM grooming2
+INNER JOIN booking ON grooming2.booking_id=booking.id;
+
+SELECT ride2.date, ride2.pickup, ride2.dropoff, ride2.numberofpets, ride2.booking_id, booking.created_at, booking.status
+FROM ride2
+INNER JOIN booking ON ride2.booking_id=booking.id;
+
+SELECT sitting2.date, sitting2.frequency, sitting2.location, sitting2.numberofpets, sitting2.district, sitting2.booking_id, booking.created_at, booking.status
+FROM sitting2
+INNER JOIN booking ON sitting2.booking_id=booking.id;
+
+SELECT walking2.date, walking2.frequency, walking2.duration, walking2.numberofpets, walking2.booking_id, booking.created_at, booking.status
+FROM walking2
+INNER JOIN booking ON walking2.booking_id=booking.id;

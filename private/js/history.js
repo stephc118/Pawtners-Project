@@ -33,17 +33,17 @@ var spinner = document.querySelector("#load");
         if (sitting.length) {
             const tableBody = document.querySelector(".pet-sitting table tbody");
             for (const order of sitting) {
-                const { id, date, location, district, numberofpets, frequency, created_ts } = order;
+                const { booking_id, date, location, district, numberofpets, frequency, created_at, status } = order;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${id}</td>
+                    <td>${booking_id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
                     <td>At ${location}: ${capitalize(district)}</td>
                     <td>${numberofpets}</td>
                     <td>${frequency !== null ? frequency : "-"}</td>
-                    <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                    <td>Pending</td>
+                    <td>${new Date(created_at).toLocaleString('en-GB')}</td>
+                    <td>${status}</td>
                     <td class="stars">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -66,17 +66,17 @@ var spinner = document.querySelector("#load");
         if (walking.length) {
             const tableBody = document.querySelector(".dog-walking table tbody");
             for (const order of walking) {
-                const { id, date, duration, numberofpets, frequency, created_ts } = order;
+                const { booking_id, date, duration, numberofpets, frequency, created_at, status } = order;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${id}</td>
+                    <td>${booking_id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
                     <td>${duration}</td>
                     <td>${numberofpets}</td>
                     <td>${frequency ? frequency : "-"}</td>
-                    <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                    <td>Pending</td>
+                    <td>${new Date(created_at).toLocaleString('en-GB')}</td>
+                    <td>${status}</td>
                     <td class="stars">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -98,15 +98,15 @@ var spinner = document.querySelector("#load");
         if (grooming.length) {
             const tableBody = document.querySelector(".pets-grooming table tbody");
             for (const order of grooming) {
-                const { id, date, numberofpets, created_ts } = order;
+                const { booking_id, date, numberofpets, created_at, status } = order;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${id}</td>
+                    <td>${booking_id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
                     <td>${numberofpets}</td>
-                    <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                    <td>Pending</td>
+                    <td>${new Date(created_at).toLocaleString('en-GB')}</td>
+                    <td>${status}</td>
                     <td class="stars">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -128,17 +128,17 @@ var spinner = document.querySelector("#load");
         if (ride.length) {
             const tableBody = document.querySelector(".pets-ride table tbody");
             for (const order of ride) {
-                const { id, date, pickup, dropoff, numberofpets, created_ts } = order;
+                const { booking_id, date, pickup, dropoff, numberofpets, created_at, status } = order;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${id}</td>
+                    <td>${booking_id}</td>
                     <td>${new Date(date).toLocaleString('en-GB')}</td>
                     <td>${capitalize(pickup)}</td>
                     <td>${capitalize(dropoff)}</td>
                     <td>${numberofpets}</td>
-                    <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                    <td>Pending</td>
+                    <td>${new Date(created_at).toLocaleString('en-GB')}</td>
+                    <td>${status}</td>
                     <td class="stars">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>

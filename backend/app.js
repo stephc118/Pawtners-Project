@@ -204,10 +204,25 @@ const { bookingRoutes } = require("./api/booking");
     app.get('/history', async(req, res) => {
         try {
             const userId = req.session.user.id;  
-            const ride = await client.query('SELECT * from ride where user_id = $1', [userId]);
-            const sitting = await client.query('SELECT * from sitting where user_id = $1', [userId]);
-            const grooming = await client.query('SELECT * from grooming where user_id = $1', [userId]);
-            const walking = await client.query('SELECT * from walking where user_id = $1', [userId]);
+            const ride = await client.query(`
+            SELECT ride2.date, ride2.pickup, ride2.dropoff, ride2.numberofpets, ride2.booking_id, booking.created_at, booking.status
+            FROM ride2
+            INNER JOIN booking ON ride2.booking_id=booking.id where booking.user_id = $1`, [userId]);
+
+            const sitting = await client.query(`
+            SELECT sitting2.date, sitting2.frequency, sitting2.location, sitting2.numberofpets, sitting2.district, sitting2.booking_id, booking.created_at, booking.status
+            FROM sitting2
+            INNER JOIN booking ON sitting2.booking_id=booking.id where booking.user_id = $1`, [userId]);
+
+            const grooming = await client.query(`
+            SELECT grooming2.date, grooming2.numberofpets, grooming2.booking_id, booking.created_at, booking.status
+            FROM grooming2
+            INNER JOIN booking ON grooming2.booking_id=booking.id where booking.user_id = $1`, [userId]);
+
+            const walking = await client.query(`
+            SELECT walking2.date, walking2.frequency, walking2.duration, walking2.numberofpets, walking2.booking_id, booking.created_at, booking.status
+            FROM walking2
+            INNER JOIN booking ON walking2.booking_id=booking.id where booking.user_id = $1`, [userId]);
 
             if (!ride || !sitting || !grooming || !walking) {
                 throw new Error('unable to get booking history from db');
@@ -222,21 +237,6 @@ const { bookingRoutes } = require("./api/booking");
                 },
                 total: ride.rows.length + sitting.rows.length + grooming.rows.length + walking.rows.length
             });
-
-            // const booking = await client.query (
-            //     ` 
-            //         WITH sitting as ('SELECT * from ride where user_id = $1', [userId]),
-            //         walking as ('SELECT * from walking where user_id = $1', [userId]),
-            //         grooming as ('SELECT * from grooming where user_id = $1', [userId]),
-            //         ride as ('SELECT * from ride where user_id = $1', [userId])
-            //     `
-            // )
-
-            // if (booking.rows.length) {
-            //     res.json ({booking: booking.rows});
-            // } else {
-            //     res.json ({booking: []});
-            // }
         } catch (err) {
             console.log(err);
         }

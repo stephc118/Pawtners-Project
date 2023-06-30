@@ -19,7 +19,7 @@ bookingRoutes.post("/ride", async (req, res) => {
         const numberOfPets = req.body.numberOfPets;
         const userId = req.session.user.id;
         const serviceId = 4;
-        const status = "pending";
+        const status = "Pending";
 
         // Insert into booking table
         const newBooking = await client.query(`
@@ -59,7 +59,7 @@ bookingRoutes.post("/grooming", async (req, res) => {
         const numberOfPets = req.body.numberOfPets;
         const userId = req.session.user.id;
         const serviceId = 3;
-        const status = "pending";
+        const status = "Pending";
         
         // Insert into booking table
         const newBooking = await client.query(`
@@ -114,7 +114,7 @@ bookingRoutes.post("/sitting", async (req, res) => {
         const district = req.body.district;
         const userId = req.session.user.id;
         const serviceId = 1;
-        const status = "pending";
+        const status = "Pending";
 
         // Insert into booking table
         const newBooking = await client.query(`
@@ -170,7 +170,7 @@ bookingRoutes.post("/walking", async (req, res) => {
         const numberOfPets = req.body.numberOfPets;
         const userId = req.session.user.id;
         const serviceId = 2;
-        const status = "pending";
+        const status = "Pending";
 
         // Insert into booking table
             const newBooking = await client.query(`
