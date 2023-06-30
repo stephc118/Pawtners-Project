@@ -333,16 +333,22 @@ const { bookingRoutes } = require("./api/booking");
         }
      });
 
-     app.get('/reviews/:service', async (req, res) => {
+     app.get('/reviews/:serviceId', async (req, res) => {
         try {
-            const { service } = req.params;
+            const { serviceId } = req.params;
             const { limit } = req.query;
             const review = await client.query (`
-                SELECT users.username, reviews.user_id, reviews.service, reviews.star, reviews.text
-                FROM reviews
-                INNER JOIN users ON reviews.user_id=users.id
-                where service = $1 limit $2
-            `, [service, limit])
+                SELECT *
+                FROM reviews2
+                INNER JOIN booking ON reviews2.booking_id=booking.id
+                INNER JOIN users ON booking.user_id=users.id
+                where booking.service_id = $1 limit $2
+            `, [serviceId, limit])
+        //     SELECT users.username, reviews.user_id, reviews.service, reviews.star, reviews.text
+        //     FROM reviews
+        //     INNER JOIN users ON reviews.user_id=users.id
+        //     where service = $1 limit $2
+        // `, [service, limit])
             console.log(review.rows);
             if (review.rows.length) {
                 res.json ({review: review.rows});

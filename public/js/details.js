@@ -1,17 +1,17 @@
 (async () => {
     try {
-        let service;
+        let serviceId;
         const serviceHeading = document.title;
-        service = serviceHeading;
+        serviceId = serviceHeading;
 
         const serviceMapping = {
-            'Pet Sitting': 'pet-sitting',
-            'Dog Walking': 'dog-walking',
-            'Pets Grooming': 'pets-grooming',
-            'Pets Ride': 'pets-ride'
+            'Pet Sitting': 1,
+            'Dog Walking': 2,
+            'Pets Grooming': 3,
+            'Pets Ride': 4
         }
 
-        const resp = await fetch(`/reviews/${serviceMapping[service]}?limit=3`);
+        const resp = await fetch(`/reviews/${serviceMapping[serviceId]}?limit=3`);
         const jsonReview = await resp.json();
 
         const reviews = jsonReview.review;
@@ -59,7 +59,7 @@
 
                 const serviceContainer = document.createElement('div');
                 serviceContainer.className = 'service-container';
-                serviceContainer.innerHTML =`<strong>Service used:</strong> ${service}` 
+                serviceContainer.innerHTML =`<strong>Service used:</strong> ${serviceId}` 
 
                 const nameContainer = document.createElement('div');
                 nameContainer.classList.add('name-container');
