@@ -81,8 +81,8 @@ async function showUserProfile() {
         const response = await res.json();
 
         // Get booking reviews
-        // const resReview = await fetch(`/reviews`);
-        // const jsonReview = await resReview.json();
+        const resReview = await fetch(`/reviews`);
+        const jsonReview = await resReview.json();
 
         clearTimeout(timeoutId); //remove spinner
 
@@ -103,37 +103,44 @@ async function showUserProfile() {
         tables.style.display = 'flex';
 
         // Check if have review or not
+        const reviews = jsonReview.review;
 
-        // const reviews = jsonReview.review;
-        // console.log('reviews', reviews);
+        const showReview = function (booking_id) {
+
+            for (const review of reviews) {
+                if (review.booking_id === booking_id) {
+                        const ratingContainer = document.querySelector(`tr[data-booking-id='${booking_id}'] td.stars`);
+                        ratingContainer.className = 'raiting-container'
+                        ratingContainer.innerHTML = `
+                        Rated <strong>${review.star}</strong> Stars, click to see review.
+                        `
+                    const reviewOverlay = document.querySelector('.review-overlay');
+                    
+                    ratingContainer.addEventListener('click', () => {
+                        reviewOverlay.style.display = 'flex';
+                        const textContainer = document.querySelector('.review-container');
+                        textContainer.innerHTML = `${review.text}`
+                    })
+        
+                    // Close Pop-Up by clicking elsewhere
+                    window.addEventListener('click', (event) => {
+                        if (event.target == reviewOverlay) {
+                            reviewOverlay.style.display = 'none';
+                        }
+                    })
+                    
+                    // Close Pop-Up by clicking close button
+                    const closeBtn = document.querySelector('.review-overlay .popup .fa-xmark');
+                    
+                    closeBtn.addEventListener('click', () => {
+                        reviewOverlay.style.display = 'none';
+                    })   
+                }
+            } 
+        }
 
         if (sitting.length) {
-            // if (reviews.length) {
-                // const tableBody = document.querySelector(".pet-sitting table tbody");
-                // for (const review of reviews) {
-                //     const { booking_id, created_ts, date, frequency, location, district, numberofpets, star, text } = review;
-                //     const row = document.createElement('tr');
-                //     row.setAttribute("data-booking-id", booking_id);
-                //     row.innerHTML = `
-                //         <td>${booking_id}</td>
-                //         <td>${new Date(date).toLocaleString('en-GB')}</td>
-                //         <td>At ${location}: ${capitalize(district)}</td>
-                //         <td>${numberofpets}</td>
-                //         <td>${frequency !== null ? frequency : "-"}</td>
-                //         <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                //         <td>Fulfilled</td>
-                //         <td class='submitted'>Review Submitted</td>
-                //         `;
-                //     tableBody.appendChild(row);
 
-                //     const readReview = document.querySelector(`.pet-sitting tr[data-booking-id="${booking_id}"] td.submitted`);
-                //     const reviewOverlay = document.querySelector('.review-overlay');
-                //     readReview.addEventListener('click', () => {
-                //         reviewOverlay.style.display = 'flex';
-                //         const reviewContainer = document.querySelector('.review-container');
-                //         reviewContainer.innerHTML = `You rated ${star} stars & you said: ${text}`;
-                //     })
-                // }
             const tableBody = document.querySelector(".pet-sitting table tbody");
             for (const order of sitting) {
                 const { booking_id, date, location, district, numberofpets, frequency, created_at, status } = order;
@@ -156,31 +163,12 @@ async function showUserProfile() {
                         <i class="fa-solid fa-star"></i>
                     </td> 
                     `;
-                // for (const order of sitting) {
-                //     const tableBody = document.querySelector(".pet-sitting table tbody");
-                //     const { id, date, location, district, numberofpets, frequency, created_ts } = order;
-                //     const row = document.createElement('tr');
-                //     row.setAttribute("data-booking-id", id);
-                //     row.innerHTML = `
-                //             <td>${id}</td>
-                //             <td>${new Date(date).toLocaleString('en-GB')}</td>
-                //             <td>At ${location}: ${capitalize(district)}</td>
-                //             <td>${numberofpets}</td>
-                //             <td>${frequency !== null ? frequency : "-"}</td>
-                //             <td>${new Date(created_ts).toLocaleString('en-GB')}</td>
-                //             <td>Pending</td>
-                //             <td class="stars">
-                //                 <i class="fa-solid fa-star star"></i>
-                //                 <i class="fa-solid fa-star star"></i>
-                //                 <i class="fa-solid fa-star star"></i>
-                //                 <i class="fa-solid fa-star star"></i>
-                //                 <i class="fa-solid fa-star star"></i>
-                //             </td>
-                //             `;
                     tableBody.appendChild(row);
 
                     const stars = document.querySelectorAll(`.pet-sitting tr[data-booking-id="${booking_id}"] .stars i`);
                     rating(stars);
+
+                    showReview(booking_id);
                 }
         } else {
             const table = document.querySelector('.pet-sitting table');
@@ -217,6 +205,8 @@ async function showUserProfile() {
 
                 const stars = document.querySelectorAll(`.dog-walking tr[data-booking-id="${booking_id}"] .stars i`);
                 rating(stars);
+
+                showReview(booking_id);
             }
         } else {
             const table = document.querySelector('.dog-walking table');
@@ -251,6 +241,8 @@ async function showUserProfile() {
 
                 const stars = document.querySelectorAll(`.pets-grooming tr[data-booking-id="${booking_id}"] .stars i`);
                 rating(stars);
+
+                showReview(booking_id);
             }
         } else {
             const table = document.querySelector('.pets-grooming table');
@@ -287,6 +279,8 @@ async function showUserProfile() {
 
                 const stars = document.querySelectorAll(`.pets-ride tr[data-booking-id="${booking_id}"] .stars i`);
                 rating(stars);
+
+                showReview(booking_id);
             }
         } else {
             const table = document.querySelector('.pets-ride table');
@@ -388,7 +382,6 @@ form.addEventListener('submit', async (event) => {
             return;
         }
         const reviewData = {
-            // service: serviceToBeReviewed,
             bookingId: bookingId,
             rating: rating,
             text: text
@@ -405,7 +398,8 @@ form.addEventListener('submit', async (event) => {
         if (respReview.status === 200) {
             window.location = '/history.html'
         } else {
-            alert('Failed to submit review, please try again.')
+            // alert('Failed to submit review, please try again.')
+            errorContainer.innerHTML = `The maximum word count for writing the review is 255 words.`
         }
     } catch (err) {
         console.log(err);

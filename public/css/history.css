@@ -36,6 +36,21 @@ section {
     position: relative;
 }
 
+.review-overlay .popup {
+    max-width: 400px;
+    height: 400px;
+}
+
+.review-overlay .popup .heading {
+    position: absolute;
+    top: 30px;
+}
+
+.review-container {
+    margin: 130px 70px auto;
+    line-height: 30px;
+}
+
 @keyframes popup {
     0%{
       transform: scale(0.4);
@@ -208,7 +223,7 @@ td.submitted:hover {
 /***********************Booking Table**************/
 
 .tables {
-    margin: 50px 100px 150px;
+    margin: 50px 0 150px;
     color: #A18772;
     display: none;
     flex-direction: column;
@@ -216,12 +231,15 @@ td.submitted:hover {
 
 .tables h2{
     color: #56493E;
+    text-align: center;
 }
 
 table {
     border-collapse: collapse;
     border-radius: 6px;
     overflow: hidden;
+    width: 1100px;
+    margin: auto;
 }
 
 td {
@@ -253,6 +271,14 @@ thead {
 .stars .fa-star.hover {
     color: #f1d133;
     transition: .3s;
+}
+
+.raiting-container {
+    cursor: pointer;
+}
+
+.raiting-container:hover {
+    color: #56493E;
 }
 
 .no-booking {
