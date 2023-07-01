@@ -321,7 +321,7 @@ const { bookingRoutes } = require("./api/booking");
             SELECT * 
             FROM reviews2 
             INNER JOIN booking on reviews2.booking_id=booking.id where booking.user_id = $1`, [userId]);
-            console.log(review.rows);
+            // console.log(review.rows);
             if (review.rows.length) {
                 res.json({review: review.rows});
             } else {

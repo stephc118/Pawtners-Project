@@ -381,6 +381,14 @@ form.addEventListener('submit', async (event) => {
             errorContainer.style.display = 'initial';
             return;
         }
+
+        // Check if exceeds the max word count
+        if (text.length > 255) {
+            errorContainer.style.display = 'initial';
+            errorContainer.innerHTML = 'The maximum word count for writing the review is 255 words.';
+            return;
+        }
+
         const reviewData = {
             bookingId: bookingId,
             rating: rating,
@@ -398,10 +406,10 @@ form.addEventListener('submit', async (event) => {
         if (respReview.status === 200) {
             window.location = '/history.html'
         } else {
-            // alert('Failed to submit review, please try again.')
-            errorContainer.innerHTML = `The maximum word count for writing the review is 255 words.`
+            errorContainer.style.display = 'initial';
+            errorContainer.innerHTML = 'Failed to submit, please try again.'
         }
     } catch (err) {
-        console.log(err);
+        console.log(err);     
     }
 })
