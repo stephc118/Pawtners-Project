@@ -5,7 +5,12 @@ h1 {
 }
 
 section {
-    padding-top: 1rem;
+    padding-top: 50px;
+}
+
+.green-btn {
+    border-radius: 5px;
+    font-weight: bold;
 }
 
 /********************POP-UP*********************/
@@ -16,7 +21,6 @@ section {
     height: 100vh;
     position: fixed;
     background: #000000b3;
-    /* display: flex; */
     display: none;
     justify-content: center;
     align-items: center;
@@ -220,6 +224,11 @@ td.submitted:hover {
     display: none;
 }
 
+.error-message {
+    color:#CD3232;
+    display: none;
+}
+
 /***********************Booking Table**************/
 
 .tables {
@@ -229,22 +238,21 @@ td.submitted:hover {
     flex-direction: column;
 }
 
-.tables h2{
+.service-title h2{
     color: #56493E;
-    text-align: center;
 }
 
-.service-title {
-    text-align: center;
-    padding-bottom: 30px;
+.service-title h2,
+.service-title p {
+    margin-left: 10%;
 }
 
 table {
     border-collapse: collapse;
     border-radius: 6px;
     overflow: hidden;
-    width: 1100px;
-    margin: auto;
+    width: 80%;
+    margin: 0 auto 30px;
 }
 
 td {
@@ -260,7 +268,6 @@ thead {
 
 .stars {
     display: flex;
-    justify-content: center;
     gap: 5px;
 }
 

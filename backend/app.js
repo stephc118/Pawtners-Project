@@ -237,20 +237,14 @@ const { bookingRoutes } = require("./api/booking");
 
     app.get('/history', async(req, res) => {
         try {
-            // const userId = 44;
             const userId = req.session.user.id;  
             const ride = await client.query(`
             SELECT *
             FROM ride2
             INNER JOIN booking ON ride2.booking_id=booking.id where booking.user_id = $1`, [userId]);
 
-            // const sitting = await client.query(`SELECT *
-            // FROM sitting2
-            // INNER JOIN booking ON sitting2.booking_id=booking.id
-            // INNER JOIN reviews2 on reviews2.booking_id=booking.id where booking.user_id = $1`, [userId]);
-
             const sitting = await client.query(`
-            SELECT sitting2.date, sitting2.frequency, sitting2.location, sitting2.numberofpets, sitting2.district, sitting2.booking_id, booking.created_at, booking.status
+            SELECT *
             FROM sitting2
             INNER JOIN booking ON sitting2.booking_id=booking.id where booking.user_id = $1`, [userId]);
 

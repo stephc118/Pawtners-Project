@@ -53,6 +53,8 @@ async function showUserProfile() {
                 editButton.style.display = "inherit";
             } else {
                 // TODO: show error if failed to submit
+                const errorMessage = document.querySelector('.propic .error-message');
+                errorMessage.style.display = 'inherit';
             }
         } catch (error) {
             console.error(error);
@@ -90,6 +92,10 @@ async function showUserProfile() {
             throw new Error('Something went wrong with your booking history, please try again.')
         }
 
+        // if (resReview !== 200) {
+        //     throw new Error ('Cannot load reviews.')
+        // }
+
         // Show booking history tables
         spinner.style.display = 'none';
         const { sitting, walking, grooming, ride } = response.orders;
@@ -105,12 +111,12 @@ async function showUserProfile() {
         // Check if have review or not
         const reviews = jsonReview.review;
 
-        const showReview = function (booking_id) {
+        function showReview(booking_id) {
 
             for (const review of reviews) {
                 if (review.booking_id === booking_id) {
                         const ratingContainer = document.querySelector(`tr[data-booking-id='${booking_id}'] td.stars`);
-                        ratingContainer.className = 'raiting-container'
+                        ratingContainer.className = 'raiting-container';
                         ratingContainer.innerHTML = `
                         Rated <strong>${review.star}</strong> Stars, click to see review.
                         `
@@ -338,9 +344,13 @@ function rating(stars) {
 // Show Pop-up
 const overlay = document.querySelector('.popup-overlay');
 const errorContainer = document.querySelector('.error-container');
+// const textArea = document.querySelector('textarea[name="text"]');
+
+
 
 const showOverlay = () => {
     document.querySelector(`#rating #star-${starIndexSelected + 1}`).checked = true;
+    // textArea.innerHTML = '';
     errorContainer.style.display = 'none';
     overlay.style.display = 'flex';
 }
@@ -385,7 +395,7 @@ form.addEventListener('submit', async (event) => {
         // Check if exceeds the max word count
         if (text.length > 255) {
             errorContainer.style.display = 'initial';
-            errorContainer.innerHTML = 'The maximum word count for writing the review is 255 words.';
+            errorContainer.innerHTML = 'The maximum word count for writing the review is 255 characters.';
             return;
         }
 
