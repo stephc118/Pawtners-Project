@@ -83,9 +83,26 @@ for (const card of planCards){
 const dateEle = document.querySelectorAll(`input.date`);
 for (const date of dateEle) {
     var today = new Date();
-    date.min = today.toLocaleDateString('en-ca');
-    today.setMonth(today.getMonth() + 2);
-    date.max = today.toLocaleDateString('en-ca');;
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var mm3 = today.getMonth() + 4;
+    var yyyy = today.getFullYear();
+  
+    var hh = today.getHours();
+    var m = today.getMinutes();
+
+    if (dd < 10) {
+    dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+    mm = '0' + mm;
+    }
+        
+    today = yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + m;
+    date.setAttribute("min", today);
+    var threeMonthsAway = yyyy + "-" + mm3 + "-" + dd + "T" + hh + ":" + m;
+    date.setAttribute("max", threeMonthsAway);
 }
 
 //TODO: clean form after send
