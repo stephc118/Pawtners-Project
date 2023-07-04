@@ -365,9 +365,17 @@ const { bookingRoutes } = require("./api/booking");
             
             const postReview = await client.query(`
                 INSERT INTO reviews2 ( star, text, booking_id) VALUES ($1, $2, $3) RETURNING *`,[rating, text, bookingId]);
+
             if ( postReview.rows.length ) {
-                console.log(postReview.rows.length);
-                res.sendStatus(200);
+                const updateStatus = await client.query(`
+                    UPDATE booking
+                    SET status = 'Fulfilled'
+                    where id = $1 RETURNING *`, [bookingId]);
+                if (updateStatus.rows.length) {
+                    res.sendStatus(200);
+                } else {
+                    throw new Error ('Failed to post review.')
+                }
             } else {
                 throw new Error ('Failed to post review.')
             }
