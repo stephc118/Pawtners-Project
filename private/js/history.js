@@ -344,13 +344,13 @@ function rating(stars) {
 // Show Pop-up
 const overlay = document.querySelector('.popup-overlay');
 const errorContainer = document.querySelector('.error-container');
-// const textArea = document.querySelector('textarea[name="text"]');
+const textArea = document.querySelector('textarea[name="text"]');
 
 
 
 const showOverlay = () => {
     document.querySelector(`#rating #star-${starIndexSelected + 1}`).checked = true;
-    // textArea.innerHTML = '';
+    textArea.value = '';
     errorContainer.style.display = 'none';
     overlay.style.display = 'flex';
 }
@@ -389,6 +389,7 @@ form.addEventListener('submit', async (event) => {
         // Check if all fields are filled
         if (!rating || !text) {
             errorContainer.style.display = 'initial';
+            errorContainer.innerHTML = 'Please give rating and write some reviews before submission.';
             return;
         }
 
